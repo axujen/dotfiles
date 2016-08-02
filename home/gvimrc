@@ -1,0 +1,48 @@
+" Fonts
+set guifont=Monaco\ for\ Powerline\ 8
+
+" GUI options.
+set guioptions+=c " console dialogs instead of popup.
+set guioptions-=m " disable the menu.
+set guioptions-=e " disable the gui tab bar.
+set guioptions-=T " disable the toolbar
+set guioptions+=p " enable if the cursor is not acting correctly.
+set guiheadroom=0 " disable bottom padding that causes issues with wms
+
+" Disable scrollbars.
+set guioptions-=l
+set guioptions-=r
+set guioptions-=b
+set guioptions-=L
+set guioptions-=R
+
+" Marker for the 80 column mark
+set cc=80
+
+" Themes and looks
+set t_Co=256 " use 256 color mode
+set cursorline "highlight current cursor line
+" Favorites distinguished, desert256, ansi_blows, xoria256.
+colorscheme distinguished
+
+" Because i like these to be the same accross themes.
+hi Normal guibg=#121212
+hi NonText guibg=#3F3F3F
+
+hi CursorLineNr guibg=#2F2F2F
+hi CursorLine guibg=#2F2F2F
+hi ColorColumn guibg=#2F2F2F
+
+hi Pmenu guibg=#2F2F2F guifg=#CCCCCC
+hi PmenuSel guibg=#121212 guifg=#CCCCCC
+
+hi TabLineFill guibg=#3F3F3F guifg=#3F3F3F
+hi TabLine guibg=#2F2F2F guifg=#CCCCCC
+hi TabLineSel guibg=#121212 guifg=#CCCCCC
+
+" Move through splits using Meta-hjkl
+" Only used in gvim because they tend to screw up with escape codes for terminals
+nnoremap <m-h> <C-w>h
+nnoremap <m-j> <C-w>j
+nnoremap <m-k> <C-w>k
+nnoremap <m-l> <C-w>l

@@ -1,0 +1,17 @@
+/* Custom css goes here */
+
+/* Hide pale moon button */
+#appmenu-toolbar-button{display:none !important;}
+
+@-moz-document domain(kudos.gamer-district.shivtr.com) {
+	.box .content {background-color: #968269 !important;} 
+	#banner {display:none !important;}
+	/* #wallpaper { background-color: #968269 !important; } */
+	body .column_padding { background-color: #9D7F59 !important; }
+	body { background-color: #9D7F59 !important; }
+
+
+	#main_menu.menu_bar .left_image { background-image: url(http://cloudfront.shivtr.com/theme_images/532640.png) !important;}
+	#main_menu.menu_bar .right_image { background-image: url(http://cloudfront.shivtr.com/theme_images/532641.png) !important;}
+	#main_menu.menu_bar .mid_image > div { background-image: url(http://cloudfront.shivtr.com/theme_images/532638.png?1383940978) !important;}
+}

@@ -1,0 +1,21 @@
+[user]
+	name = Axujen
+	email = axujen@autistici.org
+[color]
+	diff = auto
+	status = auto
+[core]
+	pager = less -r
+	excludesfile = "~/.gitignore"
+[diff]
+	tool = meld
+	algorithm = patience
+[difftool]
+	prompt = yes
+[push]
+	default = current
+[credential "https://github.com"]
+	username = axujen
+[alias]
+	wdiff = diff --color-words
+	vimdiff = difftool -t vimdiff --color-words

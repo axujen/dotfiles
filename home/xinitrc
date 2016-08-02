@@ -1,0 +1,10 @@
+# vim: ft=sh
+
+# Session settings stored in ~/.xprofile
+[ -r ~/.xprofile ] && source ~/.xprofile
+
+# Xresources
+[ -r ~/.Xresources ] && xrdb -merge ~/.Xresources
+
+# wm
+exec awesome

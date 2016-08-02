@@ -1,0 +1,38 @@
+#!/usr/bin/env sh
+[ -n "$REDSHIFT_COORDS" ] && coords=$REDSHIFT_COORDS || \
+	{ echo "Cannot find redshift coordinates, please set \$REDSHIFT_COORDS env variable."; exit 1; }
+
+[ -n "$REDSHIFT_TEMPS" ] && temps="$REDSHIFT_TEMPS" || temps="5500K:3700K"
+
+redshift_on()
+{
+	echo "Turning redshift on";
+	redshift -x > /dev/null;
+	redshift -l "$coords" -t "$temps" > /dev/null &
+}
+
+redshift_off()
+{
+	echo "Turning redshift off."
+	pkill redshift > /dev/null
+	redshift -x > /dev/null
+}
+
+redshift_toggle()
+{
+	ps cax | grep redshift > /dev/null
+	if [ $? -eq 0 ]; then
+		redshift_off;
+	else
+		redshift_on;
+	fi
+}
+
+case $1 in
+	on)
+		redshift_on;;
+	off)
+		redshift_off;;
+	*)
+		redshift_toggle;;
+esac

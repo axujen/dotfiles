@@ -1,0 +1,35 @@
+#!/bin/sh
+# Launch cataclysm-dda in a chosen terminal
+# with (optionally) custom colors
+
+OPTIONS="-geometry 150x50 -title cataclysmdda-gdi"
+
+# Use first argument as the terminal, or aterm if its detected else use xterm
+if [[ -n "$1" ]]; then
+	term="$1"
+elif [[ $(which aterm) ]]; then
+	term="aterm"
+	# Use custom colors for aterm
+	OPTIONS="$OPTIONS
+	--color0	#000000
+	--color1	#AA0000
+	--color2	#00AA00
+	--color3	#AA5500
+	--color4	#0000AA
+	--color5	#AA00AA
+	--color6	#00AAAA
+	--color7	#AAAAAA
+	--color8	#555555
+	--color9	#FF5555
+	--color10	#55FF55
+	--color11	#FFFF55
+	--color12	#5555FF
+	--color13	#FF55FF
+	--color14	#55FFFF
+	--color15	#ffffff"
+else
+	term="xterm"
+fi
+
+# Launch the game with the chosen terminal
+"$term" $OPTIONS -e cataclysm

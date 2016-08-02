@@ -1,0 +1,40 @@
+! Swap CapsLock and Escape
+remove Lock    = Caps_Lock
+keycode 0x09 =	Caps_Lock	NoSymbol	Caps_Lock
+keycode 0x42 =	Escape	NoSymbol	Escape
+add    Lock    = Caps_Lock
+
+!! Remap numpad keys to make them more usefull (This also resolves the shift+numlock issues)
+! Switch Home/End with PgUp/PgDown to make them closer
+keycode 79 = Prior
+keycode 87 = Next
+keycode 81 = Home
+keycode 89 = End
+
+! 0 = Insert
+keycode 90 = Insert
+
+! 2 becomes XF86AudioPlay
+keycode 88 = 0x1008FF14
+
+! KP_Minus/Add become Lower/Raise volume
+keycode 82 = 0x1008FF11
+keycode 86 = 0x1008FF13
+
+! KP_Divide/Multiply become XF86AUDIOPrev/Next
+keycode 106 = 0x1008FF16
+keycode 63  = 0x1008FF17
+
+!! Disabled see https://forums.libsdl.org/viewtopic.php?p=42784&sid=c6f3d4c6aa9c0c9faf1d9d031c9a2c98
+
+! Arrow keys 8 Up, 4 Left, 5 Down, 6 Left
+! keycode 80 = Up
+! keycode 83 = Left
+! keycode 85 = Right
+! keycode 84 = Down
+
+! KP_Delete becomes PrintScreen
+! keycode 91 = Print
+
+! KP_Enter is Return
+! keycode 104 = Return

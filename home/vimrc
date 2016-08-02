@@ -1,0 +1,199 @@
+version 6.0
+
+" Disable compatibility.  
+set nocompatible
+
+" w!! will save file using sudo
+cmap w!! execute 'silent w !sudo tee > /dev/null %' \| edit!
+
+"" Keybinds
+map! <S-Insert> <MiddleMouse>
+
+" Yank/Pase to system clipboard
+noremap <leader>y "+y
+noremap <leader>p "+p
+
+" Move a line of text using CTRL-{j,k}
+nmap <C-k> mz:m-2<CR>`z
+nmap <C-j> mz:m+<CR>`z
+
+" unhighlight search when you redraw
+nnoremap <silent> <c-l> :nohl<cr><c-l>
+
+" Disable the arrow keys (training wheels).
+noremap <up> <nop>
+noremap <down> <nop>
+noremap <left> <nop>
+noremap <right> <nop>
+
+" To be able to scroll the autocomplete menu in insert mode.
+inoremap <up> <c-p>
+inoremap <down> <c-n>
+inoremap <left> <c-p>
+inoremap <right> <c-n>
+
+" make Y behave like the other capitals
+nnoremap Y y$
+
+" Make using <F5>.
+noremap <F5> :make<cr>
+
+" Toggle spellchecking
+map <C-s> :set spell!<cr>
+
+" Toggle word wrap
+noremap <Leader>w :set wrap!<cr>
+
+" Tab mappings, mostly using t.
+nnoremap tn :tabnew<cr>
+nnoremap tc :tabclose<cr>
+nnoremap tt :tabnext<cr>
+nnoremap tT :tabprevious<cr>
+
+" preview selected tag
+nnoremap <C-i> <Esc>:exe "ptjump " . expand("<cword>")<Esc>
+
+" Options
+set relativenumber
+set background=dark
+set backspace=indent,eol,start
+set backupdir=/tmp//
+set directory=/tmp//
+set nobackup
+set writebackup
+set fileencodings=ucs-bom,utf-8,default,latin1
+set helplang=en
+set history=1000
+set hlsearch
+set incsearch
+set nomodeline
+set noshowmode
+set nostartofline
+set mouse=h
+set printoptions=paper:letter
+set ruler
+set showmatch
+set shortmess+=I
+set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
+set autoread
+set textwidth=0
+
+" Indent style
+function! TabStyle(...)
+	if exists('a:1')
+		let a:tabstyle = a:1 
+	else
+		let a:tabstyle = 'tab'
+	endif
+	if exists('a:2') 
+		let a:tabsize = a:2  
+	else
+		let a:tabsize = 4
+	endif
+	if a:tabstyle ==? 'space'
+		set expandtab
+	else
+		set noexpandtab
+	endif
+	let &tabstop=a:tabsize
+	let &softtabstop=a:tabsize
+	let &shiftwidth=a:tabsize
+endfunction
+command! -nargs=* TabStyle call TabStyle(<f-args>)
+set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+
+" Match tab characters, you can hilight using hi Tab
+syntax match Tab /\t/
+
+set autoindent
+set nosmartindent
+filetype indent plugin on
+set tags=./tags,./TAGS,tags,TAGS,~/.vimtags
+set termencoding=utf-8
+set visualbell
+set wildignore=*.pyc
+set confirm " Ask if you want to save the buffer instead of just failing commands.
+" set hidden " Allows to switch buffers without saving, keeps multiple undo histories for different files as long as you do not close the window.
+set wildmenu " Better command line completition.
+set wildmode=full
+set nowrap " Don't wrap text.
+set autochdir " Always cd to the current files directory
+set pastetoggle=<F3>
+set showmode
+set showcmd
+set laststatus=2 " Always show the statusline
+set lazyredraw
+set completeopt=longest,menuone
+set nospell
+set ignorecase
+set smartcase
+
+" Strip whitespace.
+fun! StripTrailingWhitespaces()
+	let l = line(".")
+	let c = col(".")
+	%s/\s\+$//e
+	call cursor(l, c)
+endfun
+command! StripTrailingWhitespaces call StripTrailingWhitespaces()
+
+" Copy search match
+function! CopyMatches(reg)
+  let hits = []
+  %s//\=len(add(hits, submatch(0))) ? submatch(0) : ''/ge
+  let reg = empty(a:reg) ? '+' : a:reg
+  execute 'let @'.reg.' = join(hits, "\n") . "\n"'
+endfunction
+command! -register CopyMatches call CopyMatches(<q-reg>)
+
+" fold settings
+set foldmethod=indent
+set foldnestmax=2
+set nofoldenable
+
+" Scrolling
+" Center the cursor.
+set scrolloff=999
+set sidescrolloff=15
+set sidescroll=1
+
+" Themes and colors
+syntax on
+set t_Co=256
+colorscheme desert
+
+" Reload vimrc settings while its running
+if !exists("*ReloadSettings")
+	function! ReloadSettings()
+		source ~/.vimrc
+		if has("gui_running")
+			source ~/.gvimrc
+		endif
+	endfunction
+	command! ReloadSettings call ReloadSettings()
+endif
+
+" Load custom vimfiles
+au FileType c,cpp,java,php,ruby,python call CheckForCustomConfiguration()
+
+function! CheckForCustomConfiguration()
+	" Check for .vim.custom in the directory containing the newly opened file
+	let custom_config_file = expand('%:p:h') . '/local.vim'
+	if filereadable(custom_config_file)
+		exe 'source' custom_config_file
+	endif
+endfunction
+
+let load_plugins = 1 " Set this to 0 to disable plugins altogether
+" Load vundle settings
+if load_plugins
+	if !isdirectory(expand("~/.vim/bundle/vundle/.git/"))
+		echon "Setting up vundle, this may take a while, wanna continue? (y/n): "
+		if nr2char(getchar()) ==? 'y'
+			!git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+		endif
+	endif
+	if filereadable(expand("~/.vim/vundle.vim"))
+		exe 'source' expand("~/.vim/vundle.vim")
+	endif
+endif

@@ -1,0 +1,111 @@
+#!/usr/bin/env sh
+# vim: ft=sh
+## Encrypt/Decrypt private dotfiles
+
+BIN=`basename $0`
+DOTDIR=`dirname $0`
+UNPACK_SCRIPT="$DOTDIR/unpack"
+PRIVATEDIR="`dirname $0`/private"
+PRIVATETAR="`dirname $0`/private.encrypted"
+KEYSDIR="$DOTDIR/keys"
+PUBKEY="$KEYSDIR/pub"
+GPG_CMD="gpg --no-default-keyring --keyring $PUBKEY --trust-model always"
+
+# Make sure we're in the right place
+# cd "$DOTDIR"
+
+function initGPG {
+    # Make sure the tmp dir exists otherwise bad stuff may happen
+    if [ ! -d "/tmp" ]; then
+        echo "Temp directory not found!"
+        exit 4
+    # Make sure mktemp exists
+    elif [ ! $(type -p mktemp) ]; then
+        echo "mktemp binary not found!"
+        exit 5
+    fi
+
+    # Taken from http://unix.stackexchange.com/a/104950
+    # Create a virtual gpg directory in /tmp so we can import out keys
+    tmp=
+    trap 'rm -rf "$tmp" /tmp/sec' EXIT INT TERM HUP
+    tmp=$(mktemp -d)
+    export GNUPGHOME="$tmp"
+
+    # First decrypt the private key
+    gpg --decrypt "$KEYSDIR/sec.enc" > "/tmp/sec"
+    
+    # Import the private key
+    gpg --import /tmp/sec
+}
+
+function gitLock {
+    # Prechecks
+    if [ ! -d "$PRIVATEDIR" ]; then
+        echo "Directory \"`basename $PRIVATEDIR`\" does not exist!"
+        echo "Make sure this directory exists and is on the same directory before running this script."
+        exit 1
+    fi
+
+    # Encryption
+    tar -zcf - "$PRIVATEDIR" | $GPG_CMD --recipient axujen --armour --output "$PRIVATETAR" --encrypt
+}
+
+function gitUnlock {
+    # Precheck
+    if [ ! -f "$PRIVATETAR" ]; then
+        echo "File \"`basename $PRIVATETAR`\" does not exist!"
+        echo "Make sure the file exists and is on the same directory before running this script."
+        exit 2
+    fi
+
+    # Initialize virtual gpg folder in /tmp
+    initGPG
+
+    # Decryption
+    gpg --decrypt "$PRIVATETAR" | tar zx
+}
+
+function gitUnpack {
+    # Precheck
+    if [ ! -d "$PRIVATEDIR" ]; then
+        echo "Directory \"`basename $PRIVATEDIR`\" does not exist!"
+        read -p "Would you like to decrypt?: " yn
+            case $yn in
+                "Yes"|"yes"|"Y"|"y") 
+                    gitUnlock
+                    ;;
+                *) 
+                    exit
+                    ;;
+            esac
+    fi
+
+    # Make sure the unpack script exists
+    if [ ! -x "$UNPACK_SCRIPT" ]; then
+        echo "Unpack script not found!"
+        echo "Make sure the script is in the root dotfiles directory"
+        exit 6
+    fi
+    # Unpacking
+    $UNPACK_SCRIPT -s $PRIVATEDIR
+}
+
+function gitUsage {
+    echo "Usage: $BIN (lock|unlock|unpack)"
+}
+
+case "$1" in
+    'lock')
+        gitLock
+        ;;
+    'unlock')
+        gitUnlock
+        ;;
+    'unpack')
+        gitUnpack
+        ;;
+    *)
+        gitUsage
+        ;;
+esac

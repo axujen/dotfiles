@@ -1,0 +1,52 @@
+#!/usr/bin/env sh
+# the name of your primary tmux session
+SESSION=$USER
+# append -2 to force tmux to use 256 color mode.
+TMUX_CMD="tmux -2"
+
+# if the session is already running, just attach to it.
+$TMUX_CMD -q has-session -t $SESSION
+if [ $? -eq 0 ]; then
+    $TMUX_CMD attach -t $SESSION
+    exit 0;
+fi
+
+# create a new session, named $SESSION, and detach from it
+$TMUX_CMD new-session -d -s $SESSION -n terminals
+
+# Set session title
+$TMUX_CMD set -g -t $SESSION set-titles-string 'tmux-session'
+
+# Window 1 (terminals)
+$TMUX_CMD set-window-option -t $SESSION:1 allow-rename off
+$TMUX_CMD select-window -t $SESSION:1
+
+# Change prefix key to C-q if you detect we're running inside ssh
+if [ -n "$SSH_CLIENT" ]; then
+    $TMUX_CMD unbind C-a
+    $TMUX_CMD set -g prefix C-q
+    $TMUX_CMD bind C-q last-window # press C-a twice to get to the last window
+else
+    # Split Window 1
+    $TMUX_CMD split-window -h
+    $TMUX_CMD split-window -v
+    $TMUX_CMD select-pane -L
+    $TMUX_CMD split-window -v
+    $TMUX_CMD select-pane -U
+
+    # Window 2 (irc)
+    $TMUX_CMD set-window-option -t $SESSION:2 allow-rename off
+    $TMUX_CMD new-window -t $SESSION -n weechat
+    $TMUX_CMD send-keys -t $SESSION:2 "weechat-curses" C-m
+    
+    # Window 3 (email)
+    $TMUX_CMD set-window-option -t $SESSION:3 allow-rename off
+    $TMUX_CMD new-window -t $SESSION -n email
+    $TMUX_CMD send-keys -t $SESSION:3 mutt C-m
+fi
+
+# all done. select starting window and get to work
+# you may need to cycle through windows and type in passwords
+# if you don't use ssh keys
+$TMUX_CMD select-window -t $SESSION:1
+$TMUX_CMD attach -t $SESSION

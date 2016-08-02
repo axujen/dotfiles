@@ -1,0 +1,8 @@
+# Source custom shellrc directory
+
+SHELLRC="$HOME/.shellrc"
+if [ -d "$SHELLRC" ]; then
+    for file in $SHELLRC/*.sh; do
+        source "$file"
+    done
+fi
