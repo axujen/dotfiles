@@ -72,7 +72,6 @@ alias tdl="td ls | sed '/--/d' | sed '/TODO:/d' | sort"
 
 # ssh on devices
 alias cid-remote-ssht="bananabox-cid-ssh -t start-tmux"
-alias cid-ssht="mosh lube@cid.local -- ~/.local/bin/start-tmux"
 alias strahl-ssht="ssh root@strahl.local -t \"/opt/home/.local/bin/bootstrap-shell\""
 
 command -v logtail >/dev/null 2>&1 && alias logs='sudo tail -F /var/log/messages | logtool -t short -n' || alias logs='sudo tail -F /var/log/messages'
