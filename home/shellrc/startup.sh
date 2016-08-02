@@ -4,7 +4,7 @@
 
 # Must explicitly enable this file by running touch ~/.shellrc/start
 if [ ! -f "$HOME/.shellrc/start" ]; then
-    exit
+    return
 fi
 
 # This is a hack, basically create a file in /tmp after the user logs in
