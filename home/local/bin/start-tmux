@@ -23,10 +23,15 @@ $TMUX_CMD select-window -t $SESSION:1
 
 # Change prefix key to C-q if you detect we're running inside ssh
 if [ -n "$SSH_CLIENT" ]; then
-    $TMUX_CMD unbind C-a
+    # $TMUX_CMD unbind C-a
     $TMUX_CMD set -g prefix C-q
     $TMUX_CMD bind C-q last-window # press C-a twice to get to the last window
 else
+# Prefix
+    # Set the normal prefix
+    $TMUX_CMD set -g prefix C-a
+    $TMUX_CMD bind C-a last-window # press C-a twice to get to the last window
+
     # Split Window 1
     $TMUX_CMD split-window -h
     $TMUX_CMD split-window -v
