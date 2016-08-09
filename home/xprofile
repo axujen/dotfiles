@@ -12,7 +12,4 @@ export STEAM_RUNTIME=0
 command -v xbindkeys && xbindkeys &
 
 # Load Xresources just in case
-[-r ~/.Xresources ] && xrdb -load ~/.Xresources &
-
-# Load startup programs
-[ -r ~/.xstartup  ] && source ~/.xstartup
+[ -r ~/.Xresources ] && xrdb -merge ~/.Xresources &

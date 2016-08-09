@@ -1,0 +1,30 @@
+#!/usr/bin/env sh
+# run scripts in ~/.xstartup directory only once per Xsession.
+# This is script is ran from your wm (awesome) to run startup apps, 
+# but avoid rerunning them when the wm is restarted inside the same session
+# Inspired by https://awesome.naquadah.org/wiki/Autostart#The_X_Resources_way
+
+startDir="$HOME/.xstartup"
+Xresource="xinit.started:"
+
+initStartup()
+{
+    if [ ! -d "$startDir" ]; then
+        echo "Directory $startDir does not exist!"
+        exit  1
+    fi
+
+    echo "Initializing startup programs!"
+    echo "$Xresource" | xrdb -merge > /dev/null 2>&1
+
+    for script in "$startDir/*.sh"; do
+        source "$script"
+    done
+}
+
+if xrdb -query | grep -qe "$Xresource"; then
+    echo "Already initialized!"
+    exit 0
+else 
+    initStartup
+fi
