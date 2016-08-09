@@ -2,26 +2,17 @@
 
 # Settings
 xset -b # mute the annoying beep
-[ -r ~/.xmodmaprc		] && xmodmap ~/.xmodmaprc &
+
 # Use native libs for steam
 # https://wiki.archlinux.org/index.php/Steam#Using_native_runtime
-STEAM_RUNTIME=0
+export STEAM_RUNTIME=0
+
+# Personal Keybinds
+[ -r ~/.xmodmaprc ] && xmodmap ~/.xmodmaprc &
+command -v xbindkeys && xbindkeys &
 
 # Load Xresources just in case
 [-r ~/.Xresources ] && xrdb -load ~/.Xresources &
 
-# Personal Keybinds
-command -v xbindkeys && xbindkeys &
-
-# Startup applications
-command -v SpiderOak		&& SpiderOak &
-command -v blueman-applet	&& blueman-applet &
-command -v cantata			&& cantata &
-command -v clipit			&& clipit &
-command -v compton			&& compton -b &
-command -v devmon			&& devmon-start &
-command -v keepassx			&& keepassx &
-command -v nitrogen			&& nitrogen  --restore &
-command -v nm-applet		&& nm-applet --sm-disable &
-command -v redshift			&& redshift-toggle on &
-command -v unclutter		&& unclutter -idle 5 -jitter 2 -not OpenArena &
+# Load startup programs
+[ -r ~/.xstartup  ] && source ~/.xstartup

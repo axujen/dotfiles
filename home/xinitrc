@@ -1,10 +1,10 @@
 # vim: ft=sh
 
 # Session settings stored in ~/.xprofile
-[ -r ~/.xprofile ] && source ~/.xprofile
+# [ -r ~/.xprofile ] && source ~/.xprofile
+source ~/.xprofile
 
-# Xresources
-[ -r ~/.Xresources ] && xrdb -merge ~/.Xresources
+# Run startup apps
+source ~/.xstartup
 
-# wm
 exec awesome
