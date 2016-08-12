@@ -70,6 +70,14 @@ alias px="proxychains -q"
 alias td="todo.sh -Ant"
 alias tdl="td ls | sed '/--/d' | sed '/TODO:/d' | sort"
 
+# Upload using limf
+upload()
+{
+    url=$(limf -l $1)
+    echo "$url" | xclip -selection c
+    echo "$url"
+}
+
 # ssh on devices
 alias cid-remote-ssht="bananabox-cid-ssh -t start-tmux"
 alias strahl-ssht="ssh root@strahl.local -t \"/opt/home/.local/bin/bootstrap-shell\""
