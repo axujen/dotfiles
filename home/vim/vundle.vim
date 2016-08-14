@@ -52,6 +52,8 @@ PluginLoad "surround"
 PluginLoad "easytags"
 PluginLoad "unite"
 PluginLoad "session"
+PluginLoad "goyo"
+PluginLoad "git-gutter"
 
 filetype plugin indent on " required!
 " vim: ft=vim
