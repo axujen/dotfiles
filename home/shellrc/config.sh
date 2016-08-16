@@ -11,7 +11,7 @@ zman() {
 
 # ssh into tmux
 ssht() {
-	ssh $* -t 'start-tmux || tmux a || tmux || /bin/zsh || /bin/bash'
+	ssh $* -t 'start-tmux || ~/.local/bin/start-tmux || tmux a || tmux || /bin/zsh || /bin/bash'
 }
 
 man() {
