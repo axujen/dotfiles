@@ -1,0 +1,81 @@
+#!/usr/bin/env sh
+# Script to update archlinux
+# Mostly commands i type frequently when i run an update
+
+ask()
+{
+    echo -n "$@"
+    read -p " (y/n): " choice
+    case "$choice" in 
+        y|Y )   return 0;;
+        n|N|* ) return 1;;
+    esac
+}
+
+ask_run()
+{
+    question="$1"
+    function="$2"
+
+    if ask "$question"; then $function; fi
+}
+
+update_mirrorlist()
+{
+    sudo reflector --latest 50 --age 1 --fastest 5 --sort country --save /etc/pacman.d/mirrorlist
+}
+
+update_packages()
+{
+    sudo pacman -Syu
+    if ask "Do you wish to update the aur"; then
+        if ask "Do you wish to run a devel update?"; then
+            packer -Syu --auronly --noedit --noconfirm --devel
+        else
+            packer -Syu --auronly --noedit --noconfirm
+        fi
+    else
+        return 0
+    fi
+}
+
+update_cleanup()
+{
+    sudo pacman -Rs $(pkg-list_true_orphans)
+    sudo pacman-optimize
+    sudo sync
+}
+
+update_clean_cache()
+{
+    sudo pkgcacheclean
+    if ask "Empty the cache (this is dangerous!)?"; then
+        sudo paccache -ruk1
+        sudo pacman -Sc
+    fi
+}
+
+update_etc()
+{
+    sudo backup-configs #TODO: This script needs to be redone and integrated in the dotfiles repo
+    sudo etc-update
+}
+
+
+# Main
+if sudo -v; then
+    # Sudo keepalive from https://gist.github.com/cowboy/3118588
+    while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+else
+    echo "Unable to gain root access."
+    exit 1
+fi
+
+# Run the update
+if ask "Do you wish to update?"; then
+    ask_run "Do you wish to update the mirrorlist?" update_mirrorlist
+    ask_run "Do you wish to update packages?"       update_packages
+    ask_run "Do you wish to update your configs?"   update_etc
+    ask_run "Do you wish to remove dead packages?"  update_cleanup
+    ask_run "Do you wish to clean the pkg cache?"   update_clean_cache
+fi
