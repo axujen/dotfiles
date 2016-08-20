@@ -108,6 +108,7 @@ syntax match Tab /\t/
 
 set autoindent
 set nosmartindent
+set ft=unix
 filetype indent plugin on
 set tags=./tags,./TAGS,tags,TAGS,~/.vimtags
 set termencoding=utf-8
