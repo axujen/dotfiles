@@ -1,4 +1,4 @@
-Bundle 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'
 
 nnoremap <F2> :NERDTreeToggle<CR>
 let g:NERDTreeQuitOnOpen=1

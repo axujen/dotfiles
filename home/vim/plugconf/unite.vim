@@ -1,5 +1,5 @@
-Bundle 'unite.vim'
-Bundle 'tsukkee/unite-help'
+Plugin 'unite.vim'
+Plugin 'tsukkee/unite-help'
 
 " custom action for sourcing vim files
 let s:source = {

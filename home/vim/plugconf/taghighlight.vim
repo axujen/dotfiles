@@ -1,4 +1,4 @@
-Bundle 'TagHighlight'
+Plugin 'TagHighlight'
 
 
 if !exists('g:TagHighlightSettings')

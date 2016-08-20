@@ -1,1 +1,1 @@
-Bundle 'tComment'
+Plugin 'tComment'

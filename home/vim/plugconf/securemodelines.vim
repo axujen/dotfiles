@@ -1,4 +1,4 @@
-Bundle 'ciaranm/securemodelines'
+Plugin 'ciaranm/securemodelines'
 
 let g:secure_modelines_allowed_items = [
 			\ "textwidth",	 "tw",

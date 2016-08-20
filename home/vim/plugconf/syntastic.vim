@@ -1,4 +1,4 @@
-Bundle 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_log_list = 1
