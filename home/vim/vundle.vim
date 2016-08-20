@@ -40,8 +40,8 @@ PluginLoad "nerdtree"
 PluginLoad "tagbar"
 PluginLoad "easymotion"
 PluginLoad "delimitMate"
-PluginLoad "neocomplete"
-PluginLoad "neosnippet"
+" PluginLoad "neocomplete"
+" PluginLoad "neosnippet"
 PluginLoad "singlecompile"
 PluginLoad "taghighlight"
 PluginLoad "airline"
@@ -54,6 +54,8 @@ PluginLoad "unite"
 PluginLoad "session"
 PluginLoad "goyo"
 PluginLoad "git-gutter"
+PluginLoad "youcompleteme"
+PluginLoad 'ultisnips'
 
 filetype plugin indent on " required!
 " vim: ft=vim
