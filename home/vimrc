@@ -180,7 +180,7 @@ au FileType c,cpp,java,php,ruby,python call CheckForCustomConfiguration()
 
 function! CheckForCustomConfiguration()
 	" Check for .vim.custom in the directory containing the newly opened file
-	let custom_config_file = expand('%:p:h') . '/local.vim'
+	let custom_config_file = expand('%:p:h') . '/.lvimrc'
 	if filereadable(custom_config_file)
 		exe 'source' custom_config_file
 	endif
