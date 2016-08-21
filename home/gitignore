@@ -1,7 +1,7 @@
 # vim: ft=cfg
 
 # vim config for a git repo
-local.vim
+.lvimrc
 
 # vim tags
 tags
