@@ -1,5 +1,4 @@
 Plugin 'Shougo/neocomplete.vim'
-Plugin 'jordwalke/VimCompleteLikeAModernEditor'
 
 " Use neocomplete.
 let g:neocomplete#enable_at_startup = 1
@@ -25,7 +24,6 @@ endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
 " Recommended key-mappings.
-
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " S-TAB Reverse
