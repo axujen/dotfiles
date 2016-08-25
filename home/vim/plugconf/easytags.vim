@@ -3,18 +3,16 @@ Plugin 'xolox/vim-easytags'
 let g:easytags_async=1
 let g:easytags_syntax_keyword="always"
 let g:easytags_dynamic_files=2
-let g:easytags_auto_highlight=0
+let g:easytags_auto_highlight=1
 let g:easytags_auto_update = 0
 
 function! InitTags()
-	silent !grep -qsFx "let b:easytags_auto_update = 1" ./.lvimrc  || echo "let b:easytags_auto_update  = 1"  > ./.lvimrc
-	silent !grep -qsFx "let b:easytags_auto_recurse = 1" ./.lvimrc || echo "let b:easytags_auto_recurse = 1" >> ./.lvimrc
-    silent !echo "au BufWritePost *  UpdateTags -R" >> ./.lvimrc
-    silent !echo "au BufWritePost *  HighlightTags" >> ./.lvimrc
+	silent !grep -qsFx "let g:easytags_auto_update = 1" ./.lvimrc  || echo "let g:easytags_auto_update  = 1"  > ./.lvimrc
+	silent !grep -qsFx "let g:easytags_auto_recurse = 1" ./.lvimrc || echo "let g:easytags_auto_recurse = 1" >> ./.lvimrc
+    silent !grep -qsFx "let g:easytags_events = ['BufWritePost']" ./.lvimrc || echo "let g:easytags_events = ['BufWritePost']" >> ./.lvimrc
 	let g:easytags_auto_update  = 1
     let g:easytags_auto_recurse = 1
-    au BufWritePost *  UpdateTags -R
-    au BufWritePost *  HighlightTags
+    let g:easytags_events = ['BufWritePost']
     
     " Put tags in .git/tags for git directories
 	let a:git_dir = expand("%:p:h")."/.git/"
