@@ -21,7 +21,7 @@ set cc=80
 
 " Themes and looks
 set t_Co=256 " use 256 color mode
-set cursorline "highlight current cursor line
+set nocursorline
 " Favorites distinguished, desert256, ansi_blows, xoria256.
 colorscheme distinguished
 

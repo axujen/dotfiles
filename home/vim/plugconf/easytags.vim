@@ -1,12 +1,19 @@
 Plugin 'xolox/vim-easytags'
 
+let g:easytags_opts = ['--tag-relative=no']
 let g:easytags_async=1
 let g:easytags_syntax_keyword="always"
 let g:easytags_dynamic_files=2
 let g:easytags_auto_highlight=1
 let g:easytags_auto_update = 0
 
-function! InitTags()
+function! TagsUpdate()
+    let a:dirname = expand("%:p:h")
+    execute 'UpdateTags -R ' a:dirname
+endfunction
+command TagsUpdate call TagsUpdate()
+
+function! TagsInit()
 	silent !grep -qsFx "let g:easytags_auto_update = 1" ./.lvimrc  || echo "let g:easytags_auto_update  = 1"  > ./.lvimrc
 	silent !grep -qsFx "let g:easytags_auto_recurse = 1" ./.lvimrc || echo "let g:easytags_auto_recurse = 1" >> ./.lvimrc
     silent !grep -qsFx "let g:easytags_events = ['BufWritePost']" ./.lvimrc || echo "let g:easytags_events = ['BufWritePost']" >> ./.lvimrc
@@ -23,8 +30,7 @@ function! InitTags()
 	    execute "silent !grep -qsFx '" . a:tagsettings . "' ./.lvimrc || echo '" . a:tagsettings . "' >> ./.lvimrc"
 	endif
 
-	UpdateTags -R
+    TagsUpdate
     HighlightTags
 endfunction
-command! InitTags call InitTags()
-
+command! TagsInit call TagsInit()

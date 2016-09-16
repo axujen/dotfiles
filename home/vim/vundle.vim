@@ -4,21 +4,22 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
 " Required plugin libraries
-Bundle 'L9'
-Bundle 'Shougo/vimproc.vim'
-Bundle 'tlib'
-Bundle 'vim-addon-mw-utils'
-Bundle 'xolox/vim-misc'
+Plugin 'L9'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'tlib'
+Plugin 'vim-addon-mw-utils'
+Plugin 'xolox/vim-misc'
 
 " Colorschemes
-Bundle 'Lokaltog/vim-distinguished'
+Plugin 'Lokaltog/vim-distinguished'
 
 " Syntax
-Bundle 'mediawiki'
-Bundle 'kchmck/vim-coffee-script'
+Plugin 'vim-scripts/indentpython.vim'
+Plugin 'mediawiki'
+Plugin 'kchmck/vim-coffee-script'
 
 let g:LoadedPlugins=[]
 function! PluginLoad(name)
@@ -47,12 +48,13 @@ PluginLoad "syntastic"
 PluginLoad "tcomment"
 PluginLoad "surround"
 PluginLoad "easytags"
-PluginLoad "unite"
 PluginLoad "session"
 PluginLoad "goyo"
 PluginLoad "git-gutter"
 PluginLoad 'ultisnips'
 PluginLoad "neocomplete"
+PluginLoad "simpylfold"
+PluginLoad "ctrlp"
 
 filetype plugin indent on " required!
 " vim: ft=vim

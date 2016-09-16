@@ -54,7 +54,7 @@ nnoremap tT :tabprevious<cr>
 nnoremap <C-i> <Esc>:exe "ptjump " . expand("<cword>")<Esc>
 
 " Options
-set relativenumber
+set norelativenumber
 set background=dark
 set backspace=indent,eol,start
 set backupdir=/tmp//
