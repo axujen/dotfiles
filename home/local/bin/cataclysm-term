@@ -2,7 +2,7 @@
 # Launch cataclysm-dda in a chosen terminal
 # with (optionally) custom colors
 
-OPTIONS="-geometry 150x50 -title cataclysmdda-gdi"
+OPTIONS="-title cataclysmdda-ncurses"
 
 # Use first argument as the terminal, or aterm if its detected else use xterm
 if [[ -n "$1" ]]; then
