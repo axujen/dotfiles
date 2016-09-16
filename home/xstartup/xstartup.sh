@@ -11,6 +11,7 @@ command -v devmon			&& devmon-start &
 command -v nm-applet		&& nm-applet --sm-disable &
 command -v redshift			&& redshift-toggle on &
 command -v unclutter		&& unclutter -idle 5 -jitter 2 -not OpenArena &
+command -v calibre-server   && calibre-server --port 5555 --daemonize &
 
 # Big apps last
 command -v cantata			&& cantata &
