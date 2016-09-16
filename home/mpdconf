@@ -136,7 +136,7 @@ auto_update_depth "3"
 # If this setting is set to "yes", MPD will discover audio files by following 
 # symbolic links outside of the configured music_directory.
 #
-#follow_outside_symlinks	"yes"
+follow_outside_symlinks	"no"
 #
 # If this setting is set to "yes", MPD will discover audio files by following
 # symbolic links inside of the configured music_directory.
@@ -151,7 +151,7 @@ follow_inside_symlinks		"no"
 # If this setting is set to "yes", service information will be published with
 # Zeroconf / Avahi.
 #
-#zeroconf_enabled		"yes"
+zeroconf_enabled		"no"
 #
 # The argument to this setting will be the Zeroconf / Avahi unique name for
 # this MPD server on the network.
@@ -206,7 +206,7 @@ audio_output {
 	mixer_control	"Master"
 	mixer_type      "software"  	# optional
 	# device		    "hw:0,0"	    # optional
-	# format		    "44100:16:2"	# optional
+	format		    "44100:16:2"	# optional
 	# mixer_device	"default"	    # optional
 	# mixer_index	    "0"		        # optional
 }
@@ -260,17 +260,17 @@ audio_output {
 #
 # An example of a httpd output (built-in HTTP streaming server):
 #
-audio_output {
-	type		"httpd"
-	name		"HTTP Stream"
-	encoder		"vorbis"		# optional, vorbis or lame
-	port		"8888"
-	bind_to_address	"0.0.0.0"		# optional, IPv4 or IPv6
-#	quality		"5.0"			# do not define if bitrate is defined
-	bitrate		"128"			# do not define if quality is defined
-	format		"44100:16:1"
-	max_clients	"0"			# optional 0=no limit
-}
+# audio_output {
+# 	type		"httpd"
+# 	name		"HTTP Stream"
+# 	encoder		"vorbis"		# optional, vorbis or lame
+# 	port		"8888"
+# 	bind_to_address	"0.0.0.0"		# optional, IPv4 or IPv6
+# 	quality		"5.0"			# do not define if bitrate is defined
+# 	bitrate		"128"			# do not define if quality is defined
+# 	format		"44100:16:1"
+# 	max_clients	"0"			# optional 0=no limit
+# }
 #
 # An example of a pulseaudio output (streaming to a remote pulseaudio server)
 #
