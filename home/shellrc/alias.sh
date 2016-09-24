@@ -79,8 +79,8 @@ upload()
 }
 
 # ssh on devices
-alias cid-remote-ssht="bananabox-cid-ssh -t start-tmux"
-alias strahl-ssht="ssh root@strahl.local -t \"/opt/home/.local/bin/bootstrap-shell\""
+alias remote-cid="bananabox-cid-ssh -t start-tmux"
+alias remote-strahl="ssh strahl.local -t '/home/.local/bin/bootstrap-shell; /home/.local/bin/start-tmux'"
 
 command -v logtail >/dev/null 2>&1 && alias logs='sudo tail -F /var/log/messages | logtool -t short -n' || alias logs='sudo tail -F /var/log/messages'
 command -v xclip >/dev/null 2>&1 && alias wgetpaste='wgetpaste -C'
