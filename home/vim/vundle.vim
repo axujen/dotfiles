@@ -53,7 +53,6 @@ PluginLoad "goyo"
 PluginLoad "git-gutter"
 PluginLoad 'ultisnips'
 PluginLoad "neocomplete"
-PluginLoad "simpylfold"
 PluginLoad "ctrlp"
 
 filetype plugin indent on " required!
