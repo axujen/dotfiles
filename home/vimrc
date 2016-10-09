@@ -35,9 +35,6 @@ inoremap <right> <c-n>
 " make Y behave like the other capitals
 nnoremap Y y$
 
-" Make using <F5>.
-noremap <F5> :make<cr>
-
 " Toggle spellchecking
 map <C-s> :set spell!<cr>
 
@@ -48,10 +45,13 @@ noremap <Leader>w :set wrap!<cr>
 nnoremap tn :tabnew<cr>
 nnoremap tc :tabclose<cr>
 nnoremap tt :tabnext<cr>
-nnoremap tT :tabprevious<cr>
 
 " preview selected tag
-nnoremap <C-i> <Esc>:exe "ptjump " . expand("<cword>")<Esc>
+nnoremap <C-i> <C-w>}
+
+" Toggle folds with space
+nnoremap <space> za
+vnoremap <space> zf
 
 " Options
 set norelativenumber
