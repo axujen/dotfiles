@@ -73,14 +73,13 @@ alias tdl="td ls | sed '/--/d' | sed '/TODO:/d' | sort"
 # Upload using limf
 upload()
 {
-    url=$(limf -l $1)
+    url=$(limf -c 12 -l $1)
     echo "$url" | xclip -selection c
     echo "$url"
 }
 
 # ssh on devices
-alias remote-cid="bananabox-cid-ssh -t start-tmux"
-alias remote-strahl="ssh strahl.local -t '/home/.local/bin/bootstrap-shell; /home/.local/bin/start-tmux'"
+alias remote-strahl="ssh strahl.local -t '/home/.local/bin/shell-init'"
 
 command -v logtail >/dev/null 2>&1 && alias logs='sudo tail -F /var/log/messages | logtool -t short -n' || alias logs='sudo tail -F /var/log/messages'
 command -v xclip >/dev/null 2>&1 && alias wgetpaste='wgetpaste -C'
