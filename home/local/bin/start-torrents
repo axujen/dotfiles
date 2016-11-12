@@ -5,7 +5,7 @@ HOST=127.0.0.1
 PORT=9999
 CMD="transmission-remote $HOST:$PORT"
 
-for ID in `$CMD -l | tail -n +2 | head -n -1 | cut -f3 -d' '`; do
+for ID in `$CMD -l | tail -n +2 | head -n -1 | cut -f4 -d' '`; do
     STATE=`$CMD -t $ID -i   | grep State    | cut -d' ' -f4`
     PERCENT=`$CMD -t $ID -i | grep Percent  | cut -d' ' -f5`
 
