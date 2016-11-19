@@ -8,6 +8,7 @@ xset -b # mute the annoying beep
 export STEAM_RUNTIME=0
 
 # Personal Keybinds
+setxkbmap -option "terminate:ctrl_alt_bksp" & # Ctrl-Alt-Backspace kills xorg
 [ -r ~/.xmodmaprc ] && xmodmap ~/.xmodmaprc &
 command -v xbindkeys && xbindkeys &
 
