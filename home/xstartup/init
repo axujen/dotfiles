@@ -17,9 +17,7 @@ initStartup()
     echo "Initializing startup programs!"
     echo "$Xresource" | xrdb -merge > /dev/null 2>&1
 
-    for script in $startDir/*.sh; do
-        source "$script"
-    done
+    run-parts --regex ".*\.sh$" $startDir
 }
 
 if xrdb -query | grep -qe "$Xresource"; then
