@@ -9,7 +9,9 @@ export STEAM_RUNTIME=0
 
 # Personal Keybinds
 [ -r ~/.xmodmaprc ] && xmodmap ~/.xmodmaprc &
-command -v xbindkeys && xbindkeys &
 
 # Load Xresources just in case
 [ -r ~/.Xresources ] && xrdb -merge ~/.Xresources &
+
+# Update shell env 
+run-parts --regex ".*\.sh$" ~/.shellrc/
