@@ -1,0 +1,4 @@
+# Crawl settings file.
+
+include = ./.crawl/lua.ini
+include = ./.crawl/settings.ini
