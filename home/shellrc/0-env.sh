@@ -6,6 +6,7 @@
 
 # Terminal
 [ -x /usr/bin/urxvt ] && TERMINAL="urxvt" || TERMINAL="xterm"
+export TERMINAL
 
 # vim for everything
 export VISUAL="vim"
@@ -15,10 +16,10 @@ export EDITOR="vim"
 [ -n "$RANGER_LEVEL" ] && PS1="$PS1"' (in ranger) '
 
 # PATH
-PATH=~/.local/bin:/usr/sbin:/sbin:$PATH
+export PATH=$HOME/.local/bin:/usr/sbin:/sbin:$PATH
 
 # Append local mandir to manpath
-MANPATH=$MANPATH:~/.local/share/man/
+export MANPATH=$MANPATH:~/.local/share/man/
 
 # Pager
-PAGER="less"
+export PAGER="less"
