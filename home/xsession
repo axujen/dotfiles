@@ -1,4 +1,7 @@
 # vim: ft=sh
+# Source ~/.profile
+. $HOME/.profile
+
 # Mute the annoying beep
 xset -b
 

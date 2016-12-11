@@ -1,5 +1,5 @@
-#!/usr/bin/sh
+# vim: ft=sh
 # Setup shell environment
-for file in ~/.shellrc/*.sh; do
-    source $file
+for file in $HOME/.shellrc/*.sh; do
+    . $file
 done
