@@ -1,18 +1,17 @@
 # vim: ft=sh
-# Use the aur package xinit-xsession to run this from your login manager
-# Its the best way to ensure everything runs the way i want without modifying /etc files
+# Mute the annoying beep
+xset -b
 
-# Run all system xinitrc shell scripts
-xinitdir="/etc/X11/xinit/xinitrc.d"
-if [ -d "$xinitdir" ]; then
-    for script in $xinitdir/*; do
-        echo "Loading xinit script $script"
-        if [ -x "$script" -a ! -d "$script" ]; then
-            . "$script"
-        fi
-    done
-    unset xinitdir
-    unset script
+# Use native libs for steam
+# https://wiki.archlinux.org/index.php/Steam#Using_native_runtime
+export STEAM_RUNTIME=0
+
+# Personal Keybinds
+setxkbmap -option "terminate:ctrl_alt_bksp" & # Ctrl-Alt-Backspace kills xorg
+
+# Load Xresources just in case
+if [ -r ~/.Xresources ]; then
+    xrdb -merge ~/.Xresources
 fi
 
 exec awesome
