@@ -30,6 +30,7 @@ redshift_toggle()
 
 case $1 in
 	on)
+        redshift_off
 		redshift_on;;
 	off)
 		redshift_off;;
