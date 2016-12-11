@@ -1,2 +1,5 @@
+#!/usr/bin/sh
 # Setup shell environment
-run-parts --regex ".*\.sh$" ~/.shellrc/
+for file in ~/.shellrc/*.sh; do
+    source $file
+done
