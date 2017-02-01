@@ -4,7 +4,6 @@
 
 BIN=`basename $0`
 DOTDIR=`dirname $0`
-UNPACK_SCRIPT="$DOTDIR/unpack"
 PRIVATEDIR="`dirname $0`/private"
 PRIVATETAR="`dirname $0`/private.encrypted"
 KEYSDIR="$DOTDIR/.keys"
@@ -66,33 +65,8 @@ function gitUnlock {
     gpg --decrypt "$PRIVATETAR" | tar zx
 }
 
-function gitUnpack {
-    # Precheck
-    if [ ! -d "$PRIVATEDIR" ]; then
-        echo "Directory \"`basename $PRIVATEDIR`\" does not exist!"
-        read -p "Would you like to decrypt?: " yn
-            case $yn in
-                "Yes"|"yes"|"Y"|"y") 
-                    gitUnlock
-                    ;;
-                *) 
-                    exit
-                    ;;
-            esac
-    fi
-
-    # Make sure the unpack script exists
-    if [ ! -x "$UNPACK_SCRIPT" ]; then
-        echo "Unpack script not found!"
-        echo "Make sure the script is in the root dotfiles directory"
-        exit 6
-    fi
-    # Unpacking
-    $UNPACK_SCRIPT -s $PRIVATEDIR
-}
-
 function gitUsage {
-    echo "Usage: $BIN (lock|unlock|unpack)"
+    echo "Usage: $BIN (lock|unlock)"
 }
 
 case "$1" in
@@ -101,9 +75,6 @@ case "$1" in
         ;;
     'unlock')
         gitUnlock
-        ;;
-    'unpack')
-        gitUnpack
         ;;
     *)
         gitUsage
