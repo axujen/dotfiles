@@ -5,7 +5,7 @@
 BIN=`basename $0`
 DOTDIR=`dirname $0`
 PRIVATEDIR="`dirname $0`/private"
-PRIVATETAR="`dirname $0`/private.encrypted"
+PRIVATETAR="`dirname $0`/private.enc"
 KEYSDIR="$DOTDIR/.keys"
 PUBKEY="$KEYSDIR/pub"
 GPG_CMD="gpg --no-default-keyring --keyring $PUBKEY --trust-model always"
