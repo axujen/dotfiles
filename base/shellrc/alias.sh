@@ -30,7 +30,7 @@ if [ -d /etc/pacman.d ]; then
 	alias pacr='pacman -Rs'
 
 	# Packer aliases
-	alias packer='packer --noedit'
+	alias packer='TMPDIR=$HOME/packertmp packer --noedit'
 	alias pak='packer'
 	alias paks='packer -Ss'
 	alias paki='packer -S'
