@@ -1,0 +1,67 @@
+"
+" Settings
+"
+" Use google as the default search. TODO: Figure out how to save startpage settings in url
+set defsearch=gg 
+set hintchars=qwerasdf
+" Can toggle navbar using <F1>, see below
+set gui=navigation
+" Show tabnumbers next to tabs
+set tabnumbers 
+" colorscheme
+colorscheme vimpwhite
+" Search settings
+set incsearch  
+set hlsearch
+set ignorecase
+set smartcase
+
+"
+" Keybinds
+"
+
+" Navigate tabs using Alt-h/l or w/e
+map <A-h> <C-p>
+map <A-l> <C-n>
+map w <C-p>
+map e <C-n>
+
+" Shift J/K for big scrolls
+map J <C-f>
+map K <C-b>
+
+" Cycle tabs using Alt-number
+map <A-1> :buffer! 1<cr>
+map <A-2> :buffer! 2<cr>
+map <A-3> :buffer! 3<cr>
+map <A-4> :buffer! 4<cr>
+map <A-5> :buffer! 5<cr>
+map <A-6> :buffer! 6<cr>
+map <A-7> :buffer! 7<cr>
+map <A-8> :buffer! 8<cr>
+map <A-9> :buffer! 9<cr>
+map <A-0> :buffer! 10<cr>
+
+" Switch to last selected tab
+map <A-`> <C-^>
+
+" toggle apptab with x
+map x :set apptab!<cr>
+
+" Toggle Nav Bar with F1
+" https://superuser.com/a/749441
+map <silent> <F1> :js toggle_navbar()<CR>
+:js << EOF
+function toggle_navbar() {
+    var nb = document.getElementById('nav-bar');
+    if (!nb)
+        return;
+    nb.style.visibility = (nb.style.visibility == '') ? 'collapse' : '';
+    nb.style.overflow = (nb.style.height == '') ? '' : 'hidden';
+    }
+toggle_navbar();
+EOF
+
+" Show rss feeds in page with vr
+map vr :open rss-feeds<cr>
+" vim: set ft=vim
