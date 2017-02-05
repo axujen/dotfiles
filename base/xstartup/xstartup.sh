@@ -8,7 +8,7 @@ command -v xmodmap          && xmodmap ~/.xmodmaprc &
 # Startup applications
 command -v nitrogen			&& nitrogen  --restore &
 command -v blueman-applet	&& blueman-applet &
-command -v clipit			&& clipit &
+command -v parcellite		&& parcellite &
 command -v compton			&& compton -b &
 command -v devmon			&& devmon-start &
 command -v nm-applet		&& nm-applet --sm-disable &
