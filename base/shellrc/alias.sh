@@ -11,7 +11,8 @@ if [ -d /etc/apt ]; then
 	alias apti="apt-get install";
 	alias aptp="apt-get purge";
 	alias aptr="apt-get remove"
-	alias apts="apt-cache search";
+	# alias apts="apt-cache search";
+    function apts(){ apt-cache search "$@" | sort }
 	alias aptss="aptitude search";
 	alias aptu="apt-get update";
 	alias aptup="apt-get upgrade";
