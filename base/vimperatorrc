@@ -23,8 +23,10 @@ set smartcase
 " Navigate tabs using Alt-h/l or w/e
 map <A-h> <C-p>
 map <A-l> <C-n>
-map w <C-p>
 map e <C-n>
+map w <C-p>
+map J <C-n>
+map K <C-p>
 
 " Shift J/K for big scrolls
 map J <C-f>
