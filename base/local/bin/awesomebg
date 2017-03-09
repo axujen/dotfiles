@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 # set the awesome wallpaper by symlinking an image to ~/.config/awesome/my/wall
 DEST="$HOME/.config/awesome/my/wall"
 
