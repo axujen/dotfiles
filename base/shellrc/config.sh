@@ -2,7 +2,7 @@
 ## Misc shell config
 
 # MOTD is my todo
-command -v todo.sh &> /dev/null && td ls | sed '/--/d' | sed '/TODO:/d' | sort
+command -v "todo.sh" >/dev/null 2>&1 && td ls | sed '/--/d' | sed '/TODO:/d' | sort
 
 # search zshall manpage
 zman() {
