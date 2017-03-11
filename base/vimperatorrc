@@ -11,13 +11,23 @@ set hintchars=qwerasdf
 set gui=navigation
 " Show tabnumbers next to tabs
 set tabnumbers 
-" colorscheme
-colorscheme vimpwhite
+
 " Search settings
 set incsearch  
 set hlsearch
 set ignorecase
 set smartcase
+"Statusbar
+set status=location,bookmark,history,ssl,position
+set statuslinevisibility=visible
+set showstatuslinks=2
+
+"
+" colorscheme
+"
+colorscheme zenburn
+highlight clear Hint
+highlight Hint font-size:16px;color:white;background-color:black;padding:1px;
 
 "
 " Keybinds
