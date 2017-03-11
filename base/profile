@@ -1,4 +1,9 @@
 # vim: ft=sh
+# Source systemwide profile to avoid problems
+if [ -r /etc/profile ]; then
+    . /etc/profile
+fi
+
 # Setup shell environment
 for file in $HOME/.shellrc/*.sh; do
     . $file
