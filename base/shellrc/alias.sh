@@ -67,6 +67,7 @@ alias awesome-quit="echo \"awesome.quit()\" | awesome-client"
 alias steam="steam -silent"
 alias netshell="sudo -g internet $SHELL"
 alias px="proxychains -q"
+alias ssh="ssh -o StrictHostKeyChecking=no"
 
 # todotxt
 alias td="todo.sh -Ant"

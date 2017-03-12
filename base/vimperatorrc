@@ -1,20 +1,33 @@
 "
 " Settings
 "
-" Use google as the default search. TODO: Figure out how to save startpage settings in url
-set defsearch=gg 
+" Use startpage as the default search engine
+" bmark https://www.startpage.com/do/search?prf=1d981f2af852a031b0ec05677d83779a&cat=web&query=%s -keyword sp
+set defsearch=sp
+" complete search keywords and bookmarks
+set complete=sb
 set hintchars=qwerasdf
 " Can toggle navbar using <F1>, see below
 set gui=navigation
 " Show tabnumbers next to tabs
 set tabnumbers 
-" colorscheme
-colorscheme vimpwhite
+
 " Search settings
 set incsearch  
 set hlsearch
 set ignorecase
 set smartcase
+"Statusbar
+set status=location,bookmark,history,ssl,position
+set statuslinevisibility=visible
+set showstatuslinks=2
+
+"
+" colorscheme
+"
+colorscheme zenburn
+highlight clear Hint
+highlight Hint font-size:16px;color:white;background-color:black;padding:1px;
 
 "
 " Keybinds
