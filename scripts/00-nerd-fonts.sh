@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 # Download and unpack patched icon fonts
 
 # Make sure curl and unzip are installed
