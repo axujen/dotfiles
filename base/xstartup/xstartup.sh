@@ -17,6 +17,8 @@ command -v unclutter		&& unclutter -idle 5 -jitter 2 -not OpenArena &
 command -v calibre-server   && calibre-server --port 5555 --daemonize &
 
 # Big apps last
+command -v dropbox          && dropbox start &
+command -v gnome-encfs-manager && gnome-encfs-manager &
 command -v cantata			&& cantata &
 command -v keepassx			&& keepassx &
 command -v SpiderOak		&& SpiderOak &
