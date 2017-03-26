@@ -1,5 +1,5 @@
 " Fonts
-set guifont=Inconsolata\ for\ Powerline\ 10
+set guifont=InconsolataForPowerline\ Nerd\ Font\ Medium\ 10
 
 " GUI options.
 set guioptions+=c " console dialogs instead of popup.
