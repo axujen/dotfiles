@@ -6,7 +6,7 @@ command -v wget  2>&1 > /dev/null || echo "wget is required, make sure it is ins
 command -v unzip 2>&1 > /dev/null || echo "unzip is required, make sure it is installed."
 
 URL="https://github.com/ryanoasis/nerd-fonts/releases/download/v1.0.0"
-FONTS=( AnonymousPro BitstreamVeraSansMono DejaVuSansMono DroidSansMono Terminus UbuntuMono )
+FONTS=( RobotoMono Inconsolata ProFont DejaVuSansMono DroidSansMono UbuntuMono )
 TMPDIR=/tmp/nerd-fonts
 
 [ ! -d $TMPDIR ] && mkdir -p $TMPDIR
