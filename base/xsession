@@ -16,3 +16,6 @@ setxkbmap -option "terminate:ctrl_alt_bksp" & # Ctrl-Alt-Backspace kills xorg
 if [ -r ~/.Xresources ]; then
     xrdb -merge ~/.Xresources
 fi
+
+# Load xmodmap
+command -v xmodmap && xmodmap ~/.xmodmaprc

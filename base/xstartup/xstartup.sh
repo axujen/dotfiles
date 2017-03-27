@@ -2,9 +2,6 @@
 # Startup apps for xorg
 # Should run AFTER the DE/WM is started.
 
-# Settings
-command -v xmodmap          && xmodmap ~/.xmodmaprc &
-
 # Startup applications
 command -v nitrogen			&& nitrogen  --restore &
 command -v blueman-applet	&& blueman-applet &
