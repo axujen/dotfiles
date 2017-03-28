@@ -6,7 +6,7 @@ ABSOLUTE_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$(basename "${BASH_
 DOTFILES_PATH=`dirname $ABSOLUTE_PATH`
 
 # Hardcoded directories
-DIR_BASE="$DOTFILES_PATH/base"
+DIR_BASE="$DOTFILES_PATH/home"
 DIR_BAK="$DOTFILES_PATH/backups"
 LOGFILE="$DOTFILES_PATH/log"
 
