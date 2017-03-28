@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+# This script will launch keepass with a database inside an encrypted dropbox folder.
+# This sript will wait untill the db file appears (private folder is mounted) before launching keepass
+
+KEEPASS="$(which keepassx)"
+DB="$HOME/Dropbox/private/shadow.kdb"
+
+if [ ! -x $KEEPASS ]; then 
+    echo "keepassx is not installed, leaving!"
+    exit 1
+fi
+
+if [ ! -d `dirname $DB` ]; then
+    echo "Dropbox private folder does not exist!"
+fi
+
+while [ ! -f "$DB" ]; do
+    echo "$DB not found, waiting 10 seconds before checking again!"
+    sleep 10
+done
+
+echo "$DB found!, launching keepass"
+$KEEPASS $DB -lock -min
