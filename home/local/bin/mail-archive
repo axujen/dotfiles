@@ -1,13 +1,15 @@
 ## Archive old emails every week, this is supposed to run from a cronjob
+# vim: ft=sh
 
 # Archive 2 week old emails
 oldAge=14
 
 # Mail directory
-mailDir="$HOME/.maildir"
+mailDir="$HOME/.mailbox"
 
 # Directory to store these backups
 archiveDir="$mailDir/Archives"
+[ ! -d $archiveDir ] && mkdir -p $archiveDir
 
 # Archive suffix "MAILBOX_$suffix"
 suffix="_archive_%d-%b-%Y"
