@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 # Symlink newly added albums in the music directory
+command -v beet || (echo "beets not installed!"; exit 1)
 
 # Query for added since
 date_query="10 days ago"
