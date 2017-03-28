@@ -35,12 +35,6 @@ set sleep_time=0
 # Center the cursor
 set menu_context = 50
 
-# Contacts
-set alias_file = "~/.mutt/contacts"
-set sort_alias = alias
-set reverse_alias = yes
-source $alias_file
-
 # mailcap file
 set mailcap_path=~/.mutt/mailcap
 auto_view text/html
@@ -54,8 +48,6 @@ set certificate_file=~/.mutt/certificates
 ## sidebar
 set sidebar_visible=yes
 set sidebar_width=24
-set sidebar_delim='|'
-set sidebar_sort=no
 
 # Show mail index when reading mail
 set pager_index_lines=5
