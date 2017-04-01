@@ -1,0 +1,58 @@
+! {{{ urxvt
+urxvt*colorBD:				lightgreen
+urxvt*colorIT:				lightblue
+urxvt*cursorBlink:			true
+urxvt*cursorUnderline:		false
+urxvt*depth:				24
+urxvt*font:					FONT
+urxvt*highlightColor:		green
+urxvt*highlightTextColor:	yellow
+urxvt*jumpScroll:			True
+urxvt*meta8:				False
+urxvt*pointBlank:			false
+urxvt*saveLines:			500
+urxvt*scrollBar:			false
+urxvt*scrollstyle:			plain
+urxvt*skipScroll:			True
+urxvt*termName:				rxvt-unicode
+urxvt*underlineColor:		lightgreen
+urxvt*urgentOnBell:			true
+urxvt*visualBell:			true
+
+! Extensions
+! clipboard extension needs xsel to function
+! https://raw.github.com/muennich/urxvt-perls/master/clipboard
+urxvt*perl-ext-common:		default,matcher,clipboard
+
+! for compatibility use both entries
+urxvt*urlLauncher:			firefox
+urxvt*url-launcher:			firefox
+
+urxvt*matcher.button:		1
+urxvt*keysym.S-Insert:		perl:clipboard:paste
+urxvt*keysym.M-c:			perl:clipboard:copy
+! }}}
+
+! {{{ xterm
+xterm*font:			FONT
+xterm*hpFunctionKeys:	True
+xterm*dynamicColors:	true
+xterm*utf8:				2
+xterm*eightBitInput:	true
+xterm*metaSendEscape:	true
+xterm*saveLines:		512
+xterm*scrollTtyKeypress:false
+xterm*scrollTtyOutput:	false
+xterm*scrollBar:		false
+xterm*rightScrollBar:	false
+xterm*jumpScroll:		true
+xterm*multiScroll:		true
+xterm*toolBar:			false
+! }}}
+
+! {{{ aterm
+aterm*font:					FONT
+aterm*boldFont:				-xos4-terminus-bold-r-normal--14-140-72-72-c-80-iso8859-1
+aterm*scrollBar:			false
+! }}}
+! vim: ft=xdefaults fdm=marker
