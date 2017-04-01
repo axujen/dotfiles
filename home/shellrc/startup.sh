@@ -18,13 +18,8 @@ else
 	touch "/tmp/has-logged/$USER"
 fi
 
-# Run mpd and its utilities
-command -v mpd && mpd && mpdscribble && beet mpdstats &
+command -v mpd && mpd &
+command -v mpdscribble && mpdscribble &
 
 # rmshit, keeps home directory clean.
 command -v rmshit && rmshit &
-
-# Update recently added music list
-if [ -x "~/.local/bin/recently-added-music" ]; then
-    ~/.local/bin/recently-added-music &
-fi
