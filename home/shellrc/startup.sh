@@ -19,7 +19,6 @@ else
 fi
 
 command -v mpd && mpd &
-command -v mpdscribble && mpdscribble &
 
 # rmshit, keeps home directory clean.
 command -v rmshit && rmshit &
