@@ -110,7 +110,7 @@ set autoindent
 set nosmartindent
 set ft=unix
 filetype indent plugin on
-set tags=./tags,./TAGS,tags,TAGS,~/.vimtags
+set tags=./vimtags,./TAGS,tags,TAGS,~/.vimtags
 set termencoding=utf-8
 set visualbell
 set wildignore=*.pyc
@@ -119,7 +119,8 @@ set confirm " Ask if you want to save the buffer instead of just failing command
 set wildmenu " Better command line completition.
 set wildmode=full
 set nowrap " Don't wrap text.
-set autochdir " Always cd to the current files directory
+set noautochdir " Set the cwd once at startup, see option below
+cd %:p:h
 set pastetoggle=<F3>
 set showmode
 set showcmd
@@ -176,7 +177,7 @@ if !exists("*ReloadSettings")
 endif
 
 " Load custom vimfiles
-au FileType c,cpp,java,php,ruby,python call CheckForCustomConfiguration()
+au FileType c,cpp,java,php,ruby,python,lua call CheckForCustomConfiguration()
 
 function! CheckForCustomConfiguration()
 	" Check for .vim.custom in the directory containing the newly opened file
