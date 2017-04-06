@@ -13,4 +13,4 @@ function! <SID>ExpandSnippetOrReturn()
     return "\<C-Y>"
   endif
 endfunction
-imap <expr> <CR> pumvisible() ? "<C-R>=<SID>ExpandSnippetOrReturn()<CR>" : "AutoPairsReturn()<CR>"
+imap <expr> <CR> pumvisible() ? "<C-R>=<SID>ExpandSnippetOrReturn()<CR>" : "\<CR>\<Plug>AutoPairsReturn"
