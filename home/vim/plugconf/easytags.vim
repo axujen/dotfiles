@@ -1,6 +1,6 @@
 Plugin 'xolox/vim-easytags'
 
-let g:easytags_opts = ['--tag-relative=no']
+let g:easytags_opts = ['--options=$HOME/.vim/ctags/ctags.cnf']
 let g:easytags_async=1
 let g:easytags_syntax_keyword="always"
 let g:easytags_dynamic_files=2
