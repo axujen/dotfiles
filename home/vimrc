@@ -3,6 +3,9 @@ version 6.0
 " Disable compatibility.  
 set nocompatible
 
+" Tab is the leader key
+let mapleader = "\<Tab>"
+
 " w!! will save file using sudo
 cmap w!! execute 'silent w !sudo tee > /dev/null %' \| edit!
 
@@ -37,9 +40,6 @@ nnoremap Y y$
 
 " Toggle spellchecking
 map <C-s> :set spell!<cr>
-
-" Toggle word wrap
-noremap <Leader>w :set wrap!<cr>
 
 " Tab mappings, mostly using t.
 nnoremap tn :tabnew<cr>
