@@ -79,4 +79,7 @@ EOF
 
 " Show rss feeds in page with vr
 map vr :open rss-feeds<cr>
+" Fix bug with TreeStyleTabs see https://github.com/vimperator/vimperator-labs/issues/740
+set activate=
+
 " vim: set ft=vim
