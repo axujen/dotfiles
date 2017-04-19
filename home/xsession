@@ -2,6 +2,9 @@
 # Source ~/.profile
 . $HOME/.profile
 
+# Set the screen timeout to 2 minutes
+xset dpms 120
+
 # Mute the annoying beep
 xset -b
 
