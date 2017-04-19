@@ -1,5 +1,2 @@
---format=2
---extra=+fq
---fields=+afikKlmnsSzt
 --tag-relative=no
 --exclude=.git
