@@ -8,7 +8,8 @@ fi
 
 # Debian aliases
 if [ -d /etc/apt ]; then
-	alias apti="apt-get install";
+	alias apti="apt-get install --no-install-recommends";
+	alias aptir="apt-get install";
 	alias aptp="apt-get purge";
 	alias aptr="apt-get remove";
 	alias aptss="aptitude search";
