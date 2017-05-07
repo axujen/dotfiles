@@ -8,14 +8,14 @@ fi
 
 # Debian aliases
 if [ -d /etc/apt ]; then
-	alias apti  = "apt install --no-install-recommends";
-	alias aptir = "apt install";
-	alias aptp  = "apt purge";
-	alias aptr  = "apt remove";
-    alias apts  = "apt search";
-	alias aptss = "aptitude search";
-	alias aptu  = "apt update";
-	alias aptup = "apt upgrade";
+	alias apti="apt install --no-install-recommends";
+	alias aptir="apt install";
+	alias aptp="apt purge";
+	alias aptr="apt remove";
+    alias apts="apt search";
+	alias aptss="aptitude search";
+	alias aptu="apt update";
+	alias aptup="apt upgrade";
 fi
 
 # Archlinux aliases
