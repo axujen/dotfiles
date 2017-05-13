@@ -20,17 +20,18 @@ urxvt*urgentOnBell:			true
 urxvt*visualBell:			true
 
 ! Extensions
-! clipboard extension needs xsel to function
-! https://raw.github.com/muennich/urxvt-perls/master/clipboard
-urxvt*perl-ext-common:		default,matcher,clipboard
+urxvt*perl-ext-common:		default,matcher
 
 ! for compatibility use both entries
 urxvt*urlLauncher:			firefox
 urxvt*url-launcher:			firefox
 
 urxvt*matcher.button:		1
-urxvt*keysym.S-Insert:		perl:clipboard:paste
-urxvt*keysym.M-c:			perl:clipboard:copy
+
+! Bind Alt-c & Alt-v, Shift-Insert to copy and paste
+URxvt.keysym.M-c:      eval:selection_to_clipboard
+URxvt.keysym.M-v:      eval:paste_clipboard
+URxvt.keysym.S-Insert: eval:paste_clipboard
 ! }}}
 
 ! {{{ xterm
