@@ -174,7 +174,7 @@ function install() {
 
     log "Unpacking your dotfiles." true
     for item in $BASE/*; do
-        item=$(realpath "$item")
+        item=$(realpath -s "$item")
     	target="$HOME/.$(basename "$item")"
         if [[ -d "$item" ]]; then
             install_dir "$item" "$target"
