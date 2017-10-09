@@ -1,9 +1,6 @@
 # vim: ft=sh
 ## Misc shell config
 
-# MOTD is my todo
-command -v "todo.sh" >/dev/null 2>&1 && td ls | sed '/--/d' | sed '/TODO:/d' | sort
-
 # search zshall manpage
 zman() {
   PAGER="less -g -s '+/^       "$1"'" man zshall
