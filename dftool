@@ -3,7 +3,7 @@ DESC="This script unpacks dotfiles stored in a git repo to your home directory."
 
 # Get the real dotfiles directory
 ABSOLUTE_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$(basename "${BASH_SOURCE[0]}")"
-DOTFILES_PATH=`dirname $ABSOLUTE_PATH`
+DOTFILES_PATH=$(dirname "$ABSOLUTE_PATH")
 
 # Hardcoded directories
 DIR_BASE="$DOTFILES_PATH/home"
@@ -30,12 +30,12 @@ function log(){
 	# note: the quiet argument is still respected
 
 	local text=$1
-	[ ! -z $2 ] && local force=$2 || local force=false
+    if [ ! -z "$2" ]; then local force="$2"; else local force=false; fi
 
-	if [ -z $QUIET ] ; then
-		$force && echo $text || { $VERBOSE && echo $text; }
+	if [ -z "$QUIET" ] ; then
+		$force && echo "$text" || { $VERBOSE && echo "$text"; }
 	fi
-	echo "[$(date +%T)] $text" >> $LOGFILE
+	echo "[$(date +%T)] $text" >> "$LOGFILE"
 }
 
 function install_file(){
@@ -98,7 +98,7 @@ function install_dir(){
 	for item in $dir/*; do
 		[[ $item == "$dir/*" ]] && break # emptry dir
 		target="$dest/$(basename "$item")"
-		[[ -d $item ]] && install_dir $item $target || install_file $item $target
+		if [[ -d $item ]]; then install_dir "$item" "$target"; else install_file "$item" "$target"; fi
 	done
 }
 
@@ -109,8 +109,10 @@ function bkp(){
 	# TODO: redo the layout structure for the backups
 
 	local file=$1
-	local basename=`basename $file`
-	local basedir="$DIR_BAK/$(echo $(dirname $file)|tr / _)"
+    local basename
+    local basedir
+    basename=$(basename "$file")
+	basedir=\"$DIR_BAK/"$(dirname "$file" | tr / _)"\"
 	local bak="$basedir/${basename#.}"
 
 	[[ -e "$basedir" ]] || mkdir -p "$basedir"
@@ -119,7 +121,7 @@ function bkp(){
 		i=1
 		local new_bak=$bak.$i
 		while [[ -e "$new_bak" ]] ; do
-			i=$[i+1]
+            let "i=i+1"
 			new_bak=$bak.$i
 		done
 		bak=$new_bak
@@ -139,18 +141,18 @@ function get_managed_files() {
     for source in $source_dir/*; do
         # If we are in a subdirectory
         if [[  -n $target_dir ]]; then
-            target="$target_dir/$(basename $source)"
+            target="$target_dir/$(basename "$source")"
         else
-            target="$HOME/.$(basename $source)"
+            target="$HOME/.$(basename "$source")"
         fi
 
         # If source is a directory
         if [[ -d "$source" ]]; then
-            echo $(get_managed_files $source $target)
+            get_managed_files "$source" "$target"
         else
             # Only symlinks are managed
             if  [[ -L $target ]]; then
-                echo $target
+                echo "$target"
             fi
         fi
     done
@@ -159,10 +161,10 @@ function get_managed_files() {
 function get_managed_dirs() {
     source=$1
 
-    dirs=($(find $source/* -type d))
-    for dir in ${dirs[@]}; do
+    dirs=($(find "$source"/* -type d))
+    for dir in "${dirs[@]}"; do
         target="$HOME/.${dir#$source/}"
-        echo $target
+        echo "$target"
     done
 }
 
@@ -172,9 +174,13 @@ function install() {
 
     log "Unpacking your dotfiles." true
     for item in $BASE/*; do
-    	item=`realpath $item`
-    	target="$HOME/.$(basename $item)"
-    	[[ -d "$item" ]] && install_dir $item $target || install_file $item $target
+        item=$(realpath "$item")
+    	target="$HOME/.$(basename "$item")"
+        if [[ -d "$item" ]]; then
+            install_dir "$item" "$target"
+        else
+            install_file "$item" "$target"
+        fi
     done
     log "Done unpacking." true
 }
@@ -183,31 +189,31 @@ function uninstall() {
     [[ -n "$1" ]] && BASE=$1 || BASE=$DIR_BASE
 
     # Warn the user before you continue.
-    read -p "This operation is dangerous! type \"YES\" to continue? " choice
+    read -rp "This operation is dangerous! type \"YES\" to continue? " choice
     [[ "$choice" != "YES" ]] && exit
 
     # First remove any symlinks
-    files=($(get_managed_files $BASE))
+    files=($(get_managed_files "$BASE"))
     echo "Deleting symlinks."
     for file in "${files[@]}"; do
         log "Deleting $file"
-        rm $file
+        rm "$file"
     done
     echo "Done."
 
     # Then delete empty directories
-    dirs=($(get_managed_dirs $BASE))
-    dirs=(`for i in ${dirs[@]}; do echo $i; done | sort -r`) # Reverse sort the directories
+    dirs=($(get_managed_dirs "$BASE"))
+    dirs=($(for i in "${dirs[@]}"; do echo "$i"; done | sort -r)) # Reverse sort the directories
 
     echo "Deleting empty directories"
-    for dir in ${dirs[@]}; do
-        if [[ $(ls -A $dir) ]]; then
+    for dir in "${dirs[@]}"; do
+        if [[ $(ls -A "$dir") ]]; then
             # Non-Empty directory
             log "$dir contains files, skipping!"
         else
             # Empty directory
             log "Deleting empty directory $dir"
-            rm -r $dir
+            rm -r "$dir"
         fi
     done
     echo "Done."
@@ -216,9 +222,9 @@ function uninstall() {
 function list_files() {
     [[ -n "$1" ]] && BASE=$1 || BASE=$DIR_BASE
 
-    files=($(get_managed_files $BASE))
+    files=($(get_managed_files "$BASE"))
     for file in "${files[@]}"; do
-        echo $file
+        echo "$file"
     done
 }
 
@@ -227,7 +233,7 @@ OPTIND=1
 while getopts "hvqc:" opt; do
 	case "$opt" in
 		h)
-			echo -e $USAGE
+			echo -e "$USAGE"
 			exit
 			;;
 		v)
@@ -237,28 +243,28 @@ while getopts "hvqc:" opt; do
 		c)
 			CLOBBER=true;;
         *)
-            echo -e $USAGE
+            echo -e "$USAGE"
             exit
             ;;
 	esac
 done
 
 ## Command parsing and execution.
-shift $(($OPTIND - 1))
+shift "$((OPTIND -1))"
 CMD="$1"
 DIR=$2
 case "$CMD" in
     install|ins)
-        install $DIR
+        install "$DIR"
         exit;;
     uninstall|rm)
-        uninstall $DIR
+        uninstall "$DIR"
         exit;;
     list|ls)
-        list_files $DIR
+        list_files "$DIR"
         exit;;
     *)
         echo "Unknown command: $1"
-        echo -e $USAGE
+        echo -e "$USAGE"
         exit;;
 esac
