@@ -1,9 +1,6 @@
 # vim: ft=sh
-# Source ~/.profile
-source "$HOME/.profile"
-
 # Set the screen timeout to 2 minutes
-xset dpms 120
+xset dpms 300
 
 # Mute the annoying beep
 xset -b
