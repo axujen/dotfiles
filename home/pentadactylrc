@@ -1,6 +1,7 @@
 " Settings
 set defsearch=sp
 set hintkeys=asdfqwer
+set complete+=bookmark
 
 " Keybinds
 map <A-h> <C-p>
@@ -51,7 +52,7 @@ map <A-`> <C-^>
 map <x> :pintab!<cr>
 
 " Toggle Nav Bar with F1
-map <F1> :toolbartoggle Bookmarks Toolbar<cr>
+map <F1> :toolbartoggle Navigation Toolbar<cr>
 
 " Show rss feeds in page with vr
 map vr :open rss-feeds<cr>

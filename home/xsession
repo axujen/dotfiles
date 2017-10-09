@@ -1,6 +1,6 @@
 # vim: ft=sh
 # Source ~/.profile
-. $HOME/.profile
+source "$HOME/.profile"
 
 # Set the screen timeout to 2 minutes
 xset dpms 120

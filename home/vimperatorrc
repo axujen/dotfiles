@@ -1,6 +1,9 @@
-"
+"---------
 " Settings
-"
+"---------
+" Fix bug with TreeStyleTabs see https://github.com/vimperator/vimperator-labs/issues/740
+set activate=
+
 " Use startpage as the default search engine
 " bmark https://www.startpage.com/do/search?prf=1d981f2af852a031b0ec05677d83779a&cat=web&query=%s -keyword sp
 set defsearch=sp
@@ -10,28 +13,22 @@ set hintchars=qwerasdf
 " Can toggle navbar using <F1>, see below
 set gui=navigation
 " Show tabnumbers next to tabs
-set tabnumbers 
+set notabnumbers 
 
 " Search settings
 set incsearch  
 set hlsearch
 set ignorecase
 set smartcase
+
 "Statusbar
 set status=location,bookmark,history,ssl,position
 set statuslinevisibility=visible
 set showstatuslinks=2
 
-"
-" colorscheme
-"
-colorscheme zenburn
-highlight clear Hint
-highlight Hint font-size:16px;color:white;background-color:black;padding:1px;
-
-"
+" --------
 " Keybinds
-"
+" --------
 
 " Navigate tabs using Alt-h/l or w/e
 map <A-h> <C-p>
@@ -65,6 +62,7 @@ map x :set apptab!<cr>
 
 " Toggle Nav Bar with F1
 " https://superuser.com/a/749441
+map <F1> <nop>
 map <silent> <F1> :js toggle_navbar()<CR>
 :js << EOF
 function toggle_navbar() {
@@ -79,7 +77,5 @@ EOF
 
 " Show rss feeds in page with vr
 map vr :open rss-feeds<cr>
-" Fix bug with TreeStyleTabs see https://github.com/vimperator/vimperator-labs/issues/740
-set activate=
 
 " vim: set ft=vim

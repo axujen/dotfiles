@@ -61,29 +61,13 @@ alias sl="ls"
 alias sudo='sudo '
 alias svim='sudo -e'
 alias tmux='tmux -2'
-alias utop="htop -u $USER"
+alias utop="htop -u \$USER"
 alias awesome-quit="echo \"awesome.quit()\" | awesome-client"
-alias steam="steam -silent"
-alias netshell="sudo -g internet $SHELL"
+alias steam="steam-native -silent"
 alias px="proxychains -q"
 alias ssh="ssh -o StrictHostKeyChecking=no"
 
-# todotxt
-alias td="todo.sh -Ant"
-alias tdl="td ls | sed '/--/d' | sed '/TODO:/d' | sort"
-
-# Upload using limf
-upload()
-{
-    url=$(limf -c 12 -l $1)
-    echo "$url" | xclip -selection c
-    echo "$url"
-}
-
-command -v logtail >/dev/null 2>&1 && alias logs='sudo tail -F /var/log/messages | logtool -t short -n' || alias logs='sudo tail -F /var/log/messages'
-command -v xclip >/dev/null 2>&1 && alias wgetpaste='wgetpaste -C'
-# Throttle all steam games
-command -v cpulimit &> /dev/null && alias steam="cpulimit -l 80 -i -z steam"
+command -v xclip >/dev/null 2>&1    && alias wgetpaste='wgetpaste -C'
 
 # If udevil is installed use it.
 if [ -d /etc/udevil ]; then
