@@ -1,10 +1,57 @@
-# vim: ft=sh
-# Source systemwide profile to avoid problems
-if [ -r /etc/profile ]; then
-    . /etc/profile
+# PATH
+export PATH=$HOME/.local/bin:/usr/sbin:/sbin:$PATH
+
+# Local man pages
+export MANPATH=$MANPATH:$HOME/.local/share/man
+
+# Use less as pager
+export PAGER="less"
+
+# Initiate envoy variables
+if [[ -x /usr/bin/envoy ]]; then eval "$(envoy -p)"; fi
+
+# Use vim as editor
+export VISUAL="vim"
+export EDITOR="vim"
+
+# XDG - set defaults as they may not be set
+# See https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
+# and https://wiki.archlinux.org/index.php/XDG_Base_Directory_support
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+
+if [ ! -w "${XDG_RUNTIME_DIR:="/run/user/$UID"}" ]; then
+    echo "\$XDG_RUNTIME_DIR ($XDG_RUNTIME_DIR) not writable. Unsetting." >&2
+    unset XDG_RUNTIME_DIR
+else
+    export XDG_RUNTIME_DIR
 fi
+# Workarounds to make applications use XDG_CONFIG_HOME
+export MPLAYER_HOME="$XDG_CONFIG_HOME"/mplayer
+export WEECHAT_HOME="$XDG_CONFIG_HOME"/weechat
+export VIMINIT=":source $XDG_CONFIG_HOME"/vim/vimrc
+export VIMPERATOR_INIT=":source $XDG_CONFIG_HOME/vimperator/vimperatorrc"
+export VIMPERATOR_RUNTIME="$XDG_CONFIG_HOME"/vimperator
+export GNUPGHOME="$XDG_CONFIG_HOME"/gnupg
+export IPYTHONDIR="$XDG_CONFIG_HOME"/ipython
+export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
+export PYTHON_EGG_CACHE="$XDG_CACHE_HOME"/python-eggs
+export RXVT_SOCKET="$XDG_RUNTIME_DIR"/urxvtd
+export WGETRC="$XDG_CONFIG_HOME/"wgetrc
+export HISTFILE="$XDG_CACHE_HOME"/shell/history
+export GIMP2_DIRECTORY="$XDG_CONFIG_HOME"/gimp
+export CRAWL_DIR="$XDG_CONFIG_HOME"/crawl/
+export CRAWL_RC="$XDG_CONFIG_HOME"/crawl/config
+export GTK_RC_FILES="$XDG_CONFIG_HOME"/gtk-1.0/gtkrc
+export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 
 # Setup shell environment
-for file in $HOME/.shellrc/*.sh; do
-    . $file
-done
+SHELLRC="$HOME/.shellrc"
+if [[ -d "$SHELLRC" ]]; then
+    for file in $SHELLRC/*.sh; do
+        # shellcheck disable=SC1090
+        source "$file"
+    done
+fi
+# vim: ft=sh

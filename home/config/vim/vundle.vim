@@ -1,7 +1,7 @@
 filetype off				   " required!
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=$XDG_CONFIG_HOME/vim/bundle/vundle/
+call vundle#begin("$XDG_CONFIG_HOME/vim/bundle")
 
 " let Vundle manage Vundle
 Plugin 'gmarik/vundle'
@@ -22,9 +22,10 @@ Plugin 'mediawiki'
 Plugin 'kchmck/vim-coffee-script'
 
 " Load custom plugins
-for plugin in split(glob("~/.vim/plugconf/*.vim"), "\n")
+for plugin in split(glob("$XDG_CONFIG_HOME/vim/plugconf/*.vim"), "\n")
     exec "source" plugin
 endfor
 
+call vundle#end()
 filetype plugin indent on " required!
 " vim: ft=vim

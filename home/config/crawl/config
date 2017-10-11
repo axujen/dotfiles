@@ -1,4 +1,6 @@
 #vim: ft=cfg
+include = ./lua.init
+
 tile_map_pixels    = 10
 tile_skip_title    = true
 tile_window_height = 0

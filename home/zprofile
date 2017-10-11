@@ -1,0 +1,5 @@
+if [[ -r "$HOME/.profile" ]]; then
+	emulate sh
+	source "$HOME/.profile"
+	emulate zsh
+fi

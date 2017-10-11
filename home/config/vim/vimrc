@@ -1,4 +1,12 @@
 version 6.0
+" Respect XDG
+set undodir=$XDG_CACHE_HOME/vim/undo
+set directory=$XDG_CACHE_HOME/vim/swap
+set backupdir=$XDG_CACHE_HOME/vim/backup
+set viminfo+='1000,n$XDG_CACHE_HOME/vim/viminfo
+set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIMRUNTIME
+set tags=./vimtags,./TAGS,tags,TAGS,$XDG_CACHE_HOME/vim/tags
+
 
 " Disable compatibility.  
 set nocompatible
@@ -110,7 +118,6 @@ set autoindent
 set nosmartindent
 set ft=unix
 filetype indent plugin on
-set tags=./vimtags,./TAGS,tags,TAGS,~/.vimtags
 set termencoding=utf-8
 set visualbell
 set wildignore=*.pyc
@@ -168,9 +175,9 @@ colorscheme desert
 " Reload vimrc settings while its running
 if !exists("*ReloadSettings")
 	function! ReloadSettings()
-		source ~/.vimrc
+		source $XDG_CONFIG_HOME/vim/vimrc
 		if has("gui_running")
-			source ~/.gvimrc
+			source $HOME/.gvimrc
 		endif
 	endfunction
 	command! ReloadSettings call ReloadSettings()
@@ -190,13 +197,13 @@ endfunction
 let load_plugins = 1 " Set this to 0 to disable plugins altogether
 " Load vundle settings
 if load_plugins
-	if !isdirectory(expand("~/.vim/bundle/vundle/.git/"))
+	if !isdirectory(expand("$XDG_CONFIG_HOME/vim/bundle/vundle/.git/"))
 		echon "Setting up vundle, this may take a while, wanna continue? (y/n): "
 		if nr2char(getchar()) ==? 'y'
-			!git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+			!git clone https://github.com/gmarik/vundle $XDG_CONFIG_HOME/vim/bundle/vundle
 		endif
 	endif
-	if filereadable(expand("~/.vim/vundle.vim"))
-		exe 'source' expand("~/.vim/vundle.vim")
+	if filereadable(expand("$XDG_CONFIG_HOME/vim/vundle.vim"))
+		exe 'source' expand("$XDG_CONFIG_HOME/vim/vundle.vim")
 	endif
 endif

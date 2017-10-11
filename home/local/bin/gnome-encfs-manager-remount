@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+
+GENCFS="$(which gnome-encfs-manager)"
+
+if [ ! -x "$GENCFS" ]; then
+    echo "gnome-encfs-manager could not be find in your '$PATH'."
+    exit 1
+fi
+
+"$GENCFS" list_stashes | while read -r stash; do
+    src=$(echo "$stash" | cut -d' ' -f1)
+    # dest=$(echo "$stash" | cut -d' ' -f3)
+
+    "$GENCFS" unmount "$src"
+    "$GENCFS" mount "$src"
+done

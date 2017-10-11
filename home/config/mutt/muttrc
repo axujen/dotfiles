@@ -36,14 +36,14 @@ set sleep_time=0
 set menu_context = 50
 
 # mailcap file
-set mailcap_path=~/.mutt/mailcap
+set mailcap_path=$XDG_CONFIG_HOME/mutt/mailcap
 auto_view text/html
 alternative_order text/plain text/enriched text/html     # save html for last
 
 # use headercache for IMAP (make sure this is a directory for performance!)
-set header_cache=~/.mutt/cache/headers
-set message_cachedir=~/.mutt/cache/bodies
-set certificate_file=~/.mutt/certificates
+set header_cache=$XDG_CONFIG_HOME/mutt/cache/headers
+set message_cachedir=$XDG_CONFIG_HOME/mutt/cache/bodies
+set certificate_file=$XDG_CONFIG_HOME/mutt/certificates
 
 ## sidebar
 set sidebar_visible=yes
@@ -53,10 +53,10 @@ set sidebar_width=24
 set pager_index_lines=5
 
 # Keys
-source ~/.mutt/keybinds
+source $XDG_CONFIG_HOME/mutt/keybinds
 
 # Colors
-source ~/.mutt/colors
+source $XDG_CONFIG_HOME/mutt/colors
 
 # Accounts
-source ~/.mutt/accounts/main
+source $XDG_CONFIG_HOME/mutt/accounts/main

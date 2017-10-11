@@ -28,4 +28,4 @@ nnoremap <C-p> :CtrlPSession<cr>
 nnoremap <leader>y :CtrlPYankring<cr>
 
 " Sessions
-let g:ctrlp_session_path = "~/.vim/sessions"
+let g:ctrlp_session_path = "$XDG_CONFIG_HOME/vim/sessions"

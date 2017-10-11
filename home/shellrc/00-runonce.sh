@@ -17,9 +17,5 @@ else
 	[ ! -d /tmp/has-logged ] && mkdir /tmp/has-logged
 	touch "/tmp/has-logged/$USER"
 fi
-
-command -v mpd && mpd &
-command -v mpdscribble && mpdscribble &
-
 # rmshit, keeps home directory clean.
 command -v rmshit && rmshit &
