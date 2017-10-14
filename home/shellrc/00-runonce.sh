@@ -17,5 +17,20 @@ else
 	[ ! -d /tmp/has-logged ] && mkdir /tmp/has-logged
 	touch "/tmp/has-logged/$USER"
 fi
-# rmshit, keeps home directory clean.
-command -v rmshit && rmshit &
+
+
+# Manage tmp dir inside $HOME
+HOMETMP="$HOME"/tmp
+if [ -e "$HOMETMP" ]; then rm -rf "$HOMETMP"; fi # just delete it and recreate
+mkdir "$HOMETMP"
+
+
+# Delete trash dotfiles
+TRASH="
+$HOME/.xsession-errors
+$HOME/.histfile 
+$HOME/.bash_history 
+$HOME/.lesshst 
+$HOME/.viminfo
+"
+for file in $TRASH; do rm "$file"; done
