@@ -1,32 +1,39 @@
-## Load Xresources
+###
+# Xresources
+###
+
 xrdb -remove -all # Clean up everything
-for file in "/etc/X11/Xresources" "$HOME/.Xresources"; do
+for file in "/etc/X11/Xresources" "$HOME/.Xresources" "$HOME/.xresources"; do
     if [ -f "$file" ]; then
         echo "Loading resource: $file"
         xrdb -merge "$file"
     fi
 done
 
-## Load Xmodmap
-if [ -z "$XKB_IN_USE" ]; then
-    for file in "/etc/X11/Xmodmap" "$HOME/.Xmodmap"; do
+###
+# Keyboard
+###
+
+# Enable ctrl:alt:backspace to kill xorg
+setxkbmap -option "terminate:ctrl_alt_bksp" # Ctrl-Alt-Backspace kills xorg
+# Load Xmodmap
+if [ "$(type -P xmodmap)" ]; then
+    for file in "/etc/X11/Xmodmap" "$HOME/.Xmodmap" "$HOME/.xmodmap"; do
         if [ -f "$file" ]; then
            echo "Loading modmap: $file"
            xmodmap "$file"
         fi
     done
 fi
-unset XKB_IN_USE
 
-# Enable ctrl:alt:backspace to kill xorg
-setxkbmap -option "terminate:ctrl_alt_bksp" & # Ctrl-Alt-Backspace kills xorg
+###
+# Misc
+###
 
 # Set the display timeout to 5 minutes
 xset dpms 300
-
 # Mute the annoying beep
 xset -b
-
 # Use native libs for steam
 # https://wiki.archlinux.org/index.php/Steam#Using_native_runtime
 export STEAM_RUNTIME=0
