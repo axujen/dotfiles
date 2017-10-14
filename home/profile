@@ -38,13 +38,13 @@ export IPYTHONDIR="$XDG_CONFIG_HOME"/ipython
 export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
 export PYTHON_EGG_CACHE="$XDG_CACHE_HOME"/python-eggs
 export RXVT_SOCKET="$XDG_RUNTIME_DIR"/urxvtd
-export WGETRC="$XDG_CONFIG_HOME/"wgetrc
 export HISTFILE="$XDG_CACHE_HOME"/shell/history
 export GIMP2_DIRECTORY="$XDG_CONFIG_HOME"/gimp
 export CRAWL_DIR="$XDG_CONFIG_HOME"/crawl/
 export CRAWL_RC="$XDG_CONFIG_HOME"/crawl/config
-export GTK_RC_FILES="$XDG_CONFIG_HOME"/gtk-1.0/gtkrc
-export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
+# export WGETRC="$XDG_CONFIG_HOME/"wgetrc
+# export GTK_RC_FILES="$XDG_CONFIG_HOME"/gtk-1.0/gtkrc
+# export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 
 # Setup shell environment
 SHELLRC="$HOME/.shellrc"
