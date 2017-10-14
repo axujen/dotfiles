@@ -1,41 +1,49 @@
 #!/usr/bin/env bash
 # Download and unpack patched icon fonts
-
+FONTS="
+RobotoMono
+Inconsolata
+ProFont
+DejaVuSansMono
+DroidSansMono
+UbuntuMono
+"
 # Make sure curl and unzip are installed
-command -v wget  2>&1 > /dev/null || echo "wget is required, make sure it is installed."
-command -v unzip 2>&1 > /dev/null || echo "unzip is required, make sure it is installed."
+if [ ! "$(type -P curl)" ]; then echo "curl is required, make sure it is installed"; exit 1; fi
+if [ ! "$(type -P unzip)" ]; then echo "unzip is required, make sure it is installed"; exit 2; fi
 
-URL="https://github.com/ryanoasis/nerd-fonts/releases/download/v1.0.0"
-FONTS=( RobotoMono Inconsolata ProFont DejaVuSansMono DroidSansMono UbuntuMono )
-TMPDIR=/tmp/nerd-fonts
+USER="ryanoasis"
+REPO="nerd-fonts"
+API="https://api.github.com/repos/$USER/$REPO/releases/latest"
+TAG="$(curl -s $API | grep 'tag_name' | cut -d \" -f 4)"
+if [ -z "$TAG" ]; then echo "Unable to retrieve latest release tag"; exit 3; fi
+if [ -d "$HOMETMP" ]; then TMPDIR=$HOMETMP; else TMPDIR="$(mktemp -d)"; fi
+cd "$TMPDIR" || exit 4 # Exit if this fails, otherwise bad things might happen
 
-[ ! -d $TMPDIR ] && mkdir -p $TMPDIR
-cd $TMPDIR || exit 1 # Exit if this fails, otherwise bad things might happen
+URL="https://github.com/$USER/$REPO/releases/download/$TAG"
+CURL="curl -LOC -"
 
-for FONT in "${FONTS[@]}"; do
+for FONT in $FONTS; do
     # Make sure the destination directory is not already occupied
     INSTALL_DIR="$HOME/.local/share/fonts/$FONT"
-    if [ -d $INSTALL_DIR ]; then
-        echo "Skipping $FONT, it seems to be already installed!"
-        echo "If its not already installed then manually delete $INSTALL_DIR"
-        echo ""
+    if [ -d "$INSTALL_DIR" ]; then
+        echo "Skipping $FONT, already installed at $INSTALL_DIR"
         continue
     fi
 
     # Download phase
-    echo "Installing $FONT"
-    wget --quiet --show-progress --no-check-certificate --continue "$URL/$FONT.zip"
-    # Make sure the download succeded before attempting to unpack
-    if [ ! $? == 0 ]; then
-        echo "Download failed, skipping"
+    echo "Downloading $FONT"
+    if $CURL "$URL"/"$FONT".zip; then
+        # Unpack phase
+        mkdir -p "$INSTALL_DIR"
+        unzip -q ./"$FONT".zip -d "$INSTALL_DIR"
+        printf "\n"
+    else
+        # Download failed
+        echo "... Failed! Skipping"
         continue
     fi
 
-
-    # Unpack phase
-    mkdir -p $INSTALL_DIR
-    unzip -q ./$FONT.zip -d $INSTALL_DIR
-    echo ""
 done
-
 echo "Finished!"
+rm -rf "$TMPDIR"
