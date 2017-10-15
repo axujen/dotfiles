@@ -1,0 +1,9 @@
+~/.xstartup: X application that are loaded after the wm
+
+~/.xstartup/init: execute this through your wm, this will load all graphical applications.
+it uses xresources to make sure it executed only once per session, so its safe to put in your wm as it will not restart
+in cases where your display manager does not reset the X server, make sure to wipe and reload xresources so this script is executed upon new logins
+
+
+~/.xstartup/*.sh: executed alphabetically, make sure to use send the process to the background using ``command &`` so they won't block the window manager
+

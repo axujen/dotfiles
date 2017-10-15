@@ -1,6 +1,3 @@
 #!/usr/bin/env sh
-# Delete ghosts
-rm ~/.crawl/saves/bones/bones*
-
 # Run crawl-tiles with a random name
-crawl-tiles -name $(shuf -n 1 ~/.local/share/fantasy-names)
+crawl-tiles -name "$(shuf -n 1 ~/.local/share/database/fantasy-names)"

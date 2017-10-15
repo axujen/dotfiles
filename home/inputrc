@@ -1,0 +1,12 @@
+## vim: ft=sh fdm=marker
+## ~/.inputrc: configuration for readline, see ~/.bashrc aswell
+
+set show-all-if-ambiguous On # Single tab complete
+
+# {{{ Colored completion
+set colored-stats On # Color files by types
+set visible-stats On # Append char to indicate type
+set mark-symlinked-directories On # Mark symlinked directories
+set colored-completion-prefix On # Color the common prefix
+set menu-complete-display-prefix On # Color the common prefix in menu-complete
+# }}}

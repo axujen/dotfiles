@@ -1,19 +1,25 @@
-# PATH
+## vim: ft=sh fdm=marker
+## ~/.profile: Should ideally be the first thing to source at login
+##             put env variables and other global settings,
+##             make sure to make it compatible with all shells
+    
+# paths
 export PATH=$HOME/.local/bin:/usr/sbin:/sbin:$PATH
-
-# Local man pages
 export MANPATH=$MANPATH:$HOME/.local/share/man
-
-# Use less as pager
+# pagers and editors
 export PAGER="less"
-
-# Initiate envoy variables
-if [[ -x /usr/bin/envoy ]]; then eval "$(envoy -p)"; fi
-
-# Use vim as editor
 export VISUAL="vim"
 export EDITOR="vim"
+# shell history
+export HISTFILE="$XDG_CACHE_HOME"/shell/history
+export HISTSIZE=1000
+export HISTCONTROL="ignorespace:ignoredups:erasedups"
 
+# TODO: Stop using envoy
+# initialize ssh-agent and gpg-agent using envoy
+if [[ -x /usr/bin/envoy ]]; then eval "$(envoy -p)"; fi
+
+# {{{ XDG_*
 # XDG - set defaults as they may not be set
 # See https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
 # and https://wiki.archlinux.org/index.php/XDG_Base_Directory_support
@@ -38,20 +44,10 @@ export IPYTHONDIR="$XDG_CONFIG_HOME"/ipython
 export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
 export PYTHON_EGG_CACHE="$XDG_CACHE_HOME"/python-eggs
 export RXVT_SOCKET="$XDG_RUNTIME_DIR"/urxvtd
-export HISTFILE="$XDG_CACHE_HOME"/shell/history
 export GIMP2_DIRECTORY="$XDG_CONFIG_HOME"/gimp
 export CRAWL_DIR="$XDG_CONFIG_HOME"/crawl/
 export CRAWL_RC="$XDG_CONFIG_HOME"/crawl/config
 # export WGETRC="$XDG_CONFIG_HOME/"wgetrc
 # export GTK_RC_FILES="$XDG_CONFIG_HOME"/gtk-1.0/gtkrc
 # export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
-
-# Setup shell environment
-SHELLRC="$HOME/.shellrc"
-if [[ -d "$SHELLRC" ]]; then
-    for file in $SHELLRC/*.sh; do
-        # shellcheck disable=SC1090
-        source "$file"
-    done
-fi
-# vim: ft=sh
+# }}}

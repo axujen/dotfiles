@@ -1,9 +1,11 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 # © Copyright 2014 axujen, <axujen at autistici.org>. All Rights Reserved.
 # Simple alarm clock.
 # usage: alarm <time> <description>
 # time: delay in minutes, if not supplied defaults to 15m
 # can set delay in hours if suffixed by h, ex: 2h = 2 hours
+
+ALARMWAV="$HOME"/.local/share/sounds/alarm.wav
 
 # We need at installed and make sure atd is running
 if ! command -v at > /dev/null; then
@@ -12,9 +14,9 @@ if ! command -v at > /dev/null; then
 fi
 
 # Provide default arguments for everything
-[[ -n "$1" ]] && DELAY="$1" || DELAY=15
-shift # "eat up" $1, that way we can use $@ to get the rest of the arguments
-[[ -n "$2" ]] && DESC="$@"  || DESC="Alarm Clock Notification!"
+[ -n "$1" ] && DELAY="$1" || DELAY=15
+shift # "eat up" $1, that way we can use $* to get the rest of the arguments
+[ -n "$2" ] && DESC="$*"  || DESC="Alarm Clock Notification!"
 
 # check if time ends with h or m and set appropriate time unit
 suffix="${DELAY: -1}"
@@ -29,5 +31,5 @@ else
 fi
 
 # Alarm command
-CMD="notify-send -t 0 ALARM \"$DESC\"; aplay -c 1 $HOME/.local/share/alarm.wav"
+CMD="notify-send -t 0 ALARM \"$DESC\"; aplay -c 1 $ALARMWAV"
 echo "$CMD" | at "now + $DELAY $UNIT"

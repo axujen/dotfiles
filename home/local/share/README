@@ -1,0 +1,3 @@
+~/.local/share: in user installed applications should go here
+
+TODO: move files in this directory into their own subdirectories and update scripts that use them accordingly

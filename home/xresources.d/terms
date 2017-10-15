@@ -1,3 +1,7 @@
+!! vim: ft=xdefaults fdm=marker
+!! ~/.xresources.d/terms: handles x temrinal configuration
+!! TODO: fix problem with urxvt not starting due to missing fonts
+!! TODO: port urxvt-perls to be used in different distros (currently only arch works) or better yet, store them in dotfiles
 ! {{{ urxvt
 urxvt*colorBD:				lightgreen
 urxvt*colorIT:				lightblue

@@ -1,12 +1,12 @@
-HISTFILE=~/.histfile
-HISTSIZE=2000
-SAVEHIST=2000
+## vim: ft=zsh fdm=marker
+## ~/.zshrc: zsh configuration file
+## commond ENV variables should go in ~/.profile or ~/.xprofile
 
+typeset -U PATH
 setopt appendhistory extendedglob hist_find_no_dups autocd hist_ignore_dups
 unsetopt beep
-typeset -U PATH
 
-# Completion
+# {{{ Completion
 autoload -Uz compinit
 compinit
 setopt completealiases
@@ -15,11 +15,14 @@ zstyle ':completion:*:*:xdvi:*' file-sort time
 zstyle ':completion:*:cd:*' ignore-parents parent pwd
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.cache/zsh
+# }}}
 
-# Prompt
+# {{{ Prompt
 # https://wiki.archlinux.org/index.php/zsh#Customizing_the_prompt
 autoload -U promptinit && promptinit
 autoload -U colors && colors
+
+# {{{ Color defs
 black="%{$fg[black]%}"
 green="%{$fg[green]%}"
 blue="%{$fg[blue]%}"
@@ -29,10 +32,11 @@ yellow="%{$fg[yellow]%}"
 magneta="%{$fg[magneta]%}"
 white="%{$fg[white]%}"
 reset="%{$reset_color%}"
-PROMPT="$yellow(%n@%m)$reset:$green%3~$red%#$reset "
+# }}}
 
-# vim mode indicator
-vim_ins_mode="%{$fg[yellow]%}[INS]%{$reset_color%}"
+# {{{ Vim mode indicator
+# vim_ins_mode="%{$fg[yellow]%}[INS]%{$reset_color%}"
+vim_ins_mode="%{$reset_color%}"
 vim_cmd_mode="%{$fg[red]%}[CMD]%{$reset_color%}"
 vim_mode=$vim_ins_mode
 
@@ -54,8 +58,9 @@ function TRAPINT() {
   vim_mode=$vim_ins_mode
   return $(( 128 + $1 ))
 }
+# }}}
 
-# load git-prompt
+# {{{ Git prompt
 setopt prompt_subst
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' actionformats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
@@ -70,11 +75,21 @@ vcs_info_wrapper() {
     echo "%{$fg[grey]%}${vcs_info_msg_0_}%{$reset_color%}$del"
   fi
 }
-RPROMPT=$'${vim_mode} $(vcs_info_wrapper)'
+# }}}
 
-# Keybinds
+PROMPT=$'${vim_mode}$yellow(%n@%m)$reset:$green%3~$red%#$reset '
+RPROMPT=$'$(vcs_info_wrapper)'
+# }}}
+
+# {{{ Keybinds
 bindkey -v
 KEYTIMEOUT=1 # instant mode switch
+
+# Better history search with C-r and C-s
+bindkey "^R" history-incremental-pattern-search-backward
+bindkey "^S" history-incremental-pattern-search-forward
+
+# {{{ ZKBD
 autoload zkbd
 ZKBDDIR=${ZDOTDIR:-$HOME}/.zkbd
 ZKBDFILE=$ZKBDDIR/$TERM
@@ -140,15 +155,17 @@ else
         zle -N zle-line-finish
     fi
 fi
+# }}}
+# }}}
 
-
-# Better history search with C-r and C-s
-bindkey "^R" history-incremental-pattern-search-backward
-bindkey "^S" history-incremental-pattern-search-forward
-
+# {{{ CD History
 # cd -<NUMBER> to access recent directory list
-# {{{ This will remember the dirstack across sessions
-DIRSTACKFILE="$HOME/.cache/zsh/dirs"
+# This will remember the dirstack across sessions
+DIRSTACKSIZE=20
+setopt autopushd pushdsilent pushdtohome
+setopt pushdignoredups # remove duplicates
+setopt pushdminus # reverts +/- operators
+DIRSTACKFILE="$XDG_CACHE_HOME/zsh/dirs"
 [[ -f $DIRSTACKFILE ]] || mkdir -p `dirname $DIRSTACKFILE` && touch $DIRSTACKFILE
 if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
   dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
@@ -160,17 +177,8 @@ chpwd() {
 }
 # }}}
 
-DIRSTACKSIZE=20
-
-setopt autopushd pushdsilent pushdtohome
-
-## Remove duplicate entries
-setopt pushdignoredups
-
-## This reverts the +/- operators.
-setopt pushdminus
-
-# Load my settings
-for i in ~/.shellrc/*.sh; do
-	source $i
-done
+# {{{ Load common shell settings
+COMMONRC="$HOME"/.shellrc/common
+# shellcheck disable=SC1090
+if [ -r "$COMMONRC" ]; then source "$COMMONRC"; fi
+# }}}

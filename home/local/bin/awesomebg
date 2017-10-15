@@ -1,22 +1,13 @@
-#!/usr/bin/env bash
-# set the awesome wallpaper by symlinking an image to ~/.config/awesome/my/wall
-DEST="$HOME/.config/awesome/my/wall"
+#!/usr/bin/env sh
+# Set the global wallpaper by symlinking it to ~/pictures/wallpaper
+DEST="$HOME/pictures/wallpaper"
 
 # Only replace symlinks
-test -L $DEST && rm $DEST
-if [[ -e "$DEST" ]]; then
-    echo "$DEST exists and is not a symbolic link. remove it manually."
-    exit 1
-fi
+if [ -L "$DEST" ]; then rm "$DEST"; fi
+if [ -e "$DEST" ]; then echo "$DEST exists and is not a symbolic link. remove it manually."; exit 1; fi
 
 # This script requires a single argument
-if [[ $# == 0 ]]; then
-    echo "No arguments supplied"
-    exit 1
-elif [[ $# > 1 ]]; then
-    echo "Only one argument is required, try again."
-    exit 1
-fi
+if [ "$#" = 0 ]; then echo "No arguments supplied"; exit 2; fi
 
-IMG=`realpath "$1"`
+IMG="$(realpath -s "$1")"
 ln -s "$IMG" "$DEST"

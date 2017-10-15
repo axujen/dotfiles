@@ -1,3 +1,7 @@
+!! vim: ft=xdefaults fdm=marker
+!! ~/.xresources.d/xscreensaver: handles xsreensaver settings
+!! TODO: xscreensaver is no longer used, i use slock instead so remove this
+
 !-------------------------------------------------------------------
 !general dialog box (affects main hostname, username, password text)
 !-------------------------------------------------------------------
@@ -32,4 +36,3 @@ xscreensaver.dpmsOff:		00:00:03
 xscreensaver.timestamp:		False
 xscreensaver.splash:		False
 xscreensaver.fadeTicks:		50
-! vim: ft=xdefaults
