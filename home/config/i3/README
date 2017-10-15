@@ -1,0 +1,3 @@
+~/.config/i3/config: i3 window manager config
+sensible i3 config that resembles my awesome-wm config, to be used as fallback if awesome breaks
+keep the changes small and sane to it doesn't cause any problems
