@@ -7,14 +7,9 @@ setopt appendhistory extendedglob hist_find_no_dups autocd hist_ignore_dups
 unsetopt beep
 
 # {{{ Completion
-autoload -Uz compinit
-compinit
-setopt completealiases
-zstyle ':completion:*' menu yes select
-zstyle ':completion:*:*:xdvi:*' file-sort time
-zstyle ':completion:*:cd:*' ignore-parents parent pwd
+if [ -r "$HOME"/.shellrc/zsh.completion ]; then source "$HOME"/.shellrc/zsh.completion; fi
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path ~/.cache/zsh
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/completion_cache
 # }}}
 
 # {{{ Prompt
@@ -88,6 +83,13 @@ KEYTIMEOUT=1 # instant mode switch
 # Better history search with C-r and C-s
 bindkey "^R" history-incremental-pattern-search-backward
 bindkey "^S" history-incremental-pattern-search-forward
+
+# Use the vi navigation keys in menu completion
+zmodload zsh/complist
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
 
 # {{{ ZKBD
 autoload zkbd
