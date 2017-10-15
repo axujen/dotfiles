@@ -51,3 +51,7 @@ export CRAWL_RC="$XDG_CONFIG_HOME"/crawl/config
 # export GTK_RC_FILES="$XDG_CONFIG_HOME"/gtk-1.0/gtkrc
 # export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 # }}}
+
+# Load private profile for things that shouldn't go into a public repo
+# shellcheck disable=SC1090
+if [ -r "$HOME"/.shellrc/private ]; then source "$HOME"/.shellrc/private; fi
