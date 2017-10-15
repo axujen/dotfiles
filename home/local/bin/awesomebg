@@ -11,3 +11,6 @@ if [ "$#" = 0 ]; then echo "No arguments supplied"; exit 2; fi
 
 IMG="$(realpath -s "$1")"
 ln -s "$IMG" "$DEST"
+
+# if feh is installed use it to set the wallpaper immediatly
+command -v feh >/dev/null && feh --bg-scale "$DEST"
