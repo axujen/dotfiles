@@ -27,6 +27,7 @@ if [ "$(type -P xmodmap)" ]; then
 fi
 # }}}
 
+xautolock -time 5 -locker 'i3lock -fc 000000; xset dpms force off' -notify 10 -notifier 'notify-send -t 10000 screensaver locking screen soon!' &
 xset dpms 300 # turn off display after 5 minutes
 xset -b # remove this goddamn torture
 
