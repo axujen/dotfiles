@@ -1,0 +1,10 @@
+## vim: ft=sh
+## ~/.zprofile: wrapper to source ~/.profile on zsh
+## basically sources ~/.profile while using sh mode of zsh
+## if zsh specific code is needed it should either go here or on ~/.zshrc
+
+if [ -r "$HOME"/.profile ]; then
+    emulate sh
+    source "$HOME"/.profile
+    emulate zsh
+fi

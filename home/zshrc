@@ -1,6 +1,8 @@
 ## vim: ft=zsh fdm=marker
 ## ~/.zshrc: zsh configuration file
-## commond ENV variables should go in ~/.profile or ~/.xprofile
+## common ENV variables should go in ~/.profile or ~/.xprofile
+## common rc settings should go in ~/.shellrc/common
+## keep this for zsh specific code that can't go in ~/.zprofile
 
 typeset -U PATH
 setopt appendhistory extendedglob hist_find_no_dups autocd hist_ignore_dups
@@ -91,6 +93,12 @@ bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 
+# commands, use bindkey -s 'key' 'command\n'
+# you can find the by pressing it in cat, for reference control=^, alt=^[
+# you can also use Control-v key in vim
+bindkey -s 'e' 'ranger\n'
+bindkey -s "t" 'tmux attach -t "$USER"\n'
+
 # {{{ ZKBD
 autoload zkbd
 ZKBDDIR=${ZDOTDIR:-$HOME}/.zkbd
@@ -111,7 +119,7 @@ if [ -r $ZKBDFILE ]; then
 	[ -n "${key[PageUp]}"	] && bindkey "${key[PageUp]}"	history-search-backward
 	[ -n "${key[PageDown]}"	] && bindkey "${key[PageDown]}"	history-search-forward
 else
-	echo "No zkbd settings found for this terminal, falling back to terminfo."
+	# echo "No zkbd settings found for this terminal, falling back to terminfo."
 
     # Falllback to terminfo http://zshwiki.org/home/zle/bindkeys
     # create a zkbd compatible hash;

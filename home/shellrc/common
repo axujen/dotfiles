@@ -1,4 +1,6 @@
 # vim: ft=sh fdm=marker
+command -v fortune >/dev/null 2>&1 && fortune -s
+
 # {{{ Aliases
 # {{{ Gentoo
 if [ -d /etc/portage ]; then
@@ -49,6 +51,14 @@ if [ -d /data/optware-ng  ]; then
     alias ipkr='ipkg remove'
     alias ipku='ipkg update'
     alias ipkup='ipkg upgrade'
+fi
+# }}}
+
+# {{{ Systemd
+# Its official now, systemd is everywhere so might aswell get used to it
+if pidof systemd; then
+    alias sd='systemctl'
+    alias sdu='systemctl --user'
 fi
 # }}}
 
