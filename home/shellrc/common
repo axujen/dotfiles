@@ -43,14 +43,13 @@ if [ -d /etc/pacman.d ]; then
 fi
 # }}}
 
-# {{{ Optware
-if [ -f /opt/etc/ipkg.conf  ]; then
-    alias ipkg-search='/opt/bin/ipkg list | grep -i'
-    alias ipks='ipkg-search'
-    alias ipki='ipkg install'
-    alias ipkr='ipkg remove'
-    alias ipku='ipkg update'
-    alias ipkup='ipkg upgrade'
+# {{{ Entware
+if [ -f /opt/etc/opkg.conf  ]; then
+    alias opks='/opt/bin/opkg list | grep -i'
+    alias opki='opkg install'
+    alias opkr='opkg remove'
+    alias opku='opkg update'
+    alias opkup='opkg upgrade'
 fi
 # }}}
 
