@@ -1,16 +1,19 @@
 #!/usr/bin/env sh
-#vim: ft=sh
+## vim: ft=sh
+## ~/.local/bin/start-torrents: starts all pending torrents in transmission-daemon
+## Use with a cronjob to download at night
+set -euo pipefail
 
 HOST=127.0.0.1
 PORT=9999
 CMD="transmission-remote $HOST:$PORT"
 
-for ID in `$CMD -l | tail -n +2 | head -n -1 | cut -f4 -d' '`; do
-    STATE=`$CMD -t $ID -i   | grep State    | cut -d' ' -f4`
-    PERCENT=`$CMD -t $ID -i | grep Percent  | cut -d' ' -f5`
+for ID in $($CMD -l | grep -Eo '^ *([0-9]+)'); do
+    STATE=$($CMD -t "$ID" -i   | grep State    | cut -d' ' -f4)
+    PERCENT=$($CMD -t "$ID" -i | grep Percent  | cut -d' ' -f5)
 
     if [ "$STATE" = "Stopped" ] && [ "$PERCENT" != "100%" ]; then
-        $CMD -t $ID --start > /dev/null 2>&1
+        $CMD -t "$ID" --start > /dev/null 2>&1
         echo "Starting torrent $ID"
     fi
 done
