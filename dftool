@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
-DESC="This script unpacks dotfiles stored in a git repo to your home directory."
+## vim: ft=bash
+## dftool: the script that makes the .magic happen
+## TODO: more testing with strict mode
+## TODO: reorganize with source->dest folders, pre/post unpack hooks 
+## and patch(?) based multiple machine handling, this the dream :/
+## also maybe manage /etc ?
+set -euo pipefail
 
 # Get the real dotfiles directory
 ABSOLUTE_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$(basename "${BASH_SOURCE[0]}")"
@@ -13,13 +19,15 @@ LOGFILE="$DOTFILES_PATH/log"
 # Settings
 VERBOSE=false
 CLOBBER=false
+QUIET=false
 
+DESC="This script unpacks dotfiles stored in a git repo to your home directory."
 USAGE="$DESC
-\n$(basename "$0") [-vcqh] install/uninstall/list
-\n\t-c\toverwrite existing files
-\n\t-v\tverbose, show same information as the log
-\n\t-q\tquiet, supress all output
-\n\t-h\tshow this help text and exit"
+$(basename "$0") [-vcqh] install/uninstall/list
+\t-c\toverwrite existing files
+\t-v\tverbose, show same information as the log
+\t-q\tquiet, supress all output
+\t-h\tshow this help text and exit"
 
 function log(){
 	# Log output to stdout and to a file.
@@ -29,13 +37,15 @@ function log(){
 	# argument
 	# note: the quiet argument is still respected
 
-	local text=$1
-    if [ ! -z "$2" ]; then local force="$2"; else local force=false; fi
+	local TEXT=$1
+    local FORCE=${2:-false}
 
-	if [ -z "$QUIET" ] ; then
-		$force && echo "$text" || { $VERBOSE && echo "$text"; }
+	if ! $QUIET; then
+        if $FORCE || $VERBOSE; then
+            echo "$TEXT"
+        fi
 	fi
-	echo "[$(date +%T)] $text" >> "$LOGFILE"
+	echo "[$(date +%T)] $TEXT" >> "$LOGFILE"
 }
 
 function install_file(){
@@ -251,8 +261,8 @@ done
 
 ## Command parsing and execution.
 shift "$((OPTIND -1))"
-CMD="$1"
-DIR=$2
+CMD="${1:-}"
+DIR="${2:-}"
 case "$CMD" in
     install|ins)
         install "$DIR"
@@ -264,7 +274,7 @@ case "$CMD" in
         list_files "$DIR"
         exit;;
     *)
-        echo "Unknown command: $1"
+        echo "Unknown command: $CMD"
         echo -e "$USAGE"
         exit;;
 esac
