@@ -7,5 +7,4 @@
 
 #include "./.xresources.d/colors/blackburn"
 #include "./.xresources.d/terms"
-#include "./.xresources.d/fonts"
 #include "./.xresources.d/xscreensaver"
