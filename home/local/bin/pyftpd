@@ -331,10 +331,16 @@ def StopServer():
             pid=int(fd.readline())
 
     if pid:
-        os.kill(pid, signal.SIGTERM)
-        import time
-        time.sleep(0.5) # so -sk can run properly, can't be arsed to check for exit
-        return pid
+        try:
+            os.kill(pid, signal.SIGTERM)
+            os.remove(pidfile)
+            import time
+            time.sleep(0.5) # so -sk can run properly, can't be arsed to check for exit
+            return pid
+        except ProcessLookupError: # instance is not actually running
+            # in which case just delete the lock
+            os.remove(pidfile)
+            return None
     else:
         return None
 
