@@ -58,3 +58,7 @@ export HISTFILE="$XDG_CACHE_HOME"/shell/history
 # Load private profile for things that shouldn't go into a public repo
 # shellcheck disable=SC1090
 if [ -r "$HOME"/.shellrc/private ]; then source "$HOME"/.shellrc/private; fi
+
+# Execute the once per boot startup file
+# shellcheck disable=SC1090
+if [ -r "$HOME"/.shellrc/startup ]; then "$HOME"/.shellrc/startup; fi

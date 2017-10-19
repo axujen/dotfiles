@@ -1,0 +1,40 @@
+#!/usr/bin/env sh
+## vim: ft=sh
+## ~/.shellrc/startup: starts background daemons on the first login
+## for implementation see https://unix.stackexchange.com/a/48510
+## NOTE: Do not source this, execute it instead
+set -euo pipefail
+
+TMPDIR="$(dirname "$(mktemp -u -t tmp.XXXXXXXXXX)")"
+LOCKDIR="${TMPDIR:-/tmp}/$USER-LOGGED"
+LOGFILE="$HOME/.shellrc/startup.log"
+
+COMMANDS="
+mpd
+mpdscribble
+pyftpd -skf
+"
+
+if mkdir "$LOCKDIR"; then
+    start(){
+        CMD="${1:-}"
+        BIN="$(echo "$CMD" | awk '{print $1;}')"
+        if command -v "$BIN" > /dev/null 2>&1; then
+            echo "Starting $CMD"
+            eval "$CMD &"
+        fi
+    }
+
+    # redirect to logfile
+    exec 3>&1 4>&2
+    exec > "$LOGFILE" 2>&1
+
+    # start things
+    IFS="$(printf '%b_' '\n')"; IFS="${IFS%_}"
+    for CMD in $COMMANDS; do
+        start "$CMD"
+    done
+
+    # restore stdin and stderr
+    exec >&3 2>&4
+fi
