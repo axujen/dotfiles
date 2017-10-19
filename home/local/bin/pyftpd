@@ -7,7 +7,7 @@
 ## TODO: Harden security further?
 ## TODO: Fix messy code, mainly path expansion and file handling
 
-import os,sys,re,sys,hashlib,binascii,uuid,errno,logging,atexit,signal
+import os,sys,re,sys,hashlib,binascii,uuid,errno,logging,atexit,signal,stat
 from argparse import ArgumentParser
 try: from ConfigParser import ConfigParser # python2
 except ImportError: from configparser import ConfigParser # python3
@@ -197,6 +197,8 @@ def WriteUsers(db, path):
         config.write(fd)
     finally:
         fd.close()
+        # set it to read-only
+        os.chmod(path, stat.S_IRUSR | stat.S_IWUSR)
 
 class FTPLocalHandler(FTPHandler):
     """Rejects connections that do not originate from the local networ"""
