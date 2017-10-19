@@ -1,11 +1,18 @@
 #!/usr/bin/env sh
-# run scripts in ~/.xstartup directory only once per Xsession.
-# This is script is ran from your wm (awesome) to run startup apps, 
-# but avoid rerunning them when the wm is restarted inside the same session
-# Inspired by https://awesome.naquadah.org/wiki/Autostart#The_X_Resources_way
+## vim: ft=sh
+## ~/.xstartup/init: executes ~/.xstartup/*.sh scripts only once per X session
+## This is script is ran from your wm (awesome) to run startup programs, 
+## but avoids rerunning them when the wm is restarted inside the same session
+## Inspired by https://awesome.naquadah.org/wiki/Autostart#The_X_Resources_way
 
+logFile="$HOME/.xstartup/log"
 startDir="$HOME/.xstartup"
 Xresource="xinit.started:"
+
+inPath(){
+    cmd="$1"
+    command -v "$cmd" > /dev/null 2>&1
+}
 
 initStartup()
 {
@@ -18,12 +25,20 @@ initStartup()
     echo "$Xresource" | xrdb -merge > /dev/null 2>&1
 
     # shellcheck source=/dev/null
-    for file in "$startDir"/*.sh; do source "$file"; done
+    for file in "$startDir"/*.sh; do 
+        # execute startup script, redirect all output to logfile
+        # and send it to background so it doesn't block the startup
+        # process
+        source "$file" >> "$logFile" 2>&1 &
+    done
 }
 
 if xrdb -query | grep -qe "$Xresource"; then
     echo "Already initialized!"
     exit 0
 else 
+    exec > "$logFile"
+    exec 2>&1
+    echo "$USER@$(hostname) - $(date)"
     initStartup
 fi
