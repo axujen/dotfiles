@@ -2,6 +2,12 @@
 ## ~/.profile: Should ideally be the first thing to source at login
 ##             put env variables and other global settings,
 ##             make sure to make it compatible with all shells
+if [ -d "$HOME"/.shellrc/pre ]; then # allow drop-in config for device specific settings
+    for file in "$HOME"/.shellrc/pre/*; do
+        # shellcheck disable=SC1090
+        source "$file"
+    done
+fi
     
 # paths
 export PATH=$HOME/.local/bin:/usr/sbin:/sbin:$PATH
@@ -30,7 +36,7 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 
 if [ -f /opt/etc/opkg.conf ]; then # entware uses /opt/var/run
-    XDG_RUNTIME_DIR=/opt/run/user/${USER:-root}
+    XDG_RUNTIME_DIR=/opt/var/run/user/${USERNAME:-root}
 fi
 if [ ! -w "${XDG_RUNTIME_DIR:="/run/user/$UID"}" ]; then
     echo "\$XDG_RUNTIME_DIR ($XDG_RUNTIME_DIR) not writable. Unsetting." >&2
@@ -65,3 +71,10 @@ if [ -r "$HOME"/.shellrc/private ]; then source "$HOME"/.shellrc/private; fi
 # Execute the once per boot startup file
 # shellcheck disable=SC1090
 if [ -r "$HOME"/.shellrc/startup ]; then "$HOME"/.shellrc/startup; fi
+
+if [ -d "$HOME"/.shellrc/post ]; then # allow drop-in config for device specific settings
+    for file in "$HOME"/.shellrc/post/*; do
+        # shellcheck disable=SC1090
+        source "$file"
+    done
+fi
