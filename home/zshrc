@@ -97,7 +97,8 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 # you can find the by pressing it in cat, for reference control=^, alt=^[
 # you can also use Control-v key in vim
 bindkey -s 'e' 'ranger\n'
-bindkey -s "t" 'tmux attach -t "$USER"\n'
+bindkey -s "t" 'tmux new-session -c "$HOME" -A -t "$USER"\n'
+bindkey -s "m" 'ncmpcpp'
 
 # {{{ ZKBD
 autoload zkbd
