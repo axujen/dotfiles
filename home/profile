@@ -29,6 +29,9 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 
+if [ -f /opt/etc/opkg.conf ]; then # entware uses /opt/var/run
+    XDG_RUNTIME_DIR=/opt/run/user/${USER:-root}
+fi
 if [ ! -w "${XDG_RUNTIME_DIR:="/run/user/$UID"}" ]; then
     echo "\$XDG_RUNTIME_DIR ($XDG_RUNTIME_DIR) not writable. Unsetting." >&2
     unset XDG_RUNTIME_DIR
