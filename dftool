@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-## vim: ft=bash
+## vim: ft=sh
 ## dftool: the script that makes the .magic happen
 ## TODO: more testing with strict mode
 ## TODO: reorganize with source->dest folders, pre/post unpack hooks 
@@ -145,8 +145,13 @@ function get_managed_files() {
     # Get a list of all files managed inside a dotfiles folder
     # Usage: get_managed_files $source
     # source:  dotfiles folder.
-    source_dir=$1
-    target_dir=$2
+    source_dir=${1:-}
+    target_dir=${2:-}
+
+    if [ -z "$source_dir" ]; then
+        log "get_managed_files requires atleast 1 argument"
+        exit 1
+    fi
 
     for source in $source_dir/*; do
         # If we are in a subdirectory
