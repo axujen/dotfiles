@@ -29,6 +29,12 @@ $(basename "$0") [-vcqh] install/uninstall/list
 \t-q\tquiet, supress all output
 \t-h\tshow this help text and exit"
 
+# because readlink and realpath are unreliable
+get_abs_path() {
+  # $1 : relative filename
+  echo "$(cd "$(dirname "$1")" && pwd)/$(basename "$1")"
+}
+
 function log(){
 	# Log output to stdout and to a file.
 	# Usage: log $text $force
@@ -47,6 +53,7 @@ function log(){
 	fi
 	echo "[$(date +%T)] $TEXT" >> "$LOGFILE"
 }
+
 
 function install_file(){
 	# Link a file from the dotfiles directory to its destination
@@ -189,7 +196,7 @@ function install() {
 
     log "Unpacking your dotfiles." true
     for item in $BASE/*; do
-        item=$(realpath -s "$item")
+        item=$(get_abs_path "$item")
     	target="$HOME/.$(basename "$item")"
         if [[ -d "$item" ]]; then
             install_dir "$item" "$target"
