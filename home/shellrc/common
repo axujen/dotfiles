@@ -44,7 +44,7 @@ fi
 # }}}
 
 # {{{ Optware
-if [ -d /data/optware-ng  ]; then
+if [ -f /opt/etc/ipkg.conf  ]; then
     alias ipkg-search='/opt/bin/ipkg list | grep -i'
     alias ipks='ipkg-search'
     alias ipki='ipkg install'
