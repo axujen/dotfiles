@@ -110,12 +110,16 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # finds out, if available)
 bar {
         position top
-        status_command i3status
+        status_command "while true; do echo `amixer get Master | awk -F\"[][]\" '/dB/ { print $2 }';echo \"||\";mpc status | head -n1; echo \"||\"; date +%F; date +%R; echo \"||\"`; sleep 5; done"
 }
 
 # Volume controls
 bindsym XF86AudioRaiseVolume exec "amixer set Master 5%+"
 bindsym XF86AudioLowerVolume exec "amixer set Master 5%-"
+
+# mpd
+bindsym XF86AudioPlay exec "mpc toggle"
+bindsym Shift+XF86AudioPlay exec "mpc clear && mpdrandom -l"
 
 # wallpaper using feh
 exec "feh --bg-scale ~/pictures/wallpaper"
