@@ -234,11 +234,6 @@ def InitServer(address, port, userdb):
     """Initialize server without starting it"""
     # Check if server is running
     pidfile=os.path.expanduser(PIDFILE)
-    if os.path.isfile(pidfile): # Check if already running
-        with open(pidfile, "r") as fd:
-            pid=fd.readline()
-            print("Another instance is already running at PID %s" % pid)
-            sys.exit(1)
 
     authorizer = DummyHashAuthorizer()
     handler = FTPLocalHandler
@@ -274,7 +269,6 @@ def InitServer(address, port, userdb):
 
 def StartServer(server):
     """Lock a pidfile and start the server"""
-
     # Unlock pidfile
     def _unlockpid(*args): 
         pidfile=os.path.expanduser(PIDFILE)
@@ -283,7 +277,6 @@ def StartServer(server):
 
     # Write the forked pid
     pidfile=os.path.expanduser(PIDFILE)
-
     try:
         with open(pidfile, "w") as pid:
             pid.write(str(os.getpid()))
@@ -324,23 +317,18 @@ def ForkServer(server):
 
 def StopServer():
     """Stop the current running instance if it it exists"""
+    pid=int()
     pidfile=os.path.expanduser(PIDFILE)
-    pid=""
     if os.path.exists(pidfile):
         with open(pidfile, 'r') as fd:
             pid=int(fd.readline())
 
     if pid:
-        try:
-            os.kill(pid, signal.SIGTERM)
-            os.remove(pidfile)
-            import time
-            time.sleep(0.5) # so -sk can run properly, can't be arsed to check for exit
-            return pid
-        except ProcessLookupError: # instance is not actually running
-            # in which case just delete the lock
-            os.remove(pidfile)
-            return None
+        os.kill(pid, signal.SIGTERM)
+        os.remove(pidfile)
+        import time
+        time.sleep(0.5) # so -sk can run properly, can't be arsed to check for exit
+        return pid
     else:
         return None
 
@@ -377,11 +365,25 @@ def main():
         sys.exit(0)
 
     if args.stop: # Terminate running instance
-        StopServer()
+        try:
+            StopServer()
+        except ProcessLookupError:
+            print("Error stopping already running instance.")
+            print("Try deleting the pidfile and stopping the instance manually\n")
+            raise
 
     if args.start: # Start the server
         userdb = LoadUsers(USERSFILE)
-        server = InitServer(CONFIG.get("server", "address"), CONFIG.get("server", "port"), userdb)
+        try:
+            server = InitServer(CONFIG.get("server", "address"), CONFIG.get("server", "port"), userdb)
+        except OSError as err:
+            for attr in dir(err):
+                if type(attr) == str:
+                    print(getattr(err, attr))
+                # print(attr, ":", getattr(err, attr))
+            print("Could not initialize the server: address already in use.\n")
+            raise
+
         if args.fork:
             ForkServer(server)
         else:
