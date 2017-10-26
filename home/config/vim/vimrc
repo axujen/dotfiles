@@ -126,7 +126,6 @@ set confirm " Ask if you want to save the buffer instead of just failing command
 set wildmenu " Better command line completition.
 set wildmode=full
 set nowrap " Don't wrap text.
-set noautochdir " Set the cwd once at startup, see option below
 cd %:p:h
 set pastetoggle=<F3>
 set showmode
