@@ -11,7 +11,7 @@ if [ ! -x "$KEEPASS" ]; then
 fi
 
 if [ ! -d "$(dirname "$DATABASE")" ]; then
-    echo "Dropbox private folder does not exist!"
+    echo "Cloud folder does not exist!"
 fi
 
 while [ ! -f "$DATABASE" ]; do
