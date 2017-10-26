@@ -35,7 +35,7 @@ if [ -d /etc/pacman.d ]; then
 	alias pacr='pacman -Rs'
 
     # Pacaur aliases
-    alias pak='AURDEST=$HOME/tmp/pkgbuild pacaur --aur --noedit'
+    alias pak='AURDEST=$HOME/tmp/pkgbuild pacaur --noedit'
     alias paki='pak -S'
     alias paks='pak -Ss'
     alias pakup='pak -u'
