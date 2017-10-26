@@ -93,6 +93,13 @@ bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 
+# Fix backspace not working in vi mode after using a or A
+# see https://superuser.com/a/533685
+`bindkey "^?" backward-delete-char`
+bindkey "^W" backward-kill-word 
+bindkey "^H" backward-delete-char      # Control-h also deletes the previous char
+bindkey "^U" backward-kill-line
+
 # commands, use bindkey -s 'key' 'command\n'
 # you can find the by pressing it in cat, for reference control=^, alt=^[
 # you can also use Control-v key in vim
