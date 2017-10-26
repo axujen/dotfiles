@@ -12,7 +12,7 @@ LOGFILE="$HOME/.shellrc/startup.log"
 COMMANDS="
 mpd
 mpdscribble
-pyftpd -skf
+pyftpd -sf
 "
 
 if mkdir "$LOCKDIR" > /dev/null 2>&1 ; then
