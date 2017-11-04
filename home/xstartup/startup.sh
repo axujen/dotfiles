@@ -6,19 +6,36 @@
 ## NOTE: use the inPath function definied in init to check if a binary exists in $PATH
 exec 2>&1
 
+STARTUP="
+compton -b
+parcellite
+udiskie --smart-tray --file-manager=ranger
+nm-applet --sm-disable
+redshift-toggle on
+rssowl -noSplash
+
+megasync
+gnome-encfs-manager-remount
+keepass-cloud
+"
+
 # Screensaver
 if inPath xautolock; then
-    inPath i3lock && xautolock -time 5 -locker 'i3lock -fc 000000; xset dpms force off' -notify 10 -notifier 'notify-send -t 10000 "screensaver" "locking screen in 10 seconds!"' &
+    inPath i3lock && xautolock -time 5 -locker 'i3lock -fc 000000 && sleep 5 && xset dpms force off' -notify 10 -notifier 'notify-send -t 10000 "screensaver" "locking screen in 10 seconds!"' &
 fi
 
-# Big apps first, to speed up the concurrent loading
-inPath keepass-cloud && keepass-cloud &
 
-# Startup applications
-inPath compton    && compton -b &
-inPath parcellite && parcellite &
-inPath devmon     && devmon-start &
-inPath nm-applet  && nm-applet --sm-disable &
-inPath redshift   && redshift-toggle on &
-inPath rssowl     && rssowl -noSplash &
-inPath gnome-encfs-manager && gnome-encfs-manager-remount &
+# Actual starting logic, that checks if the executable exists
+start(){
+    CMD="${1:-}"
+    BIN="$(echo "$CMD" | awk '{print $1;}')"
+    if inPath "$BIN" > /dev/null 2>&1; then
+        echo "Starting $BIN"
+        eval "$CMD &"
+    fi
+}
+
+IFS="$(printf '%b_' '\n')"; IFS="${IFS%_}"
+for CMD in $STARTUP; do
+    start "$CMD"
+done
