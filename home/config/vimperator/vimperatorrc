@@ -29,6 +29,8 @@ set showstatuslinks=2
 " --------
 " Keybinds
 " --------
+"  Session Manager load session
+map <C-l> :emenu Tools.Session Manager.Session Manager.Load Session...<cr>
 
 " Navigate tabs using Alt-h/l or w/e
 map <A-h> <C-p>
