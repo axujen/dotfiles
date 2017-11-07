@@ -11,7 +11,7 @@ LOGFILE="$HOME/.shellrc/startup.log"
 
 COMMANDS="
 mpd
-mpdscribble
+mpdscribble --conf ~/.config/mpd/mpdscribble.conf
 pyftpd -sf
 "
 
