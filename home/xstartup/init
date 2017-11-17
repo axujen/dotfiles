@@ -8,6 +8,7 @@
 logFile="$HOME/.xstartup/log"
 startDir="$HOME/.xstartup"
 Xresource="xinit.started:"
+exec > "$logFile" 2>&1
 
 inPath(){
     cmd="$1"
@@ -29,7 +30,8 @@ initStartup()
         # execute startup script, redirect all output to logfile
         # and send it to background so it doesn't block the startup
         # process
-        source "$file" >> "$logFile" 2>&1 &
+        echo "sourcing $file"
+        source "$file"
     done
 }
 
