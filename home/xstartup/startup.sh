@@ -21,7 +21,7 @@ keepass-cloud
 
 # Screensaver
 if inPath xautolock; then
-    inPath i3lock && xautolock -time 5 -locker 'i3lock -fc 000000 && sleep 5 && xset dpms force off' -notify 10 -notifier 'notify-send -t 10000 "screensaver" "locking screen in 10 seconds!"' &
+    inPath i3lock && xautolock -time 5 -locker 'i3lock -fc 000000; ( sleep 1 && xset dpms force off )' -notify 10 -notifier 'notify-send -t 10000 "screensaver" "locking screen in 10 seconds!"' &
 fi
 
 
