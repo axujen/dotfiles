@@ -39,7 +39,7 @@ if [ -d /etc/pacman.d ]; then
     alias paki='pak -S'
     alias paks='pak -Ss'
     alias pakup='pak -u'
-    alias pakup='pakup --devel'
+    alias pakup='pak  -Syu --devel'
 fi
 # }}}
 
@@ -55,7 +55,7 @@ fi
 
 # {{{ Systemd
 # Its official now, systemd is everywhere so might aswell get used to it
-if pidof systemd; then
+if command -v "systemd" >/dev/null 2>&1; then
     alias sd='systemctl'
     alias sdu='systemctl --user'
 fi
