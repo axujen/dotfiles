@@ -110,7 +110,8 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # finds out, if available)
 bar {
         position top
-        status_command "while true; do echo `amixer get Master | awk -F\"[][]\" '/dB/ { print $2 }';echo \"||\";mpc status | head -n1; echo \"||\"; date +%F; date +%R; echo \"||\"`; sleep 5; done"
+        # status_command "while true; do echo `amixer get Master | awk -F\"[][]\" '/dB/ { print $2 }';echo \"||\"; ~/.config/i3/mpc.sh | head -n1; echo \"||\"; date +%F; date +%R; echo \"||\"`; sleep 5; done"
+        status_command ~/.config/i3/status.sh
 }
 
 # Volume controls
