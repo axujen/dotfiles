@@ -3,6 +3,8 @@
 "---------
 " Fix bug with TreeStyleTabs see https://github.com/vimperator/vimperator-labs/issues/740
 set activate=
+" Fix bug with umatrix and ublock hidden navbar see https://github.com/gorhill/uBlock/issues/112
+style -name ublick * #nav-bar * { visibility: visible; }
 
 " Use startpage as the default search engine
 " bmark https://www.startpage.com/do/search?prf=1d981f2af852a031b0ec05677d83779a&cat=web&query=%s -keyword sp
@@ -29,20 +31,11 @@ set showstatuslinks=2
 " --------
 " Keybinds
 " --------
-"  Session Manager load session
-map <C-l> :emenu Tools.Session Manager.Session Manager.Load Session...<cr>
-
-" Navigate tabs using Alt-h/l or w/e
-map <A-h> <C-p>
-map <A-l> <C-n>
-map e <C-n>
-map w <C-p>
-map J <C-n>
-map K <C-p>
-
-" Shift J/K for big scrolls
-map J <C-f>
-map K <C-b>
+" Navigate tabs using J/K
+noremap J <C-n>
+noremap K <C-p>
+noremap e <C-n>
+noremap w <C-p>
 
 " Cycle tabs using Alt-number
 map <A-1> :buffer! 1<cr>
