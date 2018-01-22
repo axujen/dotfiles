@@ -21,16 +21,20 @@ function! TagsInit()
     let g:easytags_auto_recurse = 1
     let g:easytags_events = ['BufWritePost']
     
-    " Put tags in .git/tags for git directories
 	let a:git_dir = expand("%:p:h")."/.git/"
-	if isdirectory(a:git_dir)
-		let a:tagfile = a:git_dir.'tags'
-        let &tags=a:tagfile
-        let a:tagsettings='let &tags="' . a:tagfile . '"'
-	    execute "silent !grep -qsFx '" . a:tagsettings . "' ./.lvimrc || echo '" . a:tagsettings . "' >> ./.lvimrc"
+	if isdirectory(a:git_dir) " Hide the tags file in .git
+		let a:tagfile = a:git_dir."tags"
+    else " otherwise put in .vimtags
+        let a:tagfile = expand("%:p:h")."/.vimtags"
 	endif
 
-    TagsUpdate
-    HighlightTags
+    " save settings to .lvimrc
+    let &tags=a:tagfile
+    let a:tagsettings='let &tags="' . a:tagfile . '"'
+    execute "silent !grep -qsFx '" . a:tagsettings . "' ./.lvimrc || echo '" . a:tagsettings . "' >> ./.lvimrc"
+
+    execute 'TagsUpdate'
+    execute 'HighlightTags'
 endfunction
+
 command! TagsInit call TagsInit()
