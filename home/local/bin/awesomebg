@@ -13,4 +13,4 @@ IMG="$(realpath -s "$1")"
 ln -s "$IMG" "$DEST"
 
 # if feh is installed use it to set the wallpaper immediatly
-command -v feh >/dev/null && feh --bg-scale "$DEST"
+command -v feh >/dev/null && feh --bg-fill "$DEST"
