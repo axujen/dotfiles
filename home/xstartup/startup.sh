@@ -17,6 +17,7 @@ rssowl -noSplash
 megasync
 gnome-encfs-manager-remount
 keepass-cloud
+syncthing-gtk --minimized
 "
 
 # Screensaver
