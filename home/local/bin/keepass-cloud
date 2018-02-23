@@ -3,7 +3,7 @@
 # This sript will wait untill the db file appears (private folder is mounted) before launching keepass
 
 KEEPASS="$(which keepassx)"
-DATABASE="$HOME/sync/password.db"
+DATABASE="$HOME/storage/cloud/password.db"
 
 if [ ! -x "$KEEPASS" ]; then 
     echo "keepassx is not installed, leaving!"

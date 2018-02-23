@@ -13,6 +13,7 @@ udiskie --smart-tray --file-manager=ranger
 nm-applet --sm-disable
 redshift-toggle on
 rssowl -noSplash
+kdeconnect-indicator
 
 megasync
 gnome-encfs-manager-remount
