@@ -39,7 +39,6 @@ if [ -f /opt/etc/opkg.conf ]; then # entware uses /opt/var/run/user
     XDG_RUNTIME_DIR=/opt/var/run/user
 fi
 if [ ! -w "${XDG_RUNTIME_DIR:="/run/user/$UID"}" ]; then
-    echo "\$XDG_RUNTIME_DIR ($XDG_RUNTIME_DIR) not writable. Unsetting." >&2
     unset XDG_RUNTIME_DIR
 else
     export XDG_RUNTIME_DIR
