@@ -12,7 +12,7 @@ parcellite
 udiskie --smart-tray --file-manager=ranger
 nm-applet --sm-disable
 redshift-toggle on
-rssowl -noSplash
+quiterss || rssowl -noSplash
 kdeconnect-indicator
 
 megasync
@@ -23,7 +23,7 @@ syncthing-gtk --minimized
 
 # Screensaver
 if inPath xautolock; then
-    inPath i3lock && xautolock -time 5 -locker 'i3lock -fc 000000; ( sleep 1 && xset dpms force off )' -notify 10 -notifier 'notify-send -t 10000 "screensaver" "locking screen in 10 seconds!"' &
+    inPath i3lock && xautolock -time 10 -locker 'i3lock -fc 000000; ( sleep 1 && xset dpms force off )' -notify 10 -notifier 'notify-send -t 10000 "screensaver" "locking screen in 10 seconds!"' &
 fi
 
 
