@@ -5,6 +5,6 @@
 
 #define FONT -*-terminus-*-*-*-*-12-*-*-*-*-*-*-*
 
-#include "./.xresources.d/colors/blackburn"
-#include "./.xresources.d/terms"
-#include "./.xresources.d/xscreensaver"
+#include ".xresources.d/terms"
+#include ".xresources.d/xscreensaver"
+#include ".xresources.d/colors/blackburn"
