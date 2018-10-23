@@ -34,12 +34,12 @@ if [ -d /etc/pacman.d ]; then
 	alias pacup='pacman -Syu'
 	alias pacr='pacman -Rs'
 
-    # Pacaur aliases
-    alias pak='AURDEST=$HOME/tmp/pkgbuild pacaur --noedit'
-    alias paki='pak -S'
-    alias paks='pak -Ss'
-    alias pakup='pak -u'
-    alias pakup='pak  -Syu --devel'
+    # Yay aliases
+    alias yayi='yay -S'
+    alias yays='yay -Ss'
+    alias yayu='yay -u'
+    alias yayup='yay  -Syu --nodevel'
+    alias yayup-devel='yay  -Syu --devel'
 fi
 # }}}
 
