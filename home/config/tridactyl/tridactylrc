@@ -1,0 +1,21 @@
+# clear history on startup
+sanitise all
+
+# one hand hintchars
+set hintchars qwertasdf
+
+# use startpage as search engine, with custom settings
+set searchurls.startpage https://www.startpage.com/do/search?prf=be3de37679dfb9d82bf21f96a32daa1f&query=
+set searchengine startpage
+
+# keyword search
+set searchurls.4ch https://boards.4chan.org/
+set searchurls.yt  https://www.youtube.com/results?gl=enUS&search_query=
+
+# prompt on top
+colors quake
+
+## KEYBINDS
+bind w tabprev
+bind e tabnext
+bind x pin
