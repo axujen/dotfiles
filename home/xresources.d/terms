@@ -3,6 +3,8 @@
 !! TODO: fix problem with urxvt not starting due to missing fonts
 !! TODO: port urxvt-perls to be used in different distros (currently only arch works) or better yet, store them in dotfiles
 ! {{{ urxvt
+urxvt*background:           black
+urxvt*foreground:           white
 urxvt*colorBD:				lightgreen
 urxvt*colorIT:				lightblue
 urxvt*cursorBlink:			true
@@ -40,6 +42,8 @@ URxvt.keysym.S-Insert: eval:paste_clipboard
 
 ! {{{ xterm
 xterm*font:			FONT
+xterm*background:           black
+xterm*foreground:           white
 xterm*hpFunctionKeys:	True
 xterm*dynamicColors:	true
 xterm*utf8:				2
@@ -57,6 +61,8 @@ xterm*toolBar:			false
 
 ! {{{ aterm
 aterm*font:					FONT
+aterm*background:           black
+aterm*foreground:           white
 aterm*boldFont:				-xos4-terminus-bold-r-normal--14-140-72-72-c-80-iso8859-1
 aterm*scrollBar:			false
 ! }}}
