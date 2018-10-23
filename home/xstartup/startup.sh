@@ -12,13 +12,14 @@ parcellite
 udiskie --smart-tray --file-manager=ranger
 nm-applet --sm-disable
 redshift-toggle on
-quiterss || rssowl -noSplash
+quiterss
 kdeconnect-indicator
 
 megasync
 gnome-encfs-manager-remount
-keepass-cloud
+keepassx
 syncthing-gtk --minimized
+ums
 "
 
 # Screensaver
