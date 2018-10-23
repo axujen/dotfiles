@@ -1,0 +1,18 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+
+
+
+
+#navigator-toolbox::after {
+  display: none !important;
+}
+
+:root:not([customizing]) #nav-bar > :not(#customizationui-widget-panel) {
+  display: none !important;
+}
+
+:root:not([customizing]) #nav-bar {
+  max-height: 0;
+  min-height: 0 !important;
+}

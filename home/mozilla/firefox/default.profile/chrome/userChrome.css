@@ -1,0 +1,103 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+/*
+#navigator-toolbox::after {
+  display: none !important;
+}
+
+:root:not([customizing]) #nav-bar > :not(#customizationui-widget-panel) {
+  display: none !important;
+}
+
+:root:not([customizing]) #nav-bar {
+  max-height: 0;
+  min-height: 0 !important;
+}
+
+#titlebar {
+  display: none !important;
+}
+*/
+
+
+/* Tree Style Tabs */
+/* Auto-hide sidebar when fullscreen #1548 */
+#main-window[inFullscreen] #sidebar-box,
+#main-window[inFullscreen] #sidebar-splitter {
+  display: none !important;
+  width: 0px !important;
+}
+
+/* Hide Tabs */
+#main-window[tabsintitlebar="true"]:not([extradragspace="true"]) #TabsToolbar {
+  opacity: 0;
+  pointer-events: none;
+}
+#main-window:not([tabsintitlebar="true"]) #TabsToolbar {
+    visibility: collapse !important;
+}
+
+/* Hide TST Header */
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header {
+  display: none;
+}
+
+/* Hide TST Seperator */
+#sidebar-splitter {
+  display: none !important;
+}
+
+
+/* BEGIN Navbar */
+/*
+#navigator-toolbox {
+    /* Move navbar to bottom */
+    display: contents !important;
+}
+*/
+#nav-bar {
+    /* Move navbar to bottom */
+    -moz-box-ordinal-group: 2 !important;
+      
+    max-height: var(--nav-min-height) !important;
+}
+
+/* Hide bookmark and reader mode buttons from urlbar */
+#page-action-buttons {
+  display: none !important;
+}
+   
+.identity-box,  
+#urlbar {
+    border: none !important;
+    font-family: monospace !important;
+    font-size: 11px !important;
+    margin-top: -3px !important;
+    margin-bottom: -3px !important;
+    max-height: var(--nav-min-height) !important;
+}
+    
+.toolbarbutton-1 {
+    margin: -5px 0 -5px -5px !important;    
+}
+/* END Navbar*/
+
+/* BEGIN Hide elements
+ *  
+ *  - statuspanel[type="overLink"]  Hide URL notifications
+ *  - #back-button                  Navbar previous page button
+ *  - #forward-button               Navbar next page button
+ *  - #PanelUI-menu-button          Hamburger menu
+ *  - .tab-close-button             Tabbar tab close button
+ *  - .tabs-newtab-button           Tabbar new tab button
+ */
+/* statuspanel[type="overLink"], */
+#back-button,
+#forward-button,
+#PanelUI-menu-button
+/*.tab-close-button,
+.tabs-newtab-button 
+*/
+{
+    display: none !important;
+}
+/* END Hide elements*/
