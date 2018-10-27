@@ -74,7 +74,16 @@ vcs_info_wrapper() {
 }
 # }}}
 
-PROMPT=$'${vim_mode}$yellow(%n@%m)$reset:$green%3~$red%#$reset '
+# {{{{
+# Ranger Mode
+function ranger_mode() {
+    if [ -n "$RANGER_LEVEL" ]; then
+        echo "$green% RANGER$reset"
+    fi
+}
+# }}}}
+
+PROMPT=$'${vim_mode}$yellow(%n@%m) $(ranger_mode)$reset:$green%3~$red%#$reset '
 RPROMPT=$'$(vcs_info_wrapper)'
 # }}}
 
