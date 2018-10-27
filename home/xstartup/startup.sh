@@ -16,7 +16,6 @@ quiterss
 kdeconnect-indicator
 
 megasync
-gnome-encfs-manager-remount
 keepassx
 syncthing-gtk --minimized
 ums
