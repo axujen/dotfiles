@@ -2,13 +2,17 @@
 ## ~/.profile: Should ideally be the first thing to source at login
 ##             put env variables and other global settings,
 ##             make sure to make it compatible with all shells
+
+# {{{ shellrc
 if [ -d "$HOME"/.shellrc/pre ]; then # allow drop-in config for device specific settings
     for file in "$HOME"/.shellrc/pre/*; do
-        # shellcheck disable=SC1090
+        # shellcheck source=/dev/null
         source "$file"
     done
 fi
+# }}}
     
+# {{{ General
 # paths
 export PATH=$HOME/.local/bin:/usr/sbin:/sbin:$PATH
 export MANPATH=$MANPATH:$HOME/.local/share/man
@@ -27,7 +31,12 @@ export LS_COLORS='rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;
 # initialize ssh-agent and gpg-agent using envoy
 if [[ -x /usr/bin/envoy ]]; then eval "$(envoy -p)"; fi
 
-# {{{ XDG_*
+# Ranger
+export RANGER_LOAD_DEFAULT_RC=false
+export PYTHONOPTIMIZE=2 # technically not ranger specific
+# }}}
+
+# {{{ XDG Config
 # XDG - set defaults as they may not be set
 # See https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
 # and https://wiki.archlinux.org/index.php/XDG_Base_Directory_support
@@ -63,17 +72,19 @@ export HISTFILE="$XDG_CACHE_HOME"/shell/history
 # export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 # }}}
 
+# {{{ shellrc
 # Load private profile for things that shouldn't go into a public repo
-# shellcheck disable=SC1090
+# shellcheck source=/dev/null
 if [ -r "$HOME"/.shellrc/private ]; then source "$HOME"/.shellrc/private; fi
 
 # Execute the once per boot startup file
-# shellcheck disable=SC1090
+# shellcheck source=/dev/null
 if [ -r "$HOME"/.shellrc/startup ]; then "$HOME"/.shellrc/startup; fi
 
 if [ -d "$HOME"/.shellrc/post ]; then # allow drop-in config for device specific settings
     for file in "$HOME"/.shellrc/post/*; do
-        # shellcheck disable=SC1090
+        # shellcheck source=/dev/null
         source "$file"
     done
 fi
+# }}}
