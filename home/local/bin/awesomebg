@@ -2,15 +2,17 @@
 # Set the global wallpaper by symlinking it to ~/pictures/wallpaper
 DEST="$HOME/pictures/wallpaper"
 
-# Only replace symlinks
-if [ -L "$DEST" ]; then rm "$DEST"; fi
-if [ -e "$DEST" ]; then echo "$DEST exists and is not a symbolic link. remove it manually."; exit 1; fi
+# TODO: check input for a valid image file
+# if an argument is given, use it as wallpaper, else restore the old one
+if [ "$#" -gt 0 ]; then 
+    # Only replace symlinks
+    if [ -L "$DEST" ]; then rm "$DEST"; fi
+    if [ -e "$DEST" ]; then echo "$DEST exists and is not a symbolic link. remove it manually."; exit 1; fi
+    # Set a symlink
+    IMG="$(realpath -s "$1")"
+    ln -s "$IMG" "$DEST"
+fi
 
-# This script requires a single argument
-if [ "$#" = 0 ]; then echo "No arguments supplied"; exit 2; fi
-
-IMG="$(realpath -s "$1")"
-ln -s "$IMG" "$DEST"
-
+# TODO: check for valid image file
 # if feh is installed use it to set the wallpaper immediatly
 command -v feh >/dev/null && feh --bg-fill "$DEST"
