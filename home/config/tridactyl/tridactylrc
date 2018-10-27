@@ -9,11 +9,19 @@ set searchurls.startpage https://www.startpage.com/do/search?prf=be3de37679dfb9d
 set searchengine startpage
 
 # keyword search
-set searchurls.4ch https://boards.4chan.org/
-set searchurls.yt  https://www.youtube.com/results?gl=enUS&search_query=
+set searchurls.4ch https://boards.4chan.org/%s
+set searchurls.yt  https://www.youtube.com/results?gl=enUS&search_query=%s
+set searchurls.t   https://toorgle.net/results.php?q=%s
+set searchurls.r   https://old.reddit.com/r/%s
+set searchurls.w   https://en.wikipedia.org/w/index.php?search=%s
+set searchurls.wd  https://en.wiktionary.org/wiki/?search=%s
 
 # prompt on top
 colors quake
+
+# i still dont understand how selection and clipboard works, i just want ctrl-c ctrl-v to work -_-
+set yankto both
+set putfrom selection
 
 ## KEYBINDS
 bind w tabprev
