@@ -4,8 +4,8 @@
 
 ask()
 {
-    echo -n "$@"
-    read -p " (y/n): " choice
+    printf "\\e[1;34m%s (y/n): \\e[0m" "$@"
+    read -r choice
     case "$choice" in 
         y|Y )   return 0;;
         n|N|* ) return 1;;
@@ -22,7 +22,7 @@ ask_run()
 
 update_mirrorlist()
 {
-    sudo reflector --latest 50 --age 1 --fastest 5 --sort country --save /etc/pacman.d/mirrorlist
+    sudo reflector --latest 50 --fastest 5 --sort delay --save /etc/pacman.d/mirrorlist
 }
 
 update_packages()
@@ -30,9 +30,9 @@ update_packages()
     sudo pacman -Syu
     if ask "Do you wish to update the aur"; then
         if ask "Do you wish to run a devel update?"; then
-            packer -Syu --auronly --noedit --noconfirm --devel
+            yay -Syu --aur --devel --nocleanmenu --nodiffmenu --noeditmenu --noupgrademenu
         else
-            packer -Syu --auronly --noedit --noconfirm
+            yay -Syu --aur --nodevel --nocleanmenu --nodiffmenu --noeditmenu --noupgrademenu
         fi
     else
         return 0
@@ -41,16 +41,13 @@ update_packages()
 
 update_cleanup()
 {
-    sudo pacman -Rs $(pkg-list_true_orphans)
-    sudo pacman-optimize
-    sudo sync
+    sudo pacman -Rs "$(pkg-list_true_orphans)" # pkg_scripts [AUR]
 }
 
 update_clean_cache()
 {
     sudo pkgcacheclean
     if ask "Empty the cache (this is dangerous!)?"; then
-        sudo paccache -ruk1
         sudo pacman -Sc
     fi
 }
@@ -58,7 +55,7 @@ update_clean_cache()
 update_etc()
 {
     sudo backup-configs #TODO: This script needs to be redone and integrated in the dotfiles repo
-    sudo etc-update
+    sudo etc-update # etc-update [AUR]
 }
 
 
