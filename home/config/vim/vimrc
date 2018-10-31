@@ -59,6 +59,9 @@ nnoremap <C-i> <C-w>}
 nnoremap <space> za
 vnoremap <space> zf
 
+" Change dir to current file by typing cd
+nnoremap cd :cd %:p:h<cr>
+
 " Options
 set norelativenumber
 set background=dark

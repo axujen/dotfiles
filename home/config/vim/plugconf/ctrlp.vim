@@ -7,7 +7,7 @@ Plugin 'JazzCore/ctrlp-cmatcher'
 let g:ctrlp_use_caching = 0
 let g:ctrlp_max_depth = 10
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-let g:ctrlp_by_filename=1
+let g:ctrlp_by_filename=0
 let g:ctrlp_working_path_mode='ra'
 let g:ctrlp_regxp = 0
 let g:ctrlp_match_window = 'top,order:ttb'
