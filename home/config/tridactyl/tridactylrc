@@ -15,6 +15,7 @@ set searchurls.t   https://torrentseeker.com/search.php?q=%s
 set searchurls.r   https://old.reddit.com/r/%s
 set searchurls.w   https://en.wikipedia.org/w/index.php?search=%s
 set searchurls.wd  https://en.wiktionary.org/wiki/?search=%s
+set searchurls.arch https://wiki.archlinux.org/index.php?search=
 
 # prompt on top
 colors quake
@@ -27,3 +28,5 @@ set putfrom clipboard
 bind w tabprev
 bind e tabnext
 bind x pin
+bind q fillcmdline buffer
+bind Q fillcmdline bmarks
