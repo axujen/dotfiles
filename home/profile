@@ -56,8 +56,7 @@ fi
 export MPLAYER_HOME="$XDG_CONFIG_HOME"/mplayer
 export WEECHAT_HOME="$XDG_CONFIG_HOME"/weechat
 export VIMINIT=":source $XDG_CONFIG_HOME"/vim/vimrc
-export VIMPERATOR_INIT=":source $XDG_CONFIG_HOME/vimperator/vimperatorrc"
-export VIMPERATOR_RUNTIME="$XDG_CONFIG_HOME"/vimperator
+export GVIMINIT=":source $XDG_CONFIG_HOME"/vim/gvimrc
 export GNUPGHOME="$XDG_CONFIG_HOME"/gnupg
 export IPYTHONDIR="$XDG_CONFIG_HOME"/ipython
 export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
