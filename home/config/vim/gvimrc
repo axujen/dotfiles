@@ -1,5 +1,5 @@
 " Fonts
-set guifont=Inconsolata\ NF\ Medium\ 10
+set guifont=IBM\ Plex\ Mono\ 10
 
 " GUI options.
 set guioptions+=c " console dialogs instead of popup.
