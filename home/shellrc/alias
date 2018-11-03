@@ -1,13 +1,5 @@
 # vim: ft=sh fdm=marker
-command -v fortune >/dev/null 2>&1 && fortune -s
-
 # {{{ Aliases
-# {{{ Gentoo
-if [ -d /etc/portage ]; then
-	alias emerge="emerge -av";
-fi
-# }}}
-
 # {{{ Debian
 if [ -d /etc/apt ]; then
 	alias apti="apt install --no-install-recommends";
@@ -27,17 +19,15 @@ if [ -d /etc/pacman.d ]; then
 	alias pac-list='expac -HM "%011m\t%-20n\t%10d" $( comm -23 <(pacman -Qqen|sort) <(pacman -Qqg base base-devel|sort) ) | sort -rn'
 
 	# Pacman aliases
-	alias pac='pacman'
 	alias paci='pacman -S'
 	alias pacs='pacman -Ss'
-    alias pacu='pacman -Sy'
+    alias pacu='pacman -Syy'
 	alias pacup='pacman -Syu'
 	alias pacr='pacman -Rs'
 
     # Yay aliases
     alias yayi='yay -S'
     alias yays='yay -Ss'
-    alias yayu='yay -u'
     alias yayup='yay  -Syu --nodevel'
     alias yayup-devel='yay  -Syu --devel'
 fi
@@ -61,30 +51,20 @@ if command -v "systemd" >/dev/null 2>&1; then
 fi
 # }}}
 
-# General aliases
-alias beep="echo -e '\a'"
+# {{{ General aliases
 alias grep='grep --color=auto'
+alias p='ps aux|grep -i --color=auto'
+alias sudo='sudo '
+alias svim='sudo -e'
+alias ssh="ssh -o StrictHostKeyChecking=no"
+alias steam="steam-native -silent"
+
 # ls
 alias sl="ls"
 alias la='ls -a'
 alias ll='ls -l'
 alias ls='ls --group-directories-first --color=always -h'
-alias mirror='H="--header"; wget $H="Accept-Language: en-us,en;q=0.5" $H="Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" $H="Connection: keep-alive" -U "Mozilla/5.0 (Windows NT 5.1; rv:10.0.2) Gecko/20100101 Firefox/10.0.2" --referer=http://www.askapache.com/ -Emrkp -nc -np'
-alias p='ps aux|grep -i --color=auto'
-alias sudo='sudo '
-alias svim='sudo -e'
-alias tmux-color='tmux -2'
-alias utop="htop -u \$USER"
-alias awesome-quit="echo \"awesome.quit()\" | awesome-client"
-alias ssh="ssh -o StrictHostKeyChecking=no"
-alias steam="steam-native -silent"
-command -v xclip >/dev/null 2>&1    && alias wgetpaste='wgetpaste -C'
-
-# If udevil is installed use it.
-if [ -d /etc/udevil ]; then
-	alias dmount='udevil mount'
-	alias dumount='udevil umount'
-fi
+# }}}
 # }}}
 
 # {{{ Function aliases

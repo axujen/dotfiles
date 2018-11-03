@@ -48,7 +48,7 @@ update_clean_cache()
 {
     sudo pkgcacheclean
     if ask "Empty the cache (this is dangerous!)?"; then
-        sudo pacman -Sc
+        yay -Sc
     fi
 }
 
