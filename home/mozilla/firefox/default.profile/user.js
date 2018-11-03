@@ -1157,3 +1157,10 @@ user_pref("security.ssl3.rsa_aes_128_sha",			true); // 0x2f
 // Allow tridactyl on moz domains
 user_pref("privacy.resistFingerprinting.block_mozAddonManager", true);
 user_pref("extensions.webextensions.restrictedDomains", "");
+
+
+
+//********************
+// CUSTOM
+//*******************
+user_pref("extensions.getAddons.showPane", false);
