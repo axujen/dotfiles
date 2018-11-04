@@ -7,7 +7,7 @@
 exec 2>&1
 
 STARTUP="
-xcompmgr -nfCD 5
+xcompmgr -nC
 parcellite
 udiskie --smart-tray --file-manager=ranger
 nm-applet --sm-disable
