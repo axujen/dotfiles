@@ -1,0 +1,25 @@
+directory: ~/music
+library: ~/music/library.db
+art_filename: cover
+
+import:
+    write: yes
+    move: yes
+    resume: ask
+    log: beetslog.txt
+
+replace:
+    '[\\/]': _
+    '^\.': _
+    '[\x00-\x1f]': _
+    '[<>:"\?\*\|]': _
+    '\.$': _
+    '\s+$': ''
+    '^\s+': ''
+    '^-': _
+
+ui:
+    color: yes
+
+paths:
+    default: $albumartist/%upper{$albumtype} $albumyear - $album/$track $artist - $title
