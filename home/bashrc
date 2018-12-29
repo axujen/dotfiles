@@ -114,7 +114,7 @@ complete -cf sudo # command and file completion
 # }}}
 
 # Load common settings
-COMMONDRC="$HOME"/.shellrc/common
+COMMONDRC="$HOME"/.profile.d/common
 # shellcheck disable=SC1090
 if [ -r "$COMMONDRC" ]; then source "$COMMONDRC"; fi
 

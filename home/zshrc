@@ -1,7 +1,7 @@
 ## vim: ft=zsh fdm=marker
 ## ~/.zshrc: zsh configuration file
 ## common ENV variables should go in ~/.profile or ~/.xprofile
-## common rc settings should go in ~/.shellrc/common
+## common rc settings should go in ~/.profile.d/common
 ## keep this for zsh specific code that can't go in ~/.zprofile
 
 typeset -U PATH
@@ -9,7 +9,7 @@ setopt appendhistory extendedglob hist_find_no_dups autocd hist_ignore_dups
 unsetopt beep
 
 # {{{ Completion
-if [ -r "$HOME"/.shellrc/zsh.completion ]; then source "$HOME"/.shellrc/zsh.completion; fi
+if [ -r "$HOME"/.profile.d/zsh.completion ]; then source "$HOME"/.profile.d/zsh.completion; fi
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/completion_cache
 # }}}
@@ -205,7 +205,7 @@ chpwd() {
 # }}}
 
 # {{{ Load common shell settings
-COMMONRC="$HOME"/.shellrc/common
+COMMONRC="$HOME"/.profile.d/common
 # shellcheck disable=SC1090
 if [ -r "$COMMONRC" ]; then source "$COMMONRC"; fi
 # }}}
