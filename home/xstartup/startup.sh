@@ -17,8 +17,7 @@ kdeconnect-indicator
 
 megasync
 keepassx
-syncthing-gtk --minimized
-ums
+syncthing --no-browser
 "
 
 # Screensaver
