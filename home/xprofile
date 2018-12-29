@@ -8,6 +8,28 @@
 ## NOTE: MAKE SURE THIS NEVER BLOCKS OTHERWISE YOU WILL GET STUCK ON LOGIN AND BAD THINGS WILL HAPPEN
 ## NOTE: Preferably dont fork, as that might not initialize everything before the wm starts
 
+load_pre() {
+    if [ -d "$HOME/.xprofile.d" ]; then
+        if [ -d "$HOME/.xprofile.d/pre" ]; then
+            for file in "$HOME"/.xprofile.d/pre/*; do
+                # shellcheck disable=SC1090
+                test -f "$file" && source "$file"
+            done
+        fi
+    fi
+}
+
+load_post() {
+    if [ -d "$HOME/.xprofile.d" ]; then
+        if [ -d "$HOME/.xprofile.d/post" ]; then
+            for file in "$HOME"/.xprofile.d/post/*; do
+                # shellcheck disable=SC1090
+                test -f "$file" && source "$file"
+            done
+        fi
+    fi
+}
+
 main() {
 # {{{ Xresources
 xrdb -remove -all # don't rely on display manager to clean up xresources
@@ -42,4 +64,6 @@ xset -b # remove this goddamn torture
 export STEAM_RUNTIME=0
 }
 
+load_pre
 main
+load_post
