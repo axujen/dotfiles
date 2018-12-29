@@ -547,7 +547,7 @@ user_pref("browser.selfsupport.url",				"");
 // https://wiki.mozilla.org/Loop
 // https://support.mozilla.org/t5/Chat-and-share/Support-for-Hello-discontinued-in-Firefox-49/ta-p/37946
 // NOTICE-DISABLED: Firefox Hello requires setting `media.peerconnection.enabled` and `media.getusermedia.screensharing.enabled` to true, `security.OCSP.require` to false to work.
-//user_pref("loop.enabled",		false);
+user_pref("loop.enabled",		false);
 
 // PREF: Disable Firefox Hello metrics collection
 // https://groups.google.com/d/topic/mozilla.dev.platform/nyVkCx-_sFw/discussion
@@ -1164,3 +1164,4 @@ user_pref("extensions.webextensions.restrictedDomains", "");
 // CUSTOM
 //*******************
 user_pref("extensions.getAddons.showPane", false);
+user_pref("network.security.ports.banned.override", "1-65535")
