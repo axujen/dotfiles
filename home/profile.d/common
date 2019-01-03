@@ -64,6 +64,10 @@ alias sl="ls"
 alias la='ls -a'
 alias ll='ls -l'
 alias ls='ls --group-directories-first --color=always -h'
+
+# Stone Soup Crawl XDG Compliance
+alias crawl='crawl -rc $XDG_CONFIG_HOME/crawl/config -rcdir $XDG_CONFIG_HOME/crawl/ -macro $XDG_CONFIG_HOME/crawl'
+alias craw-tiles='crawl-tiles -rc $XDG_CONFIG_HOME/crawl/config -rcdir $XDG_CONFIG_HOME/crawl/ -macro $XDG_CONFIG_HOME/crawl'
 # }}}
 # }}}
 
