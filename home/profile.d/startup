@@ -1,13 +1,13 @@
 #!/usr/bin/env sh
 ## vim: ft=sh
-## ~/.shellrc/startup: starts background daemons on the first login
+## ~/.profile.d/startup: starts background daemons on the first login
 ## for implementation see https://unix.stackexchange.com/a/48510
 ## NOTE: Do not source this, execute it instead
 set -euo pipefail
 
 TMPDIR="$(dirname "$(mktemp -u -t tmp.XXXXXXXXXX)")"
 LOCKDIR="${TMPDIR:-/tmp}/$USER-LOGGED"
-LOGFILE="$HOME/.shellrc/startup.log"
+LOGFILE="$HOME/.profile.d/startup.log"
 
 COMMANDS="
 mpd
