@@ -1,19 +1,38 @@
-# Quick Spells
+# Dungeon Crawl Stone Soup 0.23-a0 macro file
+# WARNING: This file is entirely auto-generated.
+
+# Key Mappings:
+K2:1
+A:f
+K2:2
+A:f
+K2:3
+A:f
+K2:4
+A:f
+
+# Command Macros:
+M:\{-1073741885}
+A:zP
+
+M:\{-1073741884}
+A:zI
+
+M:\{-1073741883}
+A:zU
+
+M:\{-1073741882}
+A:zY
+
 M:1
 A:zH
+
 M:2
 A:zJ
+
 M:3
 A:zK
+
 M:4
 A:zL
 
-# Utility Spells
-M:\{-1073741885}
-A:zP
-M:\{-1073741884}
-A:zI
-M:\{-1073741883}
-A:zU
-M:\{-1073741882}
-A:zY
