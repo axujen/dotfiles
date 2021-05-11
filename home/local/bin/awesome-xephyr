@@ -1,6 +1,6 @@
 #!/bin/sh
 # script xepyhr-awesome
 # author: dante4d <dante4d@gmail.com>
-Xephyr -ac -br -resizeable -noreset :1 & 
+Xephyr :1 -ac -br -resizeable -noreset & 
 XPID="$!"
-DISPLAY=:1.0 XEPHYR=:1.0 awesome -c "$HOME/.config/awesome/rc.lua"; kill -9 "$XPID"
+DISPLAY=:1.0 awesome; kill -9 "$XPID"
