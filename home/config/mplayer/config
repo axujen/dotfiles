@@ -1,6 +1,0 @@
-# Write your default config options here!
-lavdopts=lowres=3:fast=1:skiploopfilter=all:threads=2
-framedrop=true
-autosync=10
-vo=xv
-ao=sdl
