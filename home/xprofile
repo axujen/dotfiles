@@ -53,6 +53,7 @@ if [ "$(command -v xmodmap)" ]; then
            xmodmap "$file"
         fi
     done
+    setxkbmap -option "caps:swapescape"
 fi
 # }}}
 
