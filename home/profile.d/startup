@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 ## vim: ft=sh
 ## ~/.profile.d/startup: starts background daemons on the first login
 ## for implementation see https://unix.stackexchange.com/a/48510
