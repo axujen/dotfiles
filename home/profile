@@ -52,13 +52,13 @@ export VIMINIT=":source $XDG_CONFIG_HOME"/vim/vimrc
 export GVIMINIT=":source $XDG_CONFIG_HOME"/vim/gvimrc
 export GNUPGHOME="$XDG_CONFIG_HOME"/gnupg
 export IPYTHONDIR="$XDG_CONFIG_HOME"/ipython
-export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
+export LESSHISTFILE="$XDG_CACHE_HOME"/lesshistory
 export PYTHON_EGG_CACHE="$XDG_CACHE_HOME"/python-eggs
 export RXVT_SOCKET="$XDG_RUNTIME_DIR"/urxvtd
 export GIMP2_DIRECTORY="$XDG_CONFIG_HOME"/gimp
 export CRAWL_DIR="$XDG_CONFIG_HOME"/crawl/
 export CRAWL_RC="$XDG_CONFIG_HOME"/crawl/config
-export HISTFILE="$XDG_CACHE_HOME"/shell/history
+export HISTFILE="$XDG_CACHE_HOME"/shellhistory
 # }}}
 
 # {{{ profile.d
