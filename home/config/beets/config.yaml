@@ -1,6 +1,7 @@
 directory: ~/music
 library: ~/music/library.db
 art_filename: cover
+threaded: no
 
 import:
     write: yes
