@@ -14,15 +14,17 @@ nm-applet --sm-disable
 redshift-toggle on
 quiterss
 kdeconnect-indicator
+xset s 1 1
 
 megasync
 keepassx
+keepassxc
 syncthing --no-browser
 "
 
 # Screensaver
 if inPath xautolock; then
-    inPath i3lock && xautolock -time 10 -locker 'i3lock -fc 000000; ( sleep 1 && xset dpms force off )' -notify 10 -notifier 'notify-send -t 10000 "screensaver" "locking screen in 10 seconds!"' &
+    xautolock -time 5 -locker 'i3lock -fc 000000; ( sleep 1 && xset dpms force off )' -notify 10 -notifier 'notify-send -t 10000 "screensaver" "locking screen in 10 seconds!"' &
 fi
 
 
