@@ -1,5 +1,5 @@
 ## vim: ft=sh
-## ~/.xstartup/staartup.sh: starts gui applications after the wm
+## ~/.xstartup/startup.sh: starts gui applications after the wm
 ## don't execute this file directly, use ~/.xstartup/init to make sure 
 ## its loaded once per xorg session. if you execute this directly in the
 ## wm, you will execute duplicates if you use the WM/DE restart function
@@ -24,7 +24,7 @@ syncthing --no-browser
 
 # Screensaver
 if inPath xautolock; then
-    xautolock -time 5 -locker 'i3lock -fc 000000; ( sleep 1 && xset dpms force off )' -notify 10 -notifier 'notify-send -t 10000 "screensaver" "locking screen in 10 seconds!"' &
+    inPath i3lock && xautolock -time 10 -locker 'i3lock -fc 000000; ( sleep 1 && xset dpms force off )' -notify 10 -notifier 'notify-send -t 10000 "screensaver" "locking screen in 10 seconds!"' &
 fi
 
 
