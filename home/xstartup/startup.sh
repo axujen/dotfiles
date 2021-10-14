@@ -14,7 +14,7 @@ nm-applet --sm-disable
 redshift-toggle on
 quiterss
 kdeconnect-indicator
-xset s 1 1
+xset s 60 60
 
 megasync
 keepassx
