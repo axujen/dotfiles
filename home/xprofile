@@ -57,7 +57,7 @@ if [ "$(command -v xmodmap)" ]; then
 fi
 # }}}
 
-xset dpms 300 # turn off display after 5 minutes
+xset s 300 # turn off display after 5 minutes
 xset -b # remove this goddamn torture
 
 # Use native libs for steam

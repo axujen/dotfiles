@@ -20,13 +20,9 @@ megasync
 keepassx
 keepassxc
 syncthing --no-browser
+
+xss-autolock -n '~/.local/share/dim-display.sh' -- sh -c 'sleep 1; i3lock -fc 111111'
 "
-
-# Screensaver
-if inPath xautolock; then
-    inPath i3lock && xautolock -time 10 -locker 'i3lock -fc 000000; ( sleep 1 && xset dpms force off )' -notify 10 -notifier 'notify-send -t 10000 "screensaver" "locking screen in 10 seconds!"' &
-fi
-
 
 # Actual starting logic, that checks if the executable exists
 start(){

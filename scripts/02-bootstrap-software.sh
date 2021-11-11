@@ -13,7 +13,8 @@ git
 ranger
 xcompmgr
 parcellite
-xautolock
+xss-lock
+i3lock
 "
 
 IFS="$(printf '%b_' '\n')"; IFS="${IFS%_}"
