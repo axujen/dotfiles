@@ -14,14 +14,13 @@ nm-applet --sm-disable
 redshift-toggle on
 quiterss
 kdeconnect-indicator
-xset s 60 60
 
 megasync
 keepassx
 keepassxc
 syncthing --no-browser
 
-xss-autolock -n '~/.local/share/dim-display.sh' -- sh -c 'sleep 1; i3lock -fc 111111'
+xss-lock -n ~/.local/share/dim-display.sh -- sh -c 'sleep 1; i3lock -fc 111111'
 "
 
 # Actual starting logic, that checks if the executable exists
