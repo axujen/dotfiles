@@ -1,0 +1,26 @@
+#!/usr/bin/env sh
+## This script cleans up and update archlinux/manjaro
+
+# Check for root
+if [ "$EUID" -ne 0 ]; then
+  echo "Please run as root"
+  exit
+fi
+
+## Update archlinux/manjaro
+if [ -d /etc/pacman.d ]; then
+    ## Clean package cache
+    echo "Cleaning package cache"
+    pacman -Scc
+
+    ## Remove Orphaned Packages
+    echo "Removing orphaned packages"
+    pacman -Rns $(pacman -Qtdq)
+    
+    ## Update
+    echo "Updating system"
+    pacman -Syu
+
+    ## More tips
+    echo "Refer to https://wiki.archlinux.org/title/System_maintenance for more maintenance tips"
+fi
