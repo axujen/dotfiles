@@ -30,6 +30,9 @@ if [ -d /etc/pacman.d ]; then
     alias yays='yay -Ss'
     alias yayup='yay  -Syu --nodevel'
     alias yayup-devel='yay  -Syu --devel'
+
+    # Octopi
+    alias pacg='/usr/bin/octopi'
 fi
 # }}}
 
