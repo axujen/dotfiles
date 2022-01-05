@@ -1,4 +1,5 @@
 Plugin 'xolox/vim-easytags'
+Plugin 'xolox/vim-misc'
 
 let g:easytags_opts = ['--options=$XDG_CONFIG_HOME/vim/ctags/ctags.cnf']
 let g:easytags_async=1
