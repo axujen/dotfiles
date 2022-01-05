@@ -3,4 +3,4 @@ this should be added to PATH in ~/.profile
 don't put big binaries in here as they will slow down the download of the repo
 make sure the scripts are as portable as possible (ie: POSIX)
 
-TODO: clean up script that are no longer used
+TODO: clean up scripts that are no longer used
