@@ -20,7 +20,7 @@ keepassx
 keepassxc
 syncthing --no-browser
 
-xss-lock -n ~/.local/share/dim-display.sh -- sh -c 'sleep 1; i3lock -fc 111111'
+xss-lock -- physlock -dp '`whoami`@`hostname`'
 "
 
 # Actual starting logic, that checks if the executable exists
