@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 # the name of your primary tmux session
-SESSION=$USER
+SESSION="$USER"
 # append -2 to force tmux to use 256 color mode.
 TMUX_CMD="tmux -2"
 
@@ -22,15 +22,10 @@ $TMUX_CMD set -g -t $SESSION set-titles-string "tmux-session-$SESSION"
 $TMUX_CMD set -sg escape-time 0
 
 # enable mouse
-$TMUX_CMD set mouse-utf8 on
 $TMUX_CMD set -g mouse on
 
 ## Windows ##
-# Window 1 (terminals)
-$TMUX_CMD set-window-option -t $SESSION:1 allow-rename off
-$TMUX_CMD select-window -t $SESSION:1
-
-# Split Window 1
+# Split Window 2
 $TMUX_CMD split-window -h
 $TMUX_CMD split-window -v
 $TMUX_CMD select-pane -L
@@ -45,16 +40,12 @@ $TMUX_CMD bind k select-pane -U
 
 # Change prefix key to C-q if you detect we're running inside ssh
 if [ -n "$SSH_CLIENT" ]; then
-    # $TMUX_CMD unbind C-a
     $TMUX_CMD set -g prefix C-q
-    $TMUX_CMD bind C-q last-window # press C-a twice to get to the last window
+    $TMUX_CMD bind C-q last-window # press C-q twice to get to the last window
 else
-    # Prefix
-    # Set the normal prefix
     $TMUX_CMD set -g prefix C-a
     $TMUX_CMD bind C-a last-window # press C-a twice to get to the last window
 fi
 
 # all done. select starting window and get to work
-$TMUX_CMD select-window -t $SESSION:1
-$TMUX_CMD attach -t $SESSION
+$TMUX_CMD attach -t "$SESSION"
