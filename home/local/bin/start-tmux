@@ -38,14 +38,9 @@ $TMUX_CMD bind l select-pane -R
 $TMUX_CMD bind j select-pane -D
 $TMUX_CMD bind k select-pane -U
 
-# Change prefix key to C-q if you detect we're running inside ssh
-if [ -n "$SSH_CLIENT" ]; then
-    $TMUX_CMD set -g prefix C-q
-    $TMUX_CMD bind C-q last-window # press C-q twice to get to the last window
-else
-    $TMUX_CMD set -g prefix C-a
-    $TMUX_CMD bind C-a last-window # press C-a twice to get to the last window
-fi
+# Prefix C-a
+$TMUX_CMD set -g prefix C-a
+$TMUX_CMD bind C-a last-window # press C-a twice to get to the last window
 
 # all done. select starting window and get to work
 $TMUX_CMD attach -t "$SESSION"
