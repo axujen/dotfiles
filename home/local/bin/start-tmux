@@ -27,7 +27,7 @@ if [ -n "$SSH_CLIENT" ]; then
     $TMUX_CMD set -g prefix C-q
     $TMUX_CMD bind C-q last-window # press C-a twice to get to the last window
 else
-# Prefix
+    # Prefix
     # Set the normal prefix
     $TMUX_CMD set -g prefix C-a
     $TMUX_CMD bind C-a last-window # press C-a twice to get to the last window
@@ -38,16 +38,6 @@ else
     $TMUX_CMD select-pane -L
     $TMUX_CMD split-window -v
     $TMUX_CMD select-pane -U
-
-    # Window 2 (irc)
-    $TMUX_CMD set-window-option -t $SESSION:2 allow-rename off
-    $TMUX_CMD new-window -t $SESSION -n weechat
-    $TMUX_CMD send-keys -t $SESSION:2 "weechat-curses" C-m
-    
-    # Window 3 (email)
-    $TMUX_CMD set-window-option -t $SESSION:3 allow-rename off
-    $TMUX_CMD new-window -t $SESSION -n email
-    $TMUX_CMD send-keys -t $SESSION:3 mutt C-m
 fi
 
 # all done. select starting window and get to work
