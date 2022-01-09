@@ -33,10 +33,10 @@ $TMUX_CMD split-window -v
 $TMUX_CMD select-pane -U
 
 ## Keybinds ##
-$TMUX_CMD bind h select-pane -L
-$TMUX_CMD bind l select-pane -R
-$TMUX_CMD bind j select-pane -D
-$TMUX_CMD bind k select-pane -U
+$TMUX_CMD bind C-h select-pane -L
+$TMUX_CMD bind C-l select-pane -R
+$TMUX_CMD bind C-j select-pane -D
+$TMUX_CMD bind C-k select-pane -U
 
 # Prefix C-a
 $TMUX_CMD set -g prefix C-a
