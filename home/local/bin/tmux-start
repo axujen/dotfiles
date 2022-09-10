@@ -29,8 +29,6 @@ $TMUX_CMD set -g mouse on
 $TMUX_CMD split-window -h
 $TMUX_CMD split-window -v
 $TMUX_CMD select-pane -L
-$TMUX_CMD split-window -v
-$TMUX_CMD select-pane -U
 
 ## Keybinds ##
 $TMUX_CMD bind C-h select-pane -L
