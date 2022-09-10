@@ -61,6 +61,7 @@ alias sudo='sudo '
 alias svim='sudo -e'
 alias ssh="ssh -o StrictHostKeyChecking=no"
 alias steam="steam-native -silent"
+alias tmuxa="tmux attach || tmux"
 
 # ls
 alias sl="ls"
