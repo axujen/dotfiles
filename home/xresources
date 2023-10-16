@@ -3,7 +3,7 @@
 ## this file is intentionally lowercase so some display managers might not load it
 ## make sure to load it somewhere else, preferably ~/.xprofile
 
-#define FONT -*-terminus-*-*-*-*-14-*-*-*-*-*-*-*
+#define FONT xft:xos4 Terminus:pixelsize=14
 
 #include ".xresources.d/terms"
 #include ".xresources.d/xscreensaver"
