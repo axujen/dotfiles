@@ -7,7 +7,6 @@
 exec 2>&1
 
 STARTUP="
-xcompmgr -nC
 parcellite
 udiskie --smart-tray --file-manager=ranger
 nm-applet --sm-disable
@@ -20,7 +19,7 @@ keepassx
 keepassxc
 syncthing --no-browser
 
-xss-lock -- physlock -dp '`whoami`@`hostname`'
+xscreensaver
 "
 
 # Actual starting logic, that checks if the executable exists
