@@ -2,11 +2,6 @@
 # Download and unpack patched icon fonts
 FONTS="
 RobotoMono
-Inconsolata
-ProFont
-DejaVuSansMono
-DroidSansMono
-UbuntuMono
 "
 # Make sure curl and unzip are installed
 if [ ! "$(type -P curl)" ]; then echo "curl is required, make sure it is installed"; exit 1; fi
