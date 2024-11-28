@@ -28,11 +28,7 @@ if [ -d /etc/pacman.d ]; then
     # Yay aliases
     alias yayi='yay -S'
     alias yays='yay -Ss'
-    alias yayup='yay  -Syu --nodevel'
-    alias yayup-devel='yay  -Syu --devel'
-
-    # Octopi
-    alias pacg='/usr/bin/octopi'
+    alias yayup='yay -Syu'
 fi
 # }}}
 
