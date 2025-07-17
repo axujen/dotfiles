@@ -32,6 +32,7 @@ start(){
     fi
 }
 
+source ~/.profile.d/common
 IFS="$(printf '%b_' '\n')"; IFS="${IFS%_}"
 for CMD in $STARTUP; do
     start "$CMD"

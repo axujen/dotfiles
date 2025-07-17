@@ -58,6 +58,7 @@ alias svim='sudo -e'
 alias ssh="ssh -o StrictHostKeyChecking=no"
 alias steam="steam-native -silent"
 alias tmuxa="tmux attach || tmux"
+alias scrot-clipboard='scrot -s - | xclip -selection clipboard -t image/png'
 
 # ls
 alias sl="ls"
