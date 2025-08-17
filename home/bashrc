@@ -3,8 +3,6 @@
 ## also see ~/.inputrc
 ## common ENV variables should go in ~/.profile or ~/.xprofile
 
-# Gentoo bashrc prompt
-#
 # This file is sourced by all *interactive* bash shells on startup,
 # including some apparently interactive shells such as scp and rcp
 # that can't tolerate any output.  So make sure this doesn't display
@@ -82,7 +80,6 @@ if ${use_color} ; then
 	alias grep='grep --colour=auto'
 	alias egrep='egrep --colour=auto'
 	alias fgrep='fgrep --colour=auto'
-    alias scrot-clipboard= 'PNG '
 else
 	if [[ ${EUID} == 0 ]] ; then
 		# show root@ when we don't have colors
