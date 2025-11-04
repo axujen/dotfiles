@@ -25,4 +25,3 @@ If the -c switch is used then regular files are backed up to ./dotfiles_backup
 before being overwritten.
 
 A log can be found in ./dotfiles.log.  
-**JUST MAKE SURE TO NEVER COMMIT/PUSH THE RAW PRIVATE DIR**
