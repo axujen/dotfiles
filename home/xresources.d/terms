@@ -1,6 +1,5 @@
 !! vim: ft=xdefaults fdm=marker
 !! ~/.xresources.d/terms: handles x temrinal configuration
-!! TODO: fix problem with urxvt not starting due to missing fonts
 !! TODO: port urxvt-perls to be used in different distros (currently only arch works) or better yet, store them in dotfiles
 ! {{{ urxvt
 urxvt*background:           black
@@ -10,7 +9,7 @@ urxvt*colorIT:				lightblue
 urxvt*cursorBlink:			true
 urxvt*cursorUnderline:		false
 urxvt*depth:				24
-urxvt*font:					FONT
+urxvt*font:					xft:xos4 Terminus:pixelsize=20
 urxvt*highlightColor:		green
 urxvt*highlightTextColor:	yellow
 urxvt*jumpScroll:			True
@@ -41,26 +40,26 @@ URxvt.keysym.S-Insert: eval:paste_clipboard
 ! }}}
 
 ! {{{ xterm
-xterm*font:			FONT
+xterm*font:                 xft:xos4 Terminus:pixelsize=20
 xterm*background:           black
 xterm*foreground:           white
-xterm*hpFunctionKeys:	True
-xterm*dynamicColors:	true
-xterm*utf8:				2
-xterm*eightBitInput:	true
-xterm*metaSendEscape:	true
-xterm*saveLines:		512
-xterm*scrollTtyKeypress:false
-xterm*scrollTtyOutput:	false
-xterm*scrollBar:		false
-xterm*rightScrollBar:	false
-xterm*jumpScroll:		true
-xterm*multiScroll:		true
-xterm*toolBar:			false
+xterm*hpFunctionKeys:	    true
+xterm*dynamicColors:	    true
+xterm*utf8:				    2
+xterm*eightBitInput:	    true
+xterm*metaSendEscape:	    true
+xterm*saveLines:		    512
+xterm*scrollTtyKeypress:    false
+xterm*scrollTtyOutput:	    false
+xterm*scrollBar:		    false
+xterm*rightScrollBar:	    false
+xterm*jumpScroll:		    true
+xterm*multiScroll:		    true
+xterm*toolBar:			    false
 ! }}}
 
 ! {{{ aterm
-aterm*font:					FONT
+aterm*font:                 xft:xos4 Terminus:pixelsize=20		
 aterm*background:           black
 aterm*foreground:           white
 aterm*boldFont:				-xos4-terminus-bold-r-normal--14-140-72-72-c-80-iso8859-1

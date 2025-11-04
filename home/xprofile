@@ -39,6 +39,16 @@ for file in "/etc/X11/Xresources" "$HOME/.Xresources" "$HOME/.xresources"; do
         xrdb -merge "$file"
     fi
 done
+
+# Load ~/.xresources.d
+for file in $HOME/.xresources.d/*; do
+    if [ -f "$file" ]; then
+        echo "Loading resource: $file"
+        xrdb -merge "$file"
+    fi
+done
+# Load Xresources colorshceme
+xrdb -merge "$HOME/.xresources.d/colors/blackburn"
 # }}}
 
 # {{{ Keyboard

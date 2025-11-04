@@ -1,5 +1,3 @@
 ~/.xresources.d/colors: color definitions in xresources format
 Each file should contain definitions for a single colorscheme
-A single colorscheme is selected by including it in ~/.xresources
-
-TODO: Make sure to include links to original file in the colorscheme file
+A single colorscheme is selected by including it in ~/.xprofile
