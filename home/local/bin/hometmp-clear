@@ -1,8 +1,0 @@
-#!/usr/bin/env sh
-
-HOMETMP="$HOME"/tmp
-if [ -d "$HOMETMP"  ]; then 
-    rm -rf "${HOMETMP:?}"/*
-else
-    mkdir "$HOMETMP"
-fi
