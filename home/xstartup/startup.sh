@@ -7,18 +7,12 @@
 exec 2>&1
 
 STARTUP="
-parcellite
 udiskie --smart-tray --file-manager=ranger
+parcellite
 nm-applet --sm-disable
-redshift-toggle on
-quiterss
-kdeconnect-indicator
-
 megasync
-keepassx
 keepassxc
 syncthing --no-browser
-
 xscreensaver
 "
 
