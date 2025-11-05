@@ -63,11 +63,13 @@ if [ "$(command -v xmodmap)" ]; then
            xmodmap "$file"
         fi
     done
-    setxkbmap -option "caps:swapescape"
 fi
 # }}}
 
-xset s 300 # turn off display after 5 minutes
+# turn off display after 5 minutes
+xset s blank
+xset s 300
+
 xset -b # remove this goddamn torture
 
 # Use native libs for steam
