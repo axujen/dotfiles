@@ -81,7 +81,7 @@ keybinds.keys["media controls"] = {
 -- {{{ Display Controls
 keybinds.keys["display controls"]={
     {{ modkey,	}, ";",	                    function() awful.spawn("redshift-toggle") end,   "Toggle redshift"},
-    {{ modkey,  }, "q",                     function() awful.spawn("lxdm -c USER_SWITCH") end, "Lock the screen"},
+    {{ modkey,  }, "q",                     function() awful.spawn("xscreensaver-command --lock") end, "Lock the screen"},
 
     -- Brightness
     {{          }, "XF86MonBrightnessDown", function() awful.spawn("light -U 5") end,        "Brightness down"},
