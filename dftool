@@ -78,10 +78,10 @@ function install_file(){
 		fi
 
 		# Backup regular files in case they are being overwritten
-		bkp "$dest"
+		backup "$dest"
 	fi
 
-	log "Installing $file"
+	log "Symlinking $file -> $dest"
 	ln -s "$file" "$dest"
 }
 
@@ -108,7 +108,7 @@ function install_dir(){
 
 	# If the destination is a regular file then back it up
 	# TODO: Might require user confirmation on this.
-	[[ -d "$dest" ]] || bkp "$dest"
+	[[ -d "$dest" ]] || backup "$dest"
 
 	log "Unpacking directory $dir" true
 	for item in $dir/*; do
@@ -118,33 +118,31 @@ function install_dir(){
 	done
 }
 
-function bkp(){
-	# Backup a file before overwriting it.
-	# Usage: bkp $file
-	# file: file to be backed up
-	# TODO: redo the layout structure for the backups
+function backup(){
+    # backup a file
+    # Usage: backup $filepath
+    # filepath: full path to file to be backed up
 
-	local file=$1
-    local basename
-    local basedir
-    basename=$(basename "$file")
-	basedir=\"$DIR_BAK/"$(dirname "$file" | tr / _)"\"
-	local bak="$basedir/${basename#.}"
+    local filepath=$1
 
-	[[ -e "$basedir" ]] || mkdir -p "$basedir"
+    filename=$(basename "$filepath")
+    subdir=$(dirname $filepath)
+    destdir="$DIR_BAK$subdir"
+    bakfile="$destdir/${filename#.}"
 
-	if [[ -e "$bak" ]]; then
-		i=1
-		local new_bak=$bak.$i
-		while [[ -e "$new_bak" ]] ; do
+    # Create destination backup directory if it doesnt exist
+    [[ -e "$destdir" ]] || mkdir -p "$destdir"
+    if [[ -e "$bakfile" ]]; then
+        i=1
+        local newbakfile="$bakfile.$i"
+        while [[ -e "$newbakfile" ]]; do
             let "i=i+1"
-			new_bak=$bak.$i
-		done
-		bak=$new_bak
-	fi
-
-	log "Backing up $file"
-	mv -f "$file" "$bak"
+            newbakfile="$bakfile.$i"
+        done
+        bakfile=$newbakfile
+    fi
+    log "Backing up: $filepath -> $bakfile"
+    mv -f "$filepath" "$bakfile"
 }
 
 function get_managed_files() {
@@ -279,7 +277,7 @@ while [ $# -gt 0 ]; do
             list_files "$DIR"
             exit;;
         *)
-            echo "Unknown command "$1""
+            echo "Unknown argument: $1"
             echo -e "$USAGE"
             exit;;
     esac
