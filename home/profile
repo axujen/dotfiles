@@ -62,10 +62,7 @@ export HISTFILE="$XDG_CACHE_HOME"/shellhistory
 # }}}
 
 # {{{ profile.d
-# Load private profile for things that shouldn't go into a public repo
 # shellcheck source=/dev/null
-if [ -r "$HOME"/.profile.d/private ]; then source "$HOME"/.profile.d/private; fi
-
 if [ -d "$HOME"/.profile.d/post ]; then # allow drop-in config for device specific settings
     for file in "$HOME"/.profile.d/post/*; do
         # shellcheck source=/dev/null
