@@ -3,7 +3,6 @@
 ## dftool: the script that makes the .magic happen
 ## TODO: more testing with strict mode
 ## TODO: reorganize with source->dest folders, pre/post unpack hooks 
-## and patch(?) based multiple machine handling, this the dream :/
 ## also maybe manage /etc ?
 set -euo pipefail
 
@@ -192,7 +191,7 @@ function get_managed_dirs() {
 
 # Commands
 function install() {
-    [[ -n "$1" ]] && BASE=$1 || BASE=$DIR_BASE
+    [[ -v "$1" ]] && BASE=$1 || BASE=$DIR_BASE
 
     log "Unpacking your dotfiles." true
     for item in $BASE/*; do
@@ -250,43 +249,39 @@ function list_files() {
     done
 }
 
-## Argument parsing
-OPTIND=1
-while getopts "hvqc:" opt; do
-	case "$opt" in
-		h)
-			echo -e "$USAGE"
-			exit
-			;;
-		v)
-			VERBOSE=true;;
-		q)
-			QUIET=true;;
-		c)
-			CLOBBER=true;;
-        *)
-            echo -e "$USAGE"
-            exit
-            ;;
-	esac
-done
 
-## Command parsing and execution.
-shift "$((OPTIND -1))"
-CMD="${1:-}"
-DIR="${2:-}"
-case "$CMD" in
-    install|ins)
-        install "$DIR"
-        exit;;
-    uninstall|rm)
-        uninstall "$DIR"
-        exit;;
-    list|ls)
-        list_files "$DIR"
-        exit;;
-    *)
-        echo "Unknown command: $CMD"
-        echo -e "$USAGE"
-        exit;;
-esac
+## Argument parsing
+while [ $# -gt 0 ]; do
+    ## Parse commands
+    case "$1" in
+        -h)
+            echo -e "$USAGE"
+            exit;;
+        -v)
+            VERBOSE=true;;
+        -q)
+            QUIET=true;;
+        -c)
+            CLOBBER=true;;
+        install)
+            shift
+            DIR="${1:-}"
+            install "$DIR"
+            exit;;
+        uninstall)
+            shift
+            DIR="${1:-}"
+            uninstall "$DIR"
+            exit;;
+        list)
+            shift
+            DIR="${1:-}"
+            list_files "$DIR"
+            exit;;
+        *)
+            echo "Unknown command "$1""
+            echo -e "$USAGE"
+            exit;;
+    esac
+    shift
+done
