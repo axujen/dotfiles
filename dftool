@@ -23,7 +23,7 @@ QUIET=false
 DESC="This script unpacks dotfiles stored in a git repo to your home directory."
 USAGE="$DESC
 $(basename "$0") [-vcqh] install/uninstall/list
-\t-c\toverwrite existing files
+\t-c\toverwrite existing files, regular files are backed up
 \t-v\tverbose, show same information as the log
 \t-q\tquiet, supress all output
 \t-h\tshow this help text and exit"
