@@ -3,6 +3,13 @@
 ## common ENV variables should go in ~/.profile or ~/.xprofile
 ## keep this for zsh specific code that can't go in ~/.zprofile
 
+## Source ~/.profile
+if [ -r "$HOME"/.profile ]; then
+    emulate sh
+    source "$HOME"/.profile
+    emulate zsh
+fi
+
 typeset -U PATH
 setopt appendhistory extendedglob hist_find_no_dups autocd hist_ignore_dups
 unsetopt beep
