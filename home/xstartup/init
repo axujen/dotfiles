@@ -7,7 +7,7 @@
 
 logFile="$HOME/.xstartup/log"
 startDir="$HOME/.xstartup"
-Xresource="xinit.started:"
+Xresource="xstartup.started"
 exec > "$logFile" 2>&1
 
 inPath(){
