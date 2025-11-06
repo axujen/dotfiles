@@ -55,6 +55,9 @@ xrdb -merge "$HOME/.xresources.d/colors/blackburn"
 xset r rate 250 30 # make keyboard more responsive
 # Enable ctrl:alt:backspace to kill xorg
 setxkbmap -option "terminate:ctrl_alt_bksp" # Ctrl-Alt-Backspace kills xorg
+# swap escape and caps lock
+setxkbmap -option "caps:swapescape"
+
 # Load Xmodmap
 if [ "$(command -v xmodmap)" ]; then
     for file in "/etc/X11/Xmodmap" "$HOME/.Xmodmap" "$HOME/.xmodmap"; do
