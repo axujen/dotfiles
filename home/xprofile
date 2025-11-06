@@ -1,4 +1,4 @@
-## vim: ft=sh fdm=marker
+## vim: ft=sh
 ## ~/.xprofile: setup environment before the window manager is started
 ## ideally should be the first thing executed even before the window manager
 ## you might need to symlink this to ~/.xsession as some display managers dont source this file
@@ -8,78 +8,24 @@
 ## NOTE: MAKE SURE THIS NEVER BLOCKS OTHERWISE YOU WILL GET STUCK ON LOGIN AND BAD THINGS WILL HAPPEN
 ## NOTE: Preferably dont fork, as that might not initialize everything before the wm starts
 
-load_pre() {
-    if [ -d "$HOME/.xprofile.d" ]; then
-        if [ -d "$HOME/.xprofile.d/pre" ]; then
-            for file in "$HOME"/.xprofile.d/pre/*; do
-                # shellcheck disable=SC1090
-                test -f "$file" && source "$file"
-            done
-        fi
-    fi
-}
-
-load_post() {
-    if [ -d "$HOME/.xprofile.d" ]; then
-        if [ -d "$HOME/.xprofile.d/post" ]; then
-            for file in "$HOME"/.xprofile.d/post/*; do
-                # shellcheck disable=SC1090
-                test -f "$file" && source "$file"
-            done
-        fi
-    fi
-}
-
-main() {
-# {{{ Xresources
-xrdb -remove -all # don't rely on display manager to clean up xresources
-for file in "/etc/X11/Xresources" "$HOME/.Xresources" "$HOME/.xresources"; do
-    if [ -f "$file" ]; then
-        echo "Loading resource: $file"
-        xrdb -merge "$file"
-    fi
-done
-
-# Load ~/.xresources.d
-for file in $HOME/.xresources.d/*; do
-    if [ -f "$file" ]; then
-        echo "Loading resource: $file"
-        xrdb -merge "$file"
-    fi
-done
-# Load Xresources colorshceme
-xrdb -merge "$HOME/.xresources.d/colors/blackburn"
-# }}}
-
-# {{{ Keyboard
+# Keyboard
 xset r rate 250 30 # make keyboard more responsive
-# Enable ctrl:alt:backspace to kill xorg
 setxkbmap -option "terminate:ctrl_alt_bksp" # Ctrl-Alt-Backspace kills xorg
-# swap escape and caps lock
-setxkbmap -option "caps:swapescape"
+setxkbmap -option "caps:swapescape" # Swap escape and caps lock
 
-# Load Xmodmap
-if [ "$(command -v xmodmap)" ]; then
-    for file in "/etc/X11/Xmodmap" "$HOME/.Xmodmap" "$HOME/.xmodmap"; do
-        if [ -f "$file" ]; then
-           echo "Loading modmap: $file"
-           xmodmap "$file"
-        fi
-    done
-fi
-# }}}
-
+# Xorg Misc
 # turn off display after 5 minutes
 xset s blank
 xset s 300
-
 xset -b # remove this goddamn torture
 
 # Use native libs for steam
 # https://wiki.archlinux.org/index.php/Steam#Using_native_runtime
 export STEAM_RUNTIME=0
-}
 
-load_pre
-main
-load_post
+## Load drop-in config from ~/.xprofile.d
+if [ -d "$HOME/.xprofile.d" ]; then
+    for file in "$HOME"/.xprofile.d/*; do
+        test -f "$file" && source "$file"
+    done
+fi
