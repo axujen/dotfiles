@@ -1,0 +1,24 @@
+## vim: ft=sh
+# Configuration for XDG USER DIRS
+# XDG - set defaults as they may not be set
+# See https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
+# and https://wiki.archlinux.org/index.php/XDG_Base_Directory_support
+
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+if [ ! -w "${XDG_RUNTIME_DIR:="/run/user/$UID"}" ]; then
+    unset XDG_RUNTIME_DIR
+else
+    export XDG_RUNTIME_DIR
+fi
+# Workarounds to make applications use XDG_CONFIG_HOME
+export VIMINIT=":source $XDG_CONFIG_HOME"/vim/vimrc
+export GVIMINIT=":source $XDG_CONFIG_HOME"/vim/gvimrc
+export GNUPGHOME="$XDG_CONFIG_HOME"/gnupg
+export LESSHISTFILE="$XDG_CACHE_HOME"/lesshistory
+export PYTHON_EGG_CACHE="$XDG_CACHE_HOME"/python-eggs
+export RXVT_SOCKET="$XDG_RUNTIME_DIR"/urxvtd
+export CRAWL_DIR="$XDG_CONFIG_HOME"/crawl/
+export CRAWL_RC="$XDG_CONFIG_HOME"/crawl/config
+export HISTFILE="$XDG_CACHE_HOME"/shellhistory

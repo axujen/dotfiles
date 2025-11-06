@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 ## vim: ft=sh
 ## ~/.profile.d/startup: starts background daemons on the first login
-## for implementation see https://unix.stackexchange.com/a/48510
+## for implementation see https://unix.stackexchange.com/a/48510 https://mywiki.wooledge.org/BashFAQ/045
 ## NOTE: Do not source this, execute it instead
 set -euo pipefail
 
-TMPDIR="$(dirname "$(mktemp -u -t tmp.XXXXXXXXXX)")"
+TMPDIR="$(dirname "$(mktemp -u -t tmp.XXXXXXXXXX)")" # to find the /tmp directory
 LOCKDIR="${TMPDIR:-/tmp}/$USER-LOGGED"
-LOGFILE="$HOME/.profile.d/startup.log"
+LOGFILE="$LOCKDIR/profile.d.startup.log"
 
 COMMANDS="
 mpd

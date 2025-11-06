@@ -92,10 +92,11 @@ fi
 # }}}
 
 # {{{ Settings
+export HISTSIZE=1000
+shopt -s histappend # append to history
 shopt -s checkhash # check hash table for commands before $PATH
 shopt -s checkwinsize # send resize signal to bash
 shopt -s no_empty_cmd_completion # dont autocomplete empty lines
-shopt -s histappend # append to history
 # }}}
 
 # {{{ Auto complete
@@ -110,11 +111,3 @@ bind TAB:menu-complete # first tab shows suggestions, second one cycles them
 complete -c man which # command completion
 complete -cf sudo # command and file completion
 # }}}
-
-# Load common settings
-COMMONDRC="$HOME"/.profile.d/common
-# shellcheck disable=SC1090
-if [ -r "$COMMONDRC" ]; then source "$COMMONDRC"; fi
-
-# unset vars used only inside this file
-unset use_color sh COMMONDRC
