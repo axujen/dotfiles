@@ -125,13 +125,12 @@ function backup(){
 
     local filepath=$1
 
+    # figure out paths
     filename=$(basename "$filepath")
-    subdir=$(dirname $filepath)
-    destdir="$DIR_BAK$subdir"
-    bakfile="$destdir/${filename#.}"
+    bakdir="$DIR_BAK$(dirname $filepath)"
+    bakfile="$bakdir/${filename#.}"
 
-    # Create destination backup directory if it doesnt exist
-    [[ -e "$destdir" ]] || mkdir -p "$destdir"
+    # If the destination filename already exists, append a number to it
     if [[ -e "$bakfile" ]]; then
         i=1
         local newbakfile="$bakfile.$i"
@@ -141,6 +140,10 @@ function backup(){
         done
         bakfile=$newbakfile
     fi
+
+    # Create destination backup directory if it doesnt exist
+    [[ -e "$bakdir" ]] || mkdir -p "$bakdir"
+
     log "Backing up: $filepath -> $bakfile"
     mv -f "$filepath" "$bakfile"
 }
