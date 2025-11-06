@@ -73,7 +73,7 @@ function install_file(){
 		# Never overwrite regular files without asking
 		# TODO: y/n/a prompt.
 		if [[ "$CLOBBER" != true ]]; then
-			log "Failed to install $file: destination exists."
+			log "Failed to install $file: destination exists." true
 			return
 		fi
 
@@ -144,7 +144,7 @@ function backup(){
     # Create destination backup directory if it doesnt exist
     [[ -e "$bakdir" ]] || mkdir -p "$bakdir"
 
-    log "Backing up: $filepath -> $bakfile"
+    log "Backing up: $filepath -> $bakfile" true
     mv -f "$filepath" "$bakfile"
 }
 
@@ -218,7 +218,7 @@ function uninstall() {
     files=($(get_managed_files "$BASE"))
     echo "Deleting symlinks."
     for file in "${files[@]}"; do
-        log "Deleting $file"
+        log "Deleting Symlink: $file"
         rm "$file"
     done
     echo "Done."
